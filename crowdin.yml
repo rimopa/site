@@ -1,4 +1,4 @@
 files:
-  - source: i18n/*.csv
-    translation: i18n/%two_letters_code%/%file_name%.%file_extension%
+  - source: lang/*.csv
+    translation: lang/%two_letters_code%/%file_name%.%file_extension%
     multilingual: 1
