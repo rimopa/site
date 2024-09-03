@@ -1,5 +1,5 @@
 files:
-  - source: lang/*.csv
-    translation: '%file_name%.%file_extension%'
+  - source: lang/source/*.csv
+    translation: /lang/translated/%file_name%.%file_extension%
     multilingual: 1
     scheme: 'identifier,source_phrase,es-ES,de,ja'
