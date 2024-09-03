@@ -2,3 +2,4 @@ files:
   - source: lang/*.csv
     translation: lang/%two_letters_code%/%file_name%.%file_extension%
     multilingual: 1
+    scheme: 'identifier,source_phrase,es-ES,de,ja'
