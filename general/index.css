@@ -1,0 +1,171 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
+    Helvetica, Arial, sans-serif, times;
+  color: #000;
+  background: #fcfcfc;
+  max-width: 100%;
+}
+body.dark {
+  background-color: #111111;
+  color: #fcfcfc;
+}
+main {
+  padding-top: 5em;
+}
+header {
+  font-size: 110%;
+}
+.index,
+.section-title,
+#pageTitle {
+  font-family: "Courier New", Courier, monospace, "Georgia", "Times New Roman",
+    Times, serif;
+}
+/*bars*/
+bar {
+  position: absolute;
+  right: 0;
+  background: #f15c2a;
+  width: 100%;
+  color: #fff;
+  line-height: 28px;
+  align-items: center;
+}
+body.dark bar {
+  background-color: #333333;
+}
+bar a {
+  color: #fff;
+  text-decoration: none;
+}
+body.dark bar a {
+  color: #fff;
+}
+/*  header*/
+#header {
+  font-weight: bold;
+  top: 0;
+  width: 100%;
+  box-sizing: border-box;
+  height: 3em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  align-items: center;
+  align-content: center;
+}
+#header .button:hover {
+  cursor: pointer;
+  background-color: #b13e17;
+}
+#header .item * {
+  vertical-align: middle;
+}
+#header .item {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0.3em 0.75em;
+}
+body.dark #header .button:hover {
+  background-color: #515151;
+}
+/*  footer*/
+#footer {
+  height: auto;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  -webkit-transform: translateY(55%);
+  transform: translateY(55%);
+}
+#footer p,
+#footer h2,
+#footer a {
+  padding: 0 10px;
+  text-align: center;
+}
+#footer p {
+  max-width: 550px;
+  text-align: left;
+}
+#footer-socials {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  flex-direction: row;
+  margin-block-end: 1em;
+}
+#subfooter {
+  background: #000;
+  width: 100%;
+  text-align: center;
+  padding: 5px 0;
+  margin-bottom: 0;
+}
+/*links*/
+@keyframes imHere {
+  100% {
+    color: #00dc0f;
+  }
+}
+a {
+  color: #ff5300;
+}
+a:hover {
+  animation: imHere 3s linear 1 alternate-reverse;
+}
+li {
+  margin-bottom: 0.7em;
+}
+/*other*/
+.small {
+  font-size: 75%;
+}
+/*math*/
+.math {
+  width: 90px;
+  border-color: #ccc;
+  margin-top: 14px;
+  box-shadow: inset 0 0.0625em 0.125em rgba(0, 0, 0, 0.05);
+  max-width: 100%;
+  background-color: #fff;
+  border-color: #000;
+  border-radius: 4px;
+  color: #363636;
+}
+[type="submit"].math:hover {
+  cursor: pointer;
+  background-color: #f15c2a;
+  border-color: #bb9d3c;
+  color: #fff;
+}
+.mathblock header {
+  color: #ee7248;
+}
+.math-warning {
+  font-size: 125%;
+  margin-left: 20px;
+  color: #c70039;
+}
+.math-result {
+  font-size: 125%;
+}
+/*Scratch-likely button, i is placed like this: <a data-placement="left" href="https://github.com/ScratchCE/beta"> <button class="button"><span>GitHub Repository</span></button></a>*/
+/*.button {
+display: inline-block;
+margin: 0.5em 0;
+border: 0;
+border-radius: 0.5rem;
+background-color: #ff5300;;
+cursor: pointer;
+padding: 1em 1.25em;
+color: #fff;
+font-size: .8rem;
+font-weight: bold;}
+        .button:hover{background-color: #00dc0f;}*/
