@@ -1,5 +1,5 @@
 files:
-  - source: '*/*.csv'
+  - source: '*.csv'
     translation: '%original_path%'
     multilingual: 1
     first_line_contains_header: 1
