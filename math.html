@@ -61,6 +61,9 @@
                 >Make relations between quadrilateral sizes</a
               >
             </li>
+            <li>
+              <a href="#sortNames">Sort names</a>
+            </li>
           </ul>
         </nav>
       </header>
@@ -225,6 +228,106 @@
           <h4>The diagonal:</h4>
           <p id="cmin.result.diag" class="math-result"></p>
         </section>
+      </section>
+      <section id="sortNames" class="mathblock">
+        <header>
+          <h2 class="section-title" title="sortNames">Sort names</h2>
+        </header>
+        <label
+          >Names:
+          <br />
+          <textarea
+            class="math"
+            type="text"
+            id="sortNames.names"
+            placeholder="firstName lasName"
+            style="width: max-content; aspect-ratio: 1.1"
+          >
+Gastón Durand
+Marcelo Ray
+Catalina Albrisi
+Julieta Romero
+Ignacio Pereyra
+Juan Martinessi
+Valentina Lossio
+Mateo     Sarco
+Santino Rimondotto
+Valentín Viti
+Tobías Herrera
+Erika Angélica Lopardo
+Juana Carreras
+Dolores Verón</textarea
+          ></label
+        ><br />
+
+        <label
+          >Input:
+          <select class="math" id="sortNames.input" style="width: fit-content">
+            <option value="commas">Between commas</option>
+            <option value="line" selected>In line</option>
+          </select> </label
+        ><br />
+        <label
+          >Output:
+          <select class="math" id="sortNames.output" style="width: fit-content">
+            <option value="commas">Between commas</option>
+            <option value="line">In line</option>
+          </select>
+        </label>
+        <label
+          >Reverse:
+          <input
+            type="checkbox"
+            class="math"
+            id="sortNames.reverse"
+            style="width: fit-content"
+          />
+        </label>
+        <br />
+        <input
+          class="math"
+          type="submit"
+          value="Get result"
+          onclick="orderNames()"
+        />
+        <h3>A sorted list of your names:</h3>
+        <p
+          id="sortNames.result"
+          class="math-result"
+          style="white-space: pre-line"
+        ></p>
+        <div hidden id="sortNames.warning">
+          <p class="math-warning">Not enough values to run</p>
+        </div>
+        <details open>
+          <summary>Name order description</summary>
+          The program splits the words and recognizes its parts like this chart:
+          <table>
+            <tr>
+              <th># of words</th>
+              <th>firstName</th>
+              <th>lastName</th>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>1</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>1, 2</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>1, 2</td>
+              <td>3, 4</td>
+            </tr>
+          </table>
+          Then creates a list with lastName first and firstName second, so order
+          is given first by lastName and then by firstName. This list is ordered
+          and its indexes used to order the names.
+        </details>
       </section>
       <h2>Remember the results of these tools are approximate</h2>
       <small id="lastModified"></small>
