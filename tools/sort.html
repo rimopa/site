@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--repeatitive through site-->
+    <script type="text/javascript" src="/general/index.js" defer></script>
+    <link rel="stylesheet" href="/general/index.css" />
+    <link rel="icon" href="/general/favicon.ico" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#ee7248" />
+    <!--refs-->
+    <meta name="canonical" content="https://rimopa.github.io/site/tools" />
+    <script type="text/javascript" src="/tools/js/tools.js" defer></script>
+    <script type="text/javascript" src="/tools/js/sort.js" defer></script>
+    <!--general-->
+    <title>Tools - Rimopa</title>
+    <meta name="description" content="A tools page for a tools guy" />
+    <!--Open Graph Protocol-->
+    <meta property="og:url" content="https://rimopa.github.io/site/tools" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Tools - Rimopa" />
+    <meta property="og:description" content="A tools page for a tools guy" />
+    <meta
+      property="og:image"
+      content="https://rimopa.github.io/site/general/calabaza.jpg"
+    />
+    <meta property="og:image:type" content="image/jpg" />
+    <meta property="og:image:width" content="1500" />
+    <meta property="og:image:height" content="500" />
+    <!--Twitter-->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="rimopa.github.io" />
+    <meta property="twitter:url" content="https://rimopa.github.io/site/math" />
+    <meta name="twitter:title" content="Math - Rimopa" />
+    <meta name="twitter:description" content="An math page for a math guy" />
+    <meta
+      name="twitter:image"
+      content="https://rimopa.github.io/site/general/calabaza.jpg"
+    />
+  </head>
+  <body id="body">
+    <bar id="header"></bar>
+    <main>
+      <section id="sortNames">
+        <section-title>
+          <h2 title="sortNames">Sort names</h2>
+        </section-title>
+        <label
+          >Names:
+          <br />
+          <textarea
+            class="math"
+            type="text"
+            id="sortNames.names"
+            placeholder="firstName lasName"
+            style="width: max-content; aspect-ratio: 1.1"
+          >
+Gastón Durand
+Marcelo Ray
+Catalina Albrisi
+Julieta Romero
+Ignacio Pereyra
+Juan Martinessi
+Valentina Lossio
+Mateo     Sarco
+Santino Rimondotto
+Valentín Viti
+Tobías Herrera
+Erika Angélica Lopardo
+Juana Carreras
+Dolores Verón</textarea
+          ></label
+        ><br />
+
+        <label
+          >Input:
+          <select class="math" id="sortNames.input" style="width: fit-content">
+            <option value="commas">Between commas</option>
+            <option value="line" selected>In line</option>
+          </select> </label
+        ><br />
+        <label
+          >Output:
+          <select class="math" id="sortNames.output" style="width: fit-content">
+            <option value="commas">Between commas</option>
+            <option value="line">In line</option>
+          </select>
+        </label>
+        <label
+          >Reverse:
+          <input type="checkbox" class="math" id="sortNames.reverse" checked />
+        </label>
+        <br />
+        <input
+          class="math"
+          type="submit"
+          value="Get result"
+          onclick="orderNames()"
+        />
+        <h3>A sorted list of your names:</h3>
+        <p
+          id="sortNames.result"
+          class="output"
+          style="white-space: pre-line"
+        ></p>
+        <div hidden id="sortNames.warning">
+          <p class="warning">Not enough values to run</p>
+        </div>
+        <details open>
+          <summary>Name order description</summary>
+          The program splits the words and recognizes its parts like this chart:
+          <table>
+            <tr>
+              <th># of words</th>
+              <th>firstName</th>
+              <th>lastName</th>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>1</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>1, 2</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>1, 2</td>
+              <td>3, 4</td>
+            </tr>
+          </table>
+          Then creates a list with lastName first and firstName second, so order
+          is given first by lastName and then by firstName. This list is ordered
+          and its indexes used to order the names.
+        </details>
+      </section>
+      <nav id="toolsNav"></nav>
+      <h2>Remember the results of these tools are approximate</h2>
+      <small id="lastModified"></small>
+    </main>
+    <bar id="footer"> </bar>
+  </body>
+</html>

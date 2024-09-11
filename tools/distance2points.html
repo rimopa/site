@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--repeatitive through site-->
+    <script type="text/javascript" src="/general/index.js" defer></script>
+    <link rel="stylesheet" href="/general/index.css" />
+    <link rel="icon" href="/general/favicon.ico" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#ee7248" />
+    <!--refs-->
+    <meta name="canonical" content="https://rimopa.github.io/site/tools" />
+    <script type="text/javascript" src="/tools/js/tools.js" defer></script>
+    <script
+      type="text/javascript"
+      src="/tools/js/distance2points.js"
+      defer
+    ></script>
+    <!--general-->
+    <title>Tools - Rimopa</title>
+    <meta name="description" content="A tools page for a tools guy" />
+    <!--Open Graph Protocol-->
+    <meta property="og:url" content="https://rimopa.github.io/site/tools" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Tools - Rimopa" />
+    <meta property="og:description" content="A tools page for a tools guy" />
+    <meta
+      property="og:image"
+      content="https://rimopa.github.io/site/general/calabaza.jpg"
+    />
+    <meta property="og:image:type" content="image/jpg" />
+    <meta property="og:image:width" content="1500" />
+    <meta property="og:image:height" content="500" />
+    <!--Twitter-->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="rimopa.github.io" />
+    <meta property="twitter:url" content="https://rimopa.github.io/site/math" />
+    <meta name="twitter:title" content="Math - Rimopa" />
+    <meta name="twitter:description" content="An math page for a math guy" />
+    <meta
+      name="twitter:image"
+      content="https://rimopa.github.io/site/general/calabaza.jpg"
+    />
+  </head>
+  <body id="body">
+    <bar id="header"></bar>
+    <main>
+      <section id="getdistance2points">
+        <section-title>
+          <h2 title="distancebe2points">
+            Get any kind of distance between any two points
+          </h2>
+        </section-title>
+        <p>The formula is: (|x₂ - x₁|ᵖ + |y₂ - y₁|ᵖ)¹/ᵖ</p>
+        <label
+          >p: <input class="math" type="number" id="d2p.p" value="2"
+        /></label>
+        <span>(2 is euclidian/straight distance)</span>
+        <br />
+        <br />
+        <label
+          >x₁:
+          <input class="math" type="number" id="d2p.x1" value="0" /> </label
+        ><label
+          >y₁:
+          <input class="math" type="number" id="d2p.y1" value="2" /> </label
+        ><br />
+        <br />
+        <label
+          >x₂:
+          <input class="math" type="number" id="d2p.x2" value="0" /> </label
+        ><label
+          >y₂:
+          <input class="math" type="number" id="d2p.y2" value="4" /> </label
+        ><br />
+        <input
+          class="math"
+          type="submit"
+          value="Get result"
+          onclick="distance2points()"
+        />
+        <br />
+        <h3>The distance between that two points:</h3>
+        <p id="d2p.result" class="output"></p>
+        <div hidden id="d2p.warning">
+          <p class="warning">Not enough values to run</p>
+        </div>
+      </section>
+      <nav id="toolsNav"></nav>
+      <h2>Remember the results of these tools are approximate</h2>
+      <small id="lastModified"></small>
+    </main>
+    <bar id="footer"> </bar>
+  </body>
+</html>
