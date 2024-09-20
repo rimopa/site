@@ -200,6 +200,10 @@ input[type="checkbox"]:checked::after {
   border-width: 0 2px 2px 0;
   transform: translate(-50%, -50%) rotate(45deg);
 }
+label {
+  padding: 0.4em;
+  display: inline-block;
+}
 /*Scratch-likely button, i is placed like this: <a data-placement="left" href="https://github.com/ScratchCE/beta"> <button class="button"><span>GitHub Repository</span></button></a>*/
 /*.button {
 display: inline-block;

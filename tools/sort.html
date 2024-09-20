@@ -42,12 +42,12 @@
   <body id="body">
     <bar id="header"></bar>
     <main>
-      <section id="sortNames">
+      <article id="sortNames">
         <section-title>
-          <h2 title="sortNames">Sort names</h2>
+          <h2 title="sortNames">Sort list</h2>
         </section-title>
         <label
-          >Names:
+          >List:
           <br />
           <textarea
             class="math"
@@ -55,22 +55,7 @@
             id="sortNames.names"
             placeholder="firstName lasName"
             style="width: max-content; aspect-ratio: 1.1"
-          >
-Gastón Durand
-Marcelo Ray
-Catalina Albrisi
-Julieta Romero
-Ignacio Pereyra
-Juan Martinessi
-Valentina Lossio
-Mateo     Sarco
-Santino Rimondotto
-Valentín Viti
-Tobías Herrera
-Erika Angélica Lopardo
-Juana Carreras
-Dolores Verón</textarea
-          ></label
+          ></textarea></label
         ><br />
 
         <label
@@ -78,8 +63,8 @@ Dolores Verón</textarea
           <select class="math" id="sortNames.input" style="width: fit-content">
             <option value="commas">Between commas</option>
             <option value="line" selected>In line</option>
-          </select> </label
-        ><br />
+          </select>
+        </label>
         <label
           >Output:
           <select class="math" id="sortNames.output" style="width: fit-content">
@@ -87,27 +72,29 @@ Dolores Verón</textarea
             <option value="line">In line</option>
           </select>
         </label>
+        <br />
         <label
           >Reverse:
-          <input type="checkbox" class="math" id="sortNames.reverse" checked />
+          <input type="checkbox" class="math" id="sortNames.reverse" />
         </label>
-        <br />
-        <input
-          class="math"
-          type="submit"
-          value="Get result"
-          onclick="orderNames()"
-        />
-        <h3>A sorted list of your names:</h3>
-        <p
-          id="sortNames.result"
-          class="output"
-          style="white-space: pre-line"
-        ></p>
-        <div hidden id="sortNames.warning">
-          <p class="warning">Not enough values to run</p>
-        </div>
-        <details open>
+        <label
+          >Case sensitive:
+          <input type="checkbox" class="math" id="sortNames.caseSensitives" />
+        </label>
+        <label
+          >Name order:
+          <input type="checkbox" class="math" id="sortNames.nameOrder" />
+        </label>
+        <label
+          >Delete leading and finishing spaces:
+          <input
+            type="checkbox"
+            class="math"
+            id="sortNames.deleteSpaces"
+            checked
+          />
+        </label>
+        <details>
           <summary>Name order description</summary>
           The program splits the words and recognizes its parts like this chart:
           <table>
@@ -136,7 +123,22 @@ Dolores Verón</textarea
           is given first by lastName and then by firstName. This list is ordered
           and its indexes used to order the names.
         </details>
-      </section>
+        <input
+          class="math"
+          type="submit"
+          value="Get result"
+          onclick="orderNames()"
+        />
+        <h2>A sorted list of your names:</h2>
+        <p
+          id="sortNames.result"
+          class="output"
+          style="white-space: pre-line"
+        ></p>
+        <div hidden id="sortNames.warning">
+          <p class="warning">Not enough values to run</p>
+        </div>
+      </article>
       <nav id="toolsNav"></nav>
       <h2>Remember the results of these tools are approximate</h2>
       <small id="lastModified"></small>
