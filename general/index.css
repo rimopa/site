@@ -12,14 +12,15 @@ body.dark {
 main {
   padding-top: 5em;
 }
-header {
-  font-size: 110%;
-}
 .index,
-.section-title,
+section-title,
 #pageTitle {
   font-family: "Courier New", Courier, monospace, "Georgia", "Times New Roman",
     Times, serif;
+}
+section-title {
+  font-size: 110%;
+  color: #ee7248;
 }
 /*details*/
 details {
@@ -35,7 +36,7 @@ summary {
 details[open] {
   padding: 0.5em;
 }
-details[open] summary {
+details[open] > summary {
   border-bottom: 1px solid #aaa;
   margin-bottom: 0.5em;
 }
@@ -157,22 +158,52 @@ li {
   border-radius: 4px;
   color: #363636;
 }
-[type="submit"].math:hover {
+[type="submit"].math:hover,
+button.math:hover {
   cursor: pointer;
   background-color: #f15c2a;
   border-color: #bb9d3c;
   color: #fff;
 }
-.mathblock header {
-  color: #ee7248;
-}
-.math-warning {
+.warning {
   font-size: 125%;
   margin-left: 20px;
   color: #c70039;
 }
-.math-result {
+.output {
   font-size: 125%;
+}
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+  margin: 0;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #f15c2a;
+  border-color: #f15c2a;
+}
+input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  width: 33.3%;
+  height: 60%;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+label {
+  padding: 0.4em;
+  display: inline-block;
 }
 /*Scratch-likely button, i is placed like this: <a data-placement="left" href="https://github.com/ScratchCE/beta"> <button class="button"><span>GitHub Repository</span></button></a>*/
 /*.button {

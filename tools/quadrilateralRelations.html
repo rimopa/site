@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--repeatitive through site-->
+    <script type="text/javascript" src="/general/index.js" defer></script>
+    <link rel="stylesheet" href="/general/index.css" />
+    <link rel="icon" href="/general/favicon.ico" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#ee7248" />
+    <!--refs-->
+    <meta name="canonical" content="https://rimopa.github.io/site/tools" />
+    <script type="text/javascript" src="/tools/js/tools.js" defer></script>
+    <script
+      type="text/javascript"
+      src="/tools/js/quadrilaterals.js"
+      defer
+    ></script>
+    <!--general-->
+    <title>Tools - Rimopa</title>
+    <meta name="description" content="A tools page for a tools guy" />
+    <!--Open Graph Protocol-->
+    <meta property="og:url" content="https://rimopa.github.io/site/tools" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Tools - Rimopa" />
+    <meta property="og:description" content="A tools page for a tools guy" />
+    <meta
+      property="og:image"
+      content="https://rimopa.github.io/site/general/calabaza.jpg"
+    />
+    <meta property="og:image:type" content="image/jpg" />
+    <meta property="og:image:width" content="1500" />
+    <meta property="og:image:height" content="500" />
+    <!--Twitter-->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="rimopa.github.io" />
+    <meta property="twitter:url" content="https://rimopa.github.io/site/math" />
+    <meta name="twitter:title" content="Math - Rimopa" />
+    <meta name="twitter:description" content="An math page for a math guy" />
+    <meta
+      name="twitter:image"
+      content="https://rimopa.github.io/site/general/calabaza.jpg"
+    />
+  </head>
+  <body id="body">
+    <bar id="header"></bar>
+    <main>
+      <article id="quadrilateralRelations">
+        <section-title>
+          <h2 title="makeRelationscm&In">
+            Make relations between quadrilateral sizes
+          </h2>
+          <p class="small">(May be useful for obtaining screen sizes)</p>
+        </section-title>
+        <section id="cmin.inputs">
+          <label
+            >Width: <input class="math" type="number" id="cmin.width" value="0"
+          /></label>
+          <label
+            >Measure:
+            <select class="math" id="cmin.width.type"></select
+          ></label>
+          <br />
+          <label
+            >Height:
+            <input class="math" type="number" id="cmin.height" value="0"
+          /></label>
+          <label
+            >Measure:
+            <select class="math" id="cmin.height.type"></select
+          ></label>
+          <br />
+          <label
+            >Diagonal:
+            <input class="math" type="number" id="cmin.diag" value="68.58"
+          /></label>
+          <label
+            >Measure:
+            <select class="math" id="cmin.diag.type"></select
+          ></label>
+          <br />
+          <label
+            >Acpect ratio: (width, then height)
+            <br />
+            <input class="math" type="number" id="cmin.ratio.h" value="16" />
+            :
+            <input class="math" type="number" id="cmin.ratio.v" value="9" />
+          </label>
+          <br />
+          <select id="cmin.result.type" class="math"></select>
+          <input
+            class="math"
+            type="submit"
+            value="Get result"
+            onclick="quadrilateralRelations()"
+          />
+        </section>
+        <div hidden id="cmin.warning">
+          <p class="warning">Not enough values to run</p>
+        </div>
+        <section id="cmin.results">
+          <h2>Results:</h2>
+          <p id="cmin.result.method" class="output"></p>
+          <h4>The aspect ratio:</h4>
+          <p id="cmin.result.ratio" class="output"></p>
+          <h4>The width:</h4>
+          <p id="cmin.result.width" class="output"></p>
+          <h4>The height:</h4>
+          <p id="cmin.result.height" class="output"></p>
+          <h4>The diagonal:</h4>
+          <p id="cmin.result.diag" class="output"></p>
+        </section>
+      </article>
+      <nav id="toolsNav"></nav>
+      <h2>Remember the results of these tools are approximate</h2>
+      <small id="lastModified"></small>
+    </main>
+    <bar id="footer"> </bar>
+  </body>
+</html>
