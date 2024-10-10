@@ -69,7 +69,7 @@ function resetLastModifiedTime() {
 }
 function bars() {
   document.addEventListener("DOMContentLoaded", () => {
-    fetch("/index.html")
+    fetch("index.html")
       .then((response) => response.text())
       .then((data) => {
         const parser = new DOMParser();
