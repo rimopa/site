@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="../" />
+    <!--repeatitive through site-->
+    <script type="text/javascript" src="/general/index.js" defer></script>
+    <link rel="stylesheet" href="/general/index.css" />
+    <link rel="icon" href="/general/favicon.ico" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#ee7248" />
+    <!--refs-->
+    <meta name="canonical" content="https://rimopa.github.io/site/tools" />
+    <script type="text/javascript" src="/tools/js/tools.js" defer></script>
+    <script type="text/javascript" src="/tools/js/sort.js" defer></script>
+    <!--general-->
+    <title>Tools - Rimopa</title>
+    <meta name="description" content="A tools page for a tools guy" />
+    <!--Open Graph Protocol-->
+    <meta property="og:url" content="https://rimopa.github.io/site/tools" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Tools - Rimopa" />
+    <meta property="og:description" content="A tools page for a tools guy" />
+    <meta
+      property="og:image"
+      content="https://rimopa.github.io/site/general/calabaza.jpg"
+    />
+    <meta property="og:image:type" content="image/jpg" />
+    <meta property="og:image:width" content="1500" />
+    <meta property="og:image:height" content="500" />
+    <!--Twitter-->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="rimopa.github.io" />
+    <meta property="twitter:url" content="https://rimopa.github.io/site/math" />
+    <meta name="twitter:title" content="Math - Rimopa" />
+    <meta name="twitter:description" content="An math page for a math guy" />
+    <meta
+      name="twitter:image"
+      content="https://rimopa.github.io/site/general/calabaza.jpg"
+    />
+  </head>
+  <body id="body">
+    <bar id="header"></bar>
+    <main>
+      <article id="sortNames">
+        <section-title>
+          <h2 title="sortNames">Sort list</h2>
+        </section-title>
+        <label
+          >List:
+          <br />
+          <textarea
+            class="math"
+            type="text"
+            id="sortNames.names"
+            placeholder="your list here!"
+            style="width: max-content; aspect-ratio: 1.1"
+          ></textarea></label
+        ><br />
+
+        <label
+          >Input separator:
+          <input class="math" id="sortNames.input" type="text" value="\n" />
+        </label>
+        <label
+          >Output separator:
+          <input
+            type="text"
+            class="math"
+            id="sortNames.output"
+            value="\n"
+          /> </label
+        ><br />
+        <label
+          >Reverse:
+          <input type="checkbox" class="math" id="sortNames.reverse" />
+        </label>
+        <label
+          >Case sensitive:
+          <input type="checkbox" class="math" id="sortNames.caseSensitive" />
+        </label>
+
+        <label
+          >Delete leading and finishing spaces:
+          <input
+            type="checkbox"
+            class="math"
+            id="sortNames.deleteSpaces"
+            checked
+          /> </label
+        ><br />
+        <input
+          class="math"
+          type="submit"
+          value="Get result"
+          onclick="orderNames()"
+        /><br />
+        <h2>Sorted list:</h2>
+        <p
+          id="sortNames.result"
+          class="output"
+          style="white-space: pre-wrap"
+        ></p>
+        <p class="warning" hidden id="sortNames.warning">
+          Not enough values to run
+        </p>
+        <details>
+          <summary>Advanced</summary>
+          <small
+            >Regular expresions are used for the input. Check
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet"
+              target="_blank"
+              rel="noopener noreferrer"
+              >here</a
+            >
+            for more information about how to use them.</small
+          ><br />
+          <label
+            >Search for elements instead of separator in the input:
+            <input
+              type="checkbox"
+              class="math"
+              id="sortNames.searchElements"
+            /> </label
+          ><br />
+          <label
+            >Name order:
+            <input type="checkbox" class="math" id="sortNames.nameOrder" />
+          </label>
+          <details>
+            <summary>Name order</summary>
+            The program splits the elements to make words and recognizes its
+            parts like this chart:
+            <table>
+              <tr>
+                <th># of words</th>
+                <th>firstName</th>
+                <th>lastName</th>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>1</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>1, 2</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>1, 2</td>
+                <td>3, 4</td>
+              </tr>
+            </table>
+            Then creates a list with lastName first and firstName second, so
+            order is given first by lastName and then by firstName. This list is
+            ordered and its indexes used to order the names. <br />If the name
+            is less than 2 or more than 4 words, it's ignored and an alert is
+            given.
+          </details>
+        </details>
+      </article>
+      <nav id="toolsNav"></nav>
+      <h2>Remember the results of these tools are approximate</h2>
+      <small id="lastModified"></small>
+    </main>
+    <bar id="footer"> </bar>
+  </body>
+</html>
