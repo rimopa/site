@@ -3,14 +3,19 @@ body {
     Helvetica, sans-serif, times;
   color: #000;
   background: #fcfcfc;
-  max-width: 100%;
+  margin: 0;
+  overflow-x: hidden;
+  width: 100%;
+  display: grid;
+  min-height: 100dvh;
+  grid-template-rows: auto 1fr auto;
 }
 body.dark {
   background-color: #111111;
   color: #fcfcfc;
 }
 main {
-  padding-top: 5em;
+  margin: 8px;
 }
 .index,
 section-title,
@@ -42,8 +47,6 @@ details[open] > summary {
 }
 /*bars*/
 bar {
-  position: absolute;
-  right: 0;
   background: #f15c2a;
   width: 100%;
   color: #fff;
@@ -63,16 +66,8 @@ body.dark bar a {
 /*  header*/
 #header {
   font-weight: bold;
-  top: 0;
-  width: 100%;
-  box-sizing: border-box;
   height: 3em;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
-  align-items: center;
-  align-content: center;
 }
 #header .button:hover {
   cursor: pointer;
@@ -91,14 +86,9 @@ body.dark #header .button:hover {
 }
 /*  footer*/
 #footer {
-  height: auto;
   font-size: 14px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  text-align: left;
-  -webkit-transform: translateY(55%);
-  transform: translateY(55%);
 }
 #footer p,
 #footer h2,
@@ -113,12 +103,10 @@ body.dark #header .button:hover {
 #footer-socials {
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  align-content: center;
   flex-direction: row;
   margin-block-end: 1em;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 #subfooter {
   background: #000;
