@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="../" />
+    <!--repeatitive through site-->
+    <script type="text/javascript" src="general/index.js" defer></script>
+    <link rel="stylesheet" href="general/index.css" />
+    <link rel="icon" href="favicon.ico" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#ee7248" />
+    <!--refs-->
+    <meta rel="canonical" content="https://rimopa.github.io/site/" />
+    <script
+      type="text/javascript"
+      src="general/capitalization-title.js"
+      defer
+    ></script>
+    <script
+      type="text/javascript"
+      src="screensaver/screensaver.js"
+      defer
+    ></script>
+    <!--general-->
+    <title>Rimopa's screensaver</title>
+    <meta
+      name="description"
+      content="An screensaver page for an screensaver guy"
+    />
+    <!--Open Graph Protocol-->
+    <meta
+      property="og:url"
+      content="https://rimopa.github.io/site/screensvaer"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Rimopa" />
+    <meta
+      property="og:description"
+      content="An screensaver page for an screensaver guy"
+    />
+    <meta
+      property="og:image"
+      content="https://rimopa.github.io/site/general/calabaza.jpg"
+    />
+    <meta property="og:image:type" content="image/jpg" />
+    <meta property="og:image:width" content="1500" />
+    <meta property="og:image:height" content="500" />
+    <!--Twitter-->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="rimopa.github.io" />
+    <meta
+      property="twitter:url"
+      content="https://rimopa.github.io/site/screensaver"
+    />
+    <meta name="twitter:title" content="Rimopa's screensaver" />
+    <meta
+      name="twitter:description"
+      content="An screensaver page for an screensaver guy"
+    />
+    <meta
+      name="twitter:image"
+      content="https://rimopa.github.io/site/general/calabaza.jpg"
+    />
+  </head>
+  <body id="body">
+    <main>
+      <style>
+        html {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          ::-webkit-scrollbar {
+            display: none;
+          }
+        }
+        #screensaver {
+          width: 100vw;
+          height: 100vh;
+          display: grid;
+          place-items: center;
+          overflow: hidden;
+        }
+        #screensaver * {
+          overflow: hidden;
+        }
+        img {
+          position: absolute;
+        }
+        #gifbg {
+          width: 100%;
+          height: 100%;
+          background-image: url("screensaver/giphy/1.gif");
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+        main {
+          margin: 0;
+        }
+      </style>
+      <div id="screensaver">
+        <img draggable="false" id="gifbg" />
+      </div>
+      <h1
+        id="pageTitle"
+        title="undefined capitalization"
+        style="position: fixed; margin-top: 0; top: 0; left: 0; color: #ff5300"
+      >
+        rimopa's screensaver
+      </h1>
+      <label
+        >Delay (ms):
+        <input
+          class="math"
+          type="number"
+          id="screensaver.delay"
+          value="1000"
+          onchange="updateDelay();"
+      /></label>
+      <small id="lastModified"></small>
+    </main>
+    <bar id="footer"> </bar>
+  </body>
+</html>
