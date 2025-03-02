@@ -64,8 +64,9 @@ if (localStorage.getItem("mode") === "dark") {
 }
 function resetLastModifiedTime() {
   //last modified time
-  document.getElementById("lastModified").innerText =
-    "Last modification date: " + document.lastModified;
+  const lastModified = document.getElementById("lastModified");
+  lastModified.innerText = "Last modification date: " + document.lastModified;
+  lastModified.title = "(computer local timezone)";
 }
 function bars() {
   document.addEventListener("DOMContentLoaded", () => {
@@ -79,7 +80,7 @@ function bars() {
         document.getElementById("footer").innerHTML = footer.outerHTML;
         document.getElementById("header").innerHTML = header.outerHTML;
       })
-      .catch((error) => console.error("Error fetching footer/header:", error));
+      .catch((error) => console.warn("Error fetching footer/header:", error));
   });
 }
 //initial execution
