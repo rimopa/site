@@ -74,27 +74,38 @@
           }
         }
         #screensaver {
+          position: relative;
           width: 100vw;
           height: 100vh;
+          overflow: hidden;
           display: grid;
           place-items: center;
-          overflow: hidden;
-        }
-        #screensaver * {
-          overflow: hidden;
-        }
-        img {
-          position: absolute;
+          > img {
+            position: absolute;
+          }
         }
         #gifbg {
           width: 100%;
           height: 100%;
           background-image: url("screensaver/giphy/1.gif");
-          background-repeat: no-repeat;
           background-size: cover;
+          z-index: -2;
         }
         main {
           margin: 0;
+        }
+        #imgDiv {
+          display: grid;
+          justify-content: center;
+          z-index: 1;
+          grid-template-columns: repeat(2, 1fr);
+          grid-template-rows: repeat(2, 1fr);
+          /*gap: 10px;*/
+          img {
+            /*flex: 1 1 calc(33.333% - 10px);
+            height: auto;*/
+            object-fit: cover;
+          }
         }
       </style>
       <div id="screensaver">
@@ -112,10 +123,106 @@
         <input
           class="math"
           type="number"
-          id="screensaver.delay"
-          value="1000"
+          id="SS.delay"
+          value="5000"
           onchange="updateDelay();"
       /></label>
+      <details>
+        <summary>Gifs</summary>
+        <h3>Pixabay:</h3>
+        <ul>
+          <li>
+            <a
+              href="https://pixabay.com/gifs/ball-disco-game-party-bright-11083/"
+              >Ball</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://pixabay.com/gifs/bicycle-sports-pixel-art-pedal-4417/"
+              >Bicycle</a
+            >
+          </li>
+          <li>
+            <a href="https://pixabay.com/gifs/box-gift-3d-orange-1805/">Box</a>
+          </li>
+          <li>
+            <a
+              href="https://pixabay.com/gifs/hamster-running-exercise-marathon-14608/"
+              >Hamster</a
+            >
+          </li>
+          <li>
+            <a href="https://pixabay.com/gifs/procrastinate-always-text-12569/"
+              >Procrastinate</a
+            >
+          </li>
+          <li>
+            <a href="https://pixabay.com/gifs/wheel-car-tire-marks-rims-6663/"
+              >Wheel</a
+            >
+          </li>
+        </ul>
+        <h3>Okkult Motion Pictures:</h3>
+        <ul>
+          <li>
+            <a
+              href="https://okkult.it/post/725216398376337409/looking-around-taballet-1952"
+              >LOOKING AROUND- TABALLET (1952)</a
+            >
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a
+              href="https://okkult.it/post/723203522759360512/excerpts-mould-and-yeast-1927"
+              >MOULD AND YEAST (1927)</a
+            >
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a
+              href="https://okkult.it/post/151287601909/excerpts-experiments-in-motion-graphics-1968"
+              >Experiments in Motion Graphics (1968)</a
+            >
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a href="https://okkult.it/post/187531986961/bitsandbytes9"
+              >BITS & BYTES | Ep. 9 (1983)</a
+            >
+          </li>
+        </ul>
+        <ul>
+          <li><a href=""></a></li>
+        </ul>
+        <ul>
+          <li><a href=""></a></li>
+        </ul>
+        <ul>
+          <li><a href=""></a></li>
+        </ul>
+        <ul>
+          <li><a href=""></a></li>
+        </ul>
+        <ul>
+          <li><a href=""></a></li>
+        </ul>
+        <ul>
+          <li><a href=""></a></li>
+        </ul>
+        <ul>
+          <li><a href=""></a></li>
+        </ul>
+        <ul>
+          <li><a href=""></a></li>
+        </ul>
+        <ul>
+          <li><a href=""></a></li>
+        </ul>
+      </details>
       <small id="lastModified"></small>
     </main>
     <bar id="footer"> </bar>
