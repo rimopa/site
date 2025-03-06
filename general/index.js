@@ -64,9 +64,8 @@ if (localStorage.getItem("mode") === "dark") {
 }
 function resetLastModifiedTime() {
   //last modified time
-  const lastModified = document.getElementById("lastModified");
-  lastModified.innerText = "Last modification date: " + document.lastModified;
-  lastModified.title = "(computer local timezone)";
+  document.getElementById("lastModified").innerText =
+    "Last modification date: " + document.lastModified;
 }
 function bars() {
   document.addEventListener("DOMContentLoaded", () => {
