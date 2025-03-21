@@ -45,6 +45,7 @@ function updateScreensaver() {
     }
   }
   function updateObjImgs() {
+    const ttObjImgs = objImgs.length;
     var cWidth = document.body.clientWidth;
     var cHeight = document.body.clientHeight;
     //shortest tab dimension
@@ -57,54 +58,40 @@ function updateScreensaver() {
     /*var var1 = "int1 == 0";
       var int1 = 0;
       if (new Function("int1", `return ${var1};`)(int1)) {console.log("Condition is true!");}*/
-    mode.i = getRandomInt(0, 1);
+    mode.i = getRandomInt(1, 1);
     if (mode.i == 0) {
       //Mode 0: imgs in the middle of the page, on top of each other
       //Next one's size can't be less than 500px
       mode.args = "i < imgCnt && sSize >= 500";
-      imgCnt = objImgs.length;
+      imgCnt = ttObjImgs;
       screenSaver.style.display = "grid";
       screenSaver.style.placeItems = "center";
     } else if (mode.i == 1) {
-      //Mode 1: square # images (1, 4, 9, 16, ...) of fixed size on divisions of the page
+      //Mode 1: images  of fixed size on page grid
       mode.args = "i < imgCnt";
       var columns = Math.floor(cWidth / 300);
       var rows = Math.floor(cHeight / 300);
 
-      //columns or rows being larger than total images would cause the nesxt adjuster while to set negative row/column values, so It's prevented here.
-      if (columns > objImgs.length || rows > objImgs.length) {
-        if (cHeight > cWidth) {
-          rows = objImgs.length;
-          columns = 1;
+      //Prevent imgCnt being larger than totalImgs
+      while (columns * rows > ttObjImgs) {
+        if (cHeight > cWidth && columns > 1) {
+          columns--;
+        } else if (rows > 1) {
+          rows--;
         } else {
-          columns = objImgs.length;
-          rows = 1;
+          break;
         }
-      }
-      imgCnt = columns * rows;
-      while (imgCnt > objImgs.length) {
-        if (cHeight > cWidth) {
-          columns -= 1;
-        } else {
-          rows -= 1;
-        }
-        imgCnt = columns * rows;
       }
       if (
-        columns * (rows + 1) <= objImgs.length ||
-        (columns + 1) * rows <= objImgs.length
+        columns * (rows + 1) <= ttObjImgs ||
+        (columns + 1) * rows <= ttObjImgs
       ) {
         console.warn(
-          "Didn't get max possible images. Columns: " +
-            columns +
-            ". Rows:" +
-            rows +
-            ". cHeight:" +
-            cHeight +
-            ". cWidth:" +
-            cWidth
+          `Didn't get max possible images. Columns: ${columns}, Rows: ${rows}, cHeight: ${cHeight}, cWidth: ${cWidth}`
         );
       }
+      imgCnt = columns * rows;
+
       var imgDiv = document.createElement("div");
       imgDiv.id = "imgDiv";
       imgDiv.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
@@ -112,7 +99,6 @@ function updateScreensaver() {
       screenSaver.appendChild(imgDiv);
       currentSSElements.push(imgDiv);
     }
-    console.log(columns, rows, imgCnt);
     let usedImgs = [null];
     let imgUsed = null;
     for (
@@ -161,8 +147,6 @@ let objImgs = [
   "pixabay/box.gif",
   "pixabay/hamster.gif",
   "pixabay/procrastinate.gif",
-  "pixabay/wheel.gif",
-  "pixabay/wheel.gif",
   "pixabay/wheel.gif",
 ];
 //background images
