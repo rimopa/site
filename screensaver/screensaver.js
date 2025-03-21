@@ -45,46 +45,74 @@ function updateScreensaver() {
     }
   }
   function updateObjImgs() {
+    var cWidth = document.body.clientWidth;
+    var cHeight = document.body.clientHeight;
     //shortest tab dimension
-    var sSize =
-      document.body.clientHeight > document.body.clientWidth
-        ? document.body.clientHeight
-        : document.body.clientWidth;
+    var sSize = Math.min(cHeight, cWidth);
     //longest tab dimension
-    var lSize =
-      document.body.clientHeight < document.body.clientWidth
-        ? document.body.clientHeight
-        : document.body.clientWidth;
+    var lSize = Math.max(cHeight, cWidth);
     const screenSaver = document.getElementById("screensaver");
     var mode = { i: -1 };
     var imgCnt;
     /*var var1 = "int1 == 0";
       var int1 = 0;
       if (new Function("int1", `return ${var1};`)(int1)) {console.log("Condition is true!");}*/
-    mode.i = getRandomInt(1, 1);
+    mode.i = getRandomInt(0, 1);
     if (mode.i == 0) {
       //Mode 0: imgs in the middle of the page, on top of each other
       //Next one's size can't be less than 500px
       mode.args = "i < imgCnt && sSize >= 500";
-      sSize *= 0.75;
       imgCnt = objImgs.length;
       screenSaver.style.display = "grid";
       screenSaver.style.placeItems = "center";
     } else if (mode.i == 1) {
       //Mode 1: square # images (1, 4, 9, 16, ...) of fixed size on divisions of the page
       mode.args = "i < imgCnt";
-      imgCnt = Math.floor(lSize / 300) ** 2;
-      if (imgCnt > objImgs.length) {
-        imgCnt = Math.floor(Math.sqrt(objImgs.length)) ** 2;
+      var columns = Math.floor(cWidth / 300);
+      var rows = Math.floor(cHeight / 300);
+
+      //columns or rows being larger than total images would cause the nesxt adjuster while to set negative row/column values, so It's prevented here.
+      if (columns > objImgs.length || rows > objImgs.length) {
+        if (cHeight > cWidth) {
+          rows = objImgs.length;
+          columns = 1;
+        } else {
+          columns = objImgs.length;
+          rows = 1;
+        }
+      }
+      imgCnt = columns * rows;
+      while (imgCnt > objImgs.length) {
+        if (cHeight > cWidth) {
+          columns -= 1;
+        } else {
+          rows -= 1;
+        }
+        imgCnt = columns * rows;
+      }
+      if (
+        columns * (rows + 1) <= objImgs.length ||
+        (columns + 1) * rows <= objImgs.length
+      ) {
+        console.warn(
+          "Didn't get max possible images. Columns: " +
+            columns +
+            ". Rows:" +
+            rows +
+            ". cHeight:" +
+            cHeight +
+            ". cWidth:" +
+            cWidth
+        );
       }
       var imgDiv = document.createElement("div");
       imgDiv.id = "imgDiv";
-      imgDiv.style.gridTemplateColumns = `repeat(${Math.sqrt(imgCnt)}, 1fr)`;
-      imgDiv.style.gridTemplateRows = `repeat(${Math.sqrt(imgCnt)}, 1fr)`;
+      imgDiv.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+      imgDiv.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
       screenSaver.appendChild(imgDiv);
       currentSSElements.push(imgDiv);
     }
-    console.log(mode);
+    console.log(columns, rows, imgCnt);
     let usedImgs = [null];
     let imgUsed = null;
     for (
@@ -106,14 +134,15 @@ function updateScreensaver() {
       ele.classList = "img" + i;
       currentSSElements.push(ele);
       if (mode.i == 0) {
+        sSize *= 0.75;
         ele.width = sSize;
         screenSaver.appendChild(ele);
-        sSize *= 0.75;
       } else if (mode.i == 1) {
-        //1img:100%
-        //4imgs:100%/sqrt(4)=50%
-        //9imgs:100%/sqrt(9)=33.3%
-        ele.width = (0.75 * sSize) / Math.sqrt(imgCnt);
+        if (cHeight > cWidth) {
+          ele.height = cHeight / rows;
+        } else {
+          ele.width = cWidth / columns;
+        }
         imgDiv.appendChild(ele);
       }
     }
@@ -132,6 +161,8 @@ let objImgs = [
   "pixabay/box.gif",
   "pixabay/hamster.gif",
   "pixabay/procrastinate.gif",
+  "pixabay/wheel.gif",
+  "pixabay/wheel.gif",
   "pixabay/wheel.gif",
 ];
 //background images
