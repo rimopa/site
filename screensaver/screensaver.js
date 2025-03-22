@@ -164,6 +164,7 @@ document.getElementById("SS.delay").value =
   localStorage.getItem("SS.delay") >= 0
     ? localStorage.getItem("SS.delay")
     : 1000;
+    
 
 var waitUntilDelayIsNot0;
 updateDelay();
