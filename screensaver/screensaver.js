@@ -58,7 +58,7 @@ function updateScreensaver() {
     /*var var1 = "int1 == 0";
       var int1 = 0;
       if (new Function("int1", `return ${var1};`)(int1)) {console.log("Condition is true!");}*/
-    mode.i = getRandomInt(1, 1);
+    mode.i = getRandomInt(0, 1);
     if (mode.i == 0) {
       //Mode 0: imgs in the middle of the page, on top of each other
       //Next one's size can't be less than 500px
