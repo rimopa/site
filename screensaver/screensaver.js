@@ -15,6 +15,13 @@ Array.prototype.random = function () {
     i: randomIndex,
   };*/
 };
+Array.prototype.removeVal = function (value) {
+  var idx = this.indexOf(value);
+  if (idx > -1) {
+    this.splice(idx, 1);
+  }
+  return this;
+};
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -99,10 +106,8 @@ function updateScreensaver() {
       screenSaver.appendChild(imgDiv);
       currentSSElements.push(imgDiv);
     }
-    let usedImgs = [null];
-    let imgUsed = null;
     for (
-      let i = 0;
+      let i = 0, unUsedImgs = objImgs.slice();
       new Function("i", "imgCnt", "sSize", `return ${mode.args};`)(
         i,
         imgCnt,
@@ -110,11 +115,9 @@ function updateScreensaver() {
       );
       i++
     ) {
+      let imgUsed = unUsedImgs.random();
+      unUsedImgs = unUsedImgs.removeVal(imgUsed);
       const ele = document.createElement("img");
-      while (usedImgs.includes(imgUsed)) {
-        imgUsed = objImgs.random();
-      }
-      usedImgs.push(imgUsed);
       ele.src = "screensaver/" + imgUsed;
       ele.draggable = 0;
       ele.classList = "img" + i;
