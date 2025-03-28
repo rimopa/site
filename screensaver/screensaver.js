@@ -1,11 +1,3 @@
-function updateDelay() {
-  delay = document.getElementById("SS.delay").value;
-  localStorage.setItem("SS.delay", delay);
-  if ((waitUntilDelayIsNot0 = 1 && delay > 0)) {
-    updateScreensaver();
-    waitUntilDelayIsNot0 = 0;
-  }
-}
 /*util*/
 Array.prototype.random = function () {
   return this[Math.floor(Math.random() * this.length)];
@@ -26,6 +18,14 @@ function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function updateDelay() {
+  delay = document.getElementById("SS.delay").value;
+  localStorage.setItem("SS.delay", delay);
+  if ((waitUntilDelayIsNot0 = 1 && delay > 0)) {
+    updateScreensaver();
+    waitUntilDelayIsNot0 = 0;
+  }
 }
 function screensaverTimeout() {
   if (delay > 0) {
@@ -53,15 +53,22 @@ function updateScreensaver() {
   }
   function updateObjImgs() {
     const ttObjImgs = objImgs.length;
-    var cWidth = document.body.clientWidth;
-    var cHeight = document.body.clientHeight;
+    var cWidth =
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth;
+    var cHeight =
+      window.innerHeight ||
+      document.documentElement.clientHeight ||
+      document.body.clientHeight;
+
     //shortest tab dimension
     var sSize = Math.min(cHeight, cWidth);
     //longest tab dimension
     //var lSize = Math.max(cHeight, cWidth);
     const screenSaver = document.getElementById("screensaver");
     var imgCnt;
-    var mode = { i: getRandomInt(0, 1) };
+    var mode = { i: getRandomInt(1, 1) };
     if (mode.i == 0) {
       //Mode 0: imgs in the middle of the page, on top of each other
       //Next one's size can't be less than 500px
@@ -74,8 +81,9 @@ function updateScreensaver() {
       mode.args = "i < imgCnt";
       var columns = Math.floor(cWidth / 300);
       var rows = Math.floor(cHeight / 300);
-
-      //Prevent imgCnt being larger than totalImgs
+      console.log(columns, rows);
+      console.log(cHeight, cWidth);
+      //Prevent imgCnt being larger than ttObjImgs
       while (columns * rows > ttObjImgs) {
         if (cHeight > cWidth && columns > 1) {
           columns--;
@@ -85,13 +93,18 @@ function updateScreensaver() {
           break;
         }
       }
-      if (
-        columns * (rows + 1) <= ttObjImgs ||
-        (columns + 1) * rows <= ttObjImgs
+      while (
+        (columns * (rows + 1) <= ttObjImgs && (rows + 1) * 300 <= cHeight) ||
+        ((columns + 1) * rows <= ttObjImgs && (columns + 1) * 300 <= cWidth)
       ) {
-        console.warn(
-          `Didn't get max possible images. Columns: ${columns}, Rows: ${rows}, cHeight: ${cHeight}, cWidth: ${cWidth}`
-        );
+        console.log("try doing this");
+        if (columns * (rows + 1) <= ttObjImgs) {
+          console.log("plus row");
+          rows++;
+        } else {
+          console.log("plus columns");
+          columns++;
+        }
       }
       imgCnt = columns * rows;
 
@@ -161,11 +174,10 @@ let bgImgs = [
   "okkult/4.webp",
 ];
 //set/update delay + localStorage
-
-document.getElementById("SS.delay").value =
+var delay = (document.getElementById("SS.delay").value =
   localStorage.getItem("SS.delay") >= 0
     ? localStorage.getItem("SS.delay")
-    : 1000;
+    : 1000);
 
 var waitUntilDelayIsNot0;
 updateDelay();
