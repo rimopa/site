@@ -68,7 +68,7 @@ function updateScreensaver() {
     var lSize = Math.max(cHeight, cWidth);
     const screenSaver = document.getElementById("screensaver");
     var imgCnt;
-    var mode = { i: getRandomInt(0, 1) };
+mode.i = getRandomInt(0, 1);
     if (mode.i == 0) {
       //Mode 0: imgs in the middle of the page, on top of each other
       //Next one's size can't be less than 500px
