@@ -65,10 +65,10 @@ function updateScreensaver() {
     //shortest tab dimension
     var sSize = Math.min(cHeight, cWidth);
     //longest tab dimension
-    //var lSize = Math.max(cHeight, cWidth);
+    var lSize = Math.max(cHeight, cWidth);
     const screenSaver = document.getElementById("screensaver");
     var imgCnt;
-    var mode = { i: getRandomInt(1, 1) };
+    var mode = { i: getRandomInt(0, 1) };
     if (mode.i == 0) {
       //Mode 0: imgs in the middle of the page, on top of each other
       //Next one's size can't be less than 500px
@@ -79,34 +79,48 @@ function updateScreensaver() {
     } else if (mode.i == 1) {
       //Mode 1: images  of fixed size on page grid
       mode.args = "i < imgCnt";
-      var columns = Math.floor(cWidth / 300);
-      var rows = Math.floor(cHeight / 300);
-      console.log(columns, rows);
-      console.log(cHeight, cWidth);
+      //columns/rows count for long side (lCnt) or short side (sCnt). Simplifies code.
+      let lCnt = Math.floor(lSize / 300);
+      let sCnt = Math.floor(sSize / 300);
       //Prevent imgCnt being larger than ttObjImgs
-      while (columns * rows > ttObjImgs) {
-        if (cHeight > cWidth && columns > 1) {
-          columns--;
-        } else if (rows > 1) {
-          rows--;
+      console.log("initial: long:" + lCnt + " short:" + sCnt);
+      while (lCnt * sCnt > ttObjImgs) {
+        if (sCnt > 1) {
+          console.log("short--");
+          sCnt--;
+        } else if (lCnt > 1) {
+          console.log("long--");
+          lCnt--;
         } else {
           break;
         }
       }
+      //console.log(sCnt + 2 <= lCnt);
+      //console.log((sCnt + 1) * (lCnt - 1) >= lCnt * sCnt);
+      //console.log((sCnt + 1) * (lCnt - 1) <= ttObjImgs);
+      //console.log((sCnt + 1) * 300 <= sSize);
+
       while (
-        (columns * (rows + 1) <= ttObjImgs && (rows + 1) * 300 <= cHeight) ||
-        ((columns + 1) * rows <= ttObjImgs && (columns + 1) * 300 <= cWidth)
+        sCnt + 2 <= lCnt &&
+        (sCnt + 1) * (lCnt - 1) >= lCnt * sCnt &&
+        (sCnt + 1) * (lCnt - 1) <= ttObjImgs &&
+        (sCnt + 1) * 300 <= sSize
       ) {
-        console.log("try doing this");
-        if (columns * (rows + 1) <= ttObjImgs) {
-          console.log("plus row");
-          rows++;
-        } else {
-          console.log("plus columns");
-          columns++;
-        }
+        console.log("long-- short++");
+        lCnt--;
+        sCnt++;
+      }
+      console.log("final: long:" + lCnt + " short:" + sCnt);
+      var columns, rows;
+      if (cHeight > cWidth) {
+        columns = sCnt;
+        rows = lCnt;
+      } else {
+        columns = lCnt;
+        rows = sCnt;
       }
       imgCnt = columns * rows;
+      console.log("imgCnt:" + imgCnt + " c:" + columns + " r:" + rows);
 
       var imgDiv = document.createElement("div");
       imgDiv.id = "imgDiv";
