@@ -1,11 +1,3 @@
-function updateDelay() {
-  delay = document.getElementById("SS.delay").value;
-  localStorage.setItem("SS.delay", delay);
-  if ((waitUntilDelayIsNot0 = 1 && delay > 0)) {
-    updateScreensaver();
-    waitUntilDelayIsNot0 = 0;
-  }
-}
 /*util*/
 Array.prototype.random = function () {
   return this[Math.floor(Math.random() * this.length)];
@@ -15,10 +7,25 @@ Array.prototype.random = function () {
     i: randomIndex,
   };*/
 };
+Array.prototype.removeVal = function (value) {
+  var idx = this.indexOf(value);
+  if (idx > -1) {
+    this.splice(idx, 1);
+  }
+  return this;
+};
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function updateDelay() {
+  delay = document.getElementById("SS.delay").value;
+  localStorage.setItem("SS.delay", delay);
+  if ((waitUntilDelayIsNot0 = 1 && delay > 0)) {
+    updateScreensaver();
+    waitUntilDelayIsNot0 = 0;
+  }
 }
 function screensaverTimeout() {
   if (delay > 0) {
@@ -46,19 +53,22 @@ function updateScreensaver() {
   }
   function updateObjImgs() {
     const ttObjImgs = objImgs.length;
-    var cWidth = document.body.clientWidth;
-    var cHeight = document.body.clientHeight;
+    var cWidth =
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth;
+    var cHeight =
+      window.innerHeight ||
+      document.documentElement.clientHeight ||
+      document.body.clientHeight;
+
     //shortest tab dimension
     var sSize = Math.min(cHeight, cWidth);
     //longest tab dimension
     var lSize = Math.max(cHeight, cWidth);
     const screenSaver = document.getElementById("screensaver");
-    var mode = { i: -1 };
     var imgCnt;
-    /*var var1 = "int1 == 0";
-      var int1 = 0;
-      if (new Function("int1", `return ${var1};`)(int1)) {console.log("Condition is true!");}*/
-    mode.i = getRandomInt(0, 1);
+mode.i = getRandomInt(0, 1);
     if (mode.i == 0) {
       //Mode 0: imgs in the middle of the page, on top of each other
       //Next one's size can't be less than 500px
@@ -69,28 +79,48 @@ function updateScreensaver() {
     } else if (mode.i == 1) {
       //Mode 1: images  of fixed size on page grid
       mode.args = "i < imgCnt";
-      var columns = Math.floor(cWidth / 300);
-      var rows = Math.floor(cHeight / 300);
-
-      //Prevent imgCnt being larger than totalImgs
-      while (columns * rows > ttObjImgs) {
-        if (cHeight > cWidth && columns > 1) {
-          columns--;
-        } else if (rows > 1) {
-          rows--;
+      //columns/rows count for long side (lCnt) or short side (sCnt). Simplifies code.
+      let lCnt = Math.floor(lSize / 300);
+      let sCnt = Math.floor(sSize / 300);
+      //Prevent imgCnt being larger than ttObjImgs
+      console.log("initial: long:" + lCnt + " short:" + sCnt);
+      while (lCnt * sCnt > ttObjImgs) {
+        if (sCnt > 1) {
+          console.log("short--");
+          sCnt--;
+        } else if (lCnt > 1) {
+          console.log("long--");
+          lCnt--;
         } else {
           break;
         }
       }
-      if (
-        columns * (rows + 1) <= ttObjImgs ||
-        (columns + 1) * rows <= ttObjImgs
+      //console.log(sCnt + 2 <= lCnt);
+      //console.log((sCnt + 1) * (lCnt - 1) >= lCnt * sCnt);
+      //console.log((sCnt + 1) * (lCnt - 1) <= ttObjImgs);
+      //console.log((sCnt + 1) * 300 <= sSize);
+
+      while (
+        sCnt + 2 <= lCnt &&
+        (sCnt + 1) * (lCnt - 1) >= lCnt * sCnt &&
+        (sCnt + 1) * (lCnt - 1) <= ttObjImgs &&
+        (sCnt + 1) * 300 <= sSize
       ) {
-        console.warn(
-          `Didn't get max possible images. Columns: ${columns}, Rows: ${rows}, cHeight: ${cHeight}, cWidth: ${cWidth}`
-        );
+        console.log("long-- short++");
+        lCnt--;
+        sCnt++;
+      }
+      console.log("final: long:" + lCnt + " short:" + sCnt);
+      var columns, rows;
+      if (cHeight > cWidth) {
+        columns = sCnt;
+        rows = lCnt;
+      } else {
+        columns = lCnt;
+        rows = sCnt;
       }
       imgCnt = columns * rows;
+      console.log("imgCnt:" + imgCnt + " c:" + columns + " r:" + rows);
 
       var imgDiv = document.createElement("div");
       imgDiv.id = "imgDiv";
@@ -99,10 +129,11 @@ function updateScreensaver() {
       screenSaver.appendChild(imgDiv);
       currentSSElements.push(imgDiv);
     }
-    let usedImgs = [null];
-    let imgUsed = null;
+    /*var var1 = "int1 == 0";
+      var int1 = 0;
+      if (new Function("int1", `return ${var1};`)(int1)) {console.log("Condition is true!");}*/
     for (
-      let i = 0;
+      let i = 0, unUsedImgs = objImgs.slice();
       new Function("i", "imgCnt", "sSize", `return ${mode.args};`)(
         i,
         imgCnt,
@@ -110,11 +141,9 @@ function updateScreensaver() {
       );
       i++
     ) {
+      let imgUsed = unUsedImgs.random();
+      unUsedImgs = unUsedImgs.removeVal(imgUsed);
       const ele = document.createElement("img");
-      while (usedImgs.includes(imgUsed)) {
-        imgUsed = objImgs.random();
-      }
-      usedImgs.push(imgUsed);
       ele.src = "screensaver/" + imgUsed;
       ele.draggable = 0;
       ele.classList = "img" + i;
@@ -124,11 +153,6 @@ function updateScreensaver() {
         ele.width = sSize;
         screenSaver.appendChild(ele);
       } else if (mode.i == 1) {
-        if (cHeight > cWidth) {
-          ele.height = cHeight / rows;
-        } else {
-          ele.width = cWidth / columns;
-        }
         imgDiv.appendChild(ele);
       }
     }
@@ -159,11 +183,10 @@ let bgImgs = [
   "okkult/4.webp",
 ];
 //set/update delay + localStorage
-
-document.getElementById("SS.delay").value =
+var delay = (document.getElementById("SS.delay").value =
   localStorage.getItem("SS.delay") >= 0
     ? localStorage.getItem("SS.delay")
-    : 1000;
+    : 1000);
 
 var waitUntilDelayIsNot0;
 updateDelay();
