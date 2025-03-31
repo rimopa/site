@@ -139,11 +139,6 @@ function updateScreensaver() {
         ele.width = sSize;
         screenSaver.appendChild(ele);
       } else if (mode.i == 1) {
-        if (cHeight > cWidth) {
-          ele.height = cHeight / rows;
-        } else {
-          ele.width = cWidth / columns;
-        }
         imgDiv.appendChild(ele);
       }
     }
