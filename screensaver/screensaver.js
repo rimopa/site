@@ -27,10 +27,12 @@ function updateDelay() {
     waitUntilDelayIsNot0 = 0;
   }
 }
+let screensaverTimer;
 function screensaverTimeout() {
+  clearTimeout(screensaverTimer);
   if (delay > 0) {
-    setTimeout(() => {
-      updateScreensaver();
+    screensaverTimer = setTimeout(() => {
+      requestAnimationFrame(updateScreensaver);
     }, delay);
   } else {
     waitUntilDelayIsNot0 = 1;
