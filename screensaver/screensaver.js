@@ -1,39 +1,24 @@
 /*util*/
 Array.prototype.random = function () {
-  return this[Math.floor(Math.random() * this.length)];
-  /*const randomIndex = Math.floor(Math.random() * this.length);
-  return {
-    ele: this[randomIndex],
-    i: randomIndex,
-  };*/
+  return this[(Math.random() * this.length) | 0];
 };
 Array.prototype.removeVal = function (value) {
-  var idx = this.indexOf(value);
-  if (idx > -1) {
-    this.splice(idx, 1);
-  }
-  return this;
+  return this.filter((ele) => ele !== value);
 };
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-function updateDelay() {
-  delay = document.getElementById("SS.delay").value;
-  localStorage.setItem("SS.delay", delay);
-  if ((waitUntilDelayIsNot0 = 1 && delay > 0)) {
-    updateScreensaver();
-    waitUntilDelayIsNot0 = 0;
-  }
-}
+let screensaverTimer;
 function screensaverTimeout() {
+  clearTimeout(screensaverTimer);
+  delay = Number(document.getElementById("SS.delay").value);
+  localStorage.setItem("SS.delay", delay);
   if (delay > 0) {
-    setTimeout(() => {
-      updateScreensaver();
+    screensaverTimer = setTimeout(() => {
+      requestAnimationFrame(updateScreensaver);
     }, delay);
-  } else {
-    waitUntilDelayIsNot0 = 1;
   }
 }
 function updateScreensaver() {
@@ -45,11 +30,7 @@ function updateScreensaver() {
   }
   function updateBg() {
     bg.style.backgroundImage = "url(screensaver/" + bgImgs.random() + ")";
-    if (getRandomInt(0, 1) == 0) {
-      bg.style.backgroundSize = "cover";
-    } else {
-      bg.style.backgroundSize = "auto";
-    }
+    bg.classList.toggle("cover-bg", getRandomInt(0, 1) === 0);
   }
   function updateObjImgs() {
     const ttObjImgs = objImgs.length;
@@ -68,17 +49,15 @@ function updateScreensaver() {
     var lSize = Math.max(cHeight, cWidth);
     const screenSaver = document.getElementById("screensaver");
     var imgCnt;
-    var mode = { i: getRandomInt(0, 1) };
-    if (mode.i == 0) {
+    var mode = getRandomInt(0, 1);
+    if (mode == 0) {
       //Mode 0: imgs in the middle of the page, on top of each other
       //Next one's size can't be less than 500px
-      mode.args = "i < imgCnt && sSize >= 500";
       imgCnt = ttObjImgs;
       screenSaver.style.display = "grid";
       screenSaver.style.placeItems = "center";
-    } else if (mode.i == 1) {
+    } else if (mode == 1) {
       //Mode 1: images  of fixed size on page grid
-      mode.args = "i < imgCnt";
       //columns/rows count for long side (lCnt) or short side (sCnt). Simplifies code.
       let lCnt = Math.floor(lSize / 300);
       let sCnt = Math.floor(sSize / 300);
@@ -95,11 +74,6 @@ function updateScreensaver() {
           break;
         }
       }
-      //console.log(sCnt + 2 <= lCnt);
-      //console.log((sCnt + 1) * (lCnt - 1) >= lCnt * sCnt);
-      //console.log((sCnt + 1) * (lCnt - 1) <= ttObjImgs);
-      //console.log((sCnt + 1) * 300 <= sSize);
-
       while (
         sCnt + 2 <= lCnt &&
         (sCnt + 1) * (lCnt - 1) >= lCnt * sCnt &&
@@ -129,16 +103,9 @@ function updateScreensaver() {
       screenSaver.appendChild(imgDiv);
       currentSSElements.push(imgDiv);
     }
-    /*var var1 = "int1 == 0";
-      var int1 = 0;
-      if (new Function("int1", `return ${var1};`)(int1)) {console.log("Condition is true!");}*/
     for (
       let i = 0, unUsedImgs = objImgs.slice();
-      new Function("i", "imgCnt", "sSize", `return ${mode.args};`)(
-        i,
-        imgCnt,
-        sSize
-      );
+      i < imgCnt && (mode !== 0 || sSize >= 500);
       i++
     ) {
       let imgUsed = unUsedImgs.random();
@@ -148,11 +115,11 @@ function updateScreensaver() {
       ele.draggable = 0;
       ele.classList = "img" + i;
       currentSSElements.push(ele);
-      if (mode.i == 0) {
+      if (mode == 0) {
         sSize *= 0.75;
         ele.width = sSize;
         screenSaver.appendChild(ele);
-      } else if (mode.i == 1) {
+      } else if (mode == 1) {
         imgDiv.appendChild(ele);
       }
     }
@@ -183,11 +150,10 @@ let bgImgs = [
   "okkult/4.webp",
 ];
 //set/update delay + localStorage
-var delay = (document.getElementById("SS.delay").value =
-  localStorage.getItem("SS.delay") >= 0
-    ? localStorage.getItem("SS.delay")
-    : 1000);
 
-var waitUntilDelayIsNot0;
-updateDelay();
+document.getElementById("SS.delay").value =
+  localStorage.getItem("SS.delay") > 0
+    ? localStorage.getItem("SS.delay")
+    : 1000;
+
 updateScreensaver();
