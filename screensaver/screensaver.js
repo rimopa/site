@@ -10,23 +10,15 @@ function getRandomInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-function updateDelay() {
-  delay = document.getElementById("SS.delay").value;
-  localStorage.setItem("SS.delay", delay);
-  if ((waitUntilDelayIsNot0 = 1 && delay > 0)) {
-    updateScreensaver();
-    waitUntilDelayIsNot0 = 0;
-  }
-}
 let screensaverTimer;
 function screensaverTimeout() {
   clearTimeout(screensaverTimer);
+  delay = Number(document.getElementById("SS.delay").value);
+  localStorage.setItem("SS.delay", delay);
   if (delay > 0) {
     screensaverTimer = setTimeout(() => {
       requestAnimationFrame(updateScreensaver);
     }, delay);
-  } else {
-    waitUntilDelayIsNot0 = 1;
   }
 }
 function updateScreensaver() {
@@ -158,11 +150,10 @@ let bgImgs = [
   "okkult/4.webp",
 ];
 //set/update delay + localStorage
-var delay = (document.getElementById("SS.delay").value =
-  localStorage.getItem("SS.delay") >= 0
-    ? localStorage.getItem("SS.delay")
-    : 1000);
 
-var waitUntilDelayIsNot0;
-updateDelay();
+document.getElementById("SS.delay").value =
+  localStorage.getItem("SS.delay") > 0
+    ? localStorage.getItem("SS.delay")
+    : 1000;
+
 updateScreensaver();
