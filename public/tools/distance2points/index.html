@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <script type="text/javascript" src="/js/index.js" defer></script>
+<link rel="stylesheet" href="/css/index.css" />
+<link rel="icon" href="/imgs/favicon.ico" />
+<script
+  type="text/javascript"
+  src="/js/capitalization-title.js"
+  defer
+></script>
+
+   
+
+<title>Tools - Rimopa</title>
+<meta name="description" content="Get the distance between any two points, in diffent ways and planes" />
+
+
+<meta property="og:title" content="Tools - Rimopa" />
+<meta property="og:description" content="Get the distance between any two points, in diffent ways and planes" />
+<meta property="og:image" content="/imgs/calabaza.jpg" />
+<meta property="og:url" content="https://rimopa.github.io/site/tools/distance2points/" />
+<meta property="og:type" content="website" />
+
+
+<meta name="twitter:title" content="Tools - Rimopa" />
+<meta name="twitter:description" content="Get the distance between any two points, in diffent ways and planes" />
+<meta name="twitter:image" content="/imgs/calabaza.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="canonical" href="https://rimopa.github.io/site/tools/distance2points/" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#ee7248" />
+
+
+<script type="text/javascript" src="tools/js/distance2points.js" defer></script>
+
+  </head>
+  <body id="body">
+    <bar id="header">
+    <a href="/index.html" class="item">
+      <img
+        title="Guau alta eskin"
+        alt="Rimopa"
+        draggable="false"
+        src="/imgs/logo.png"
+        height="30"
+      />
+    </a>
+    <a class="button item" title="dark mode" onclick="toggleTheme()">
+      <img
+        src="/imgs/dark_theme.svg"
+        height="24"
+        draggable="false"
+        alt="dark mode button"
+      />
+    </a>
+    <a class="item" href="/tools"><span>Tools</span></a>
+    <a class="item" href="/screensaver"><span>Screensaver</span></a>
+  </bar>
+    <main>
+      
+<article id="distance2points">
+  <section-title>
+    <h1 title="distance2points">
+      Get any kind of distance between any two points
+    </h1>
+  </section-title>
+  <p>The formula is: (|x₂ - x₁|ᵖ + |y₂ - y₁|ᵖ)^(1/P)</p>
+  <label>p: <input class="math" type="number" id="d2p.p" value="2" /></label>
+  <span>(2 is euclidian/straight distance)</span>
+  <br />
+  <label>x₁: <input class="math" type="number" id="d2p.x1" value="0" /> </label
+  ><label
+    >y₁: <input class="math" type="number" id="d2p.y1" value="2" />
+  </label>
+  <br />
+  <label>x₂: <input class="math" type="number" id="d2p.x2" value="0" /> </label
+  ><label>y₂: <input class="math" type="number" id="d2p.y2" value="4" /> </label
+  ><br />
+  <input
+    class="math"
+    type="submit"
+    value="Get result"
+    onclick="distance2points()"
+  />
+  <h2>The distance between that two points:</h2>
+  <p id="d2p.result" class="output"></p>
+  <div hidden id="d2p.warning">
+    <p class="warning">Not enough values to run</p>
+  </div>
+</article>
+
+
+<h2>Full toolist</h2>
+<ul class="tool-list">
+  
+  
+  <li title="Get annual rate of return on any investment">
+    <a href="/tools/annualperformance/">Annual performance</a>
+    <br />
+    <small>Get annual rate of return on any investment</small>
+  </li>
+  
+  
+  <li title="Get the distance between any two points, in diffent ways and planes">
+    <a href="/tools/distance2points/">Distance between points</a>
+    <br />
+    <small>Get the distance between any two points, in diffent ways and planes</small>
+  </li>
+  
+  
+  <li title="Make relations between quadrilateral sizes">
+    <a href="/tools/quadrilateralrelations/">Quadrilateral relationships</a>
+    <br />
+    <small>Make relations between quadrilateral sizes</small>
+  </li>
+  
+  
+  <li title="Separate elements and sort them alphabetically">
+    <a href="/tools/sort/">Sort list</a>
+    <br />
+    <small>Separate elements and sort them alphabetically</small>
+  </li>
+  
+</ul>
+<h2>Remember the results of these tools are approximate</h2>
+
+      <small id="lastModified"></small>
+    </main>
+    <bar id="footer">
+  <h2 title="Alfred Pan">Santino Rimondotto</h2>
+  <p>
+    Soy Santino Rimondotto, un estudiante al que le gustan estas cositas y
+    aprovechó una página que había hecho antes para modificarla y convertirla en
+    esta abominación.
+  </p>
+  <div id="footer-socials">
+    <a title="Twitter para los amigos" href="https://twitter.com/RIMOPA0">X</a>
+  </div>
+  <div id="subfooter">
+    <span>Nadie me pidió que haga esto.</span>
+    <br />
+    <span title="No sé qué más poner acá"> Gracias por ver </span>
+  </div>
+</bar>
+
+  </body>
+</html>

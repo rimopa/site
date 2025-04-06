@@ -1,0 +1,12 @@
+{{define "main"}}
+<h1>game</h1>
+<iframe
+  src="/juego.html"
+  width="100%"
+  height="500"
+  style="border: none"
+  loading="lazy"
+  title="Problema"
+>
+</iframe>
+{{ readFile "/juego.html" | safeHTML }} {{end}}
