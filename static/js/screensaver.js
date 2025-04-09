@@ -29,7 +29,7 @@ function updateScreensaver() {
     currentSSElements = [];
   }
   function updateBg() {
-    bg.style.backgroundImage = "url(screensaver/" + bgImgs.random() + ")";
+    bg.style.backgroundImage = "url(/imgs/" + bgImgs.random() + ")";
     bg.classList.toggle("cover-bg", getRandomInt(0, 1) === 0);
   }
   function updateObjImgs() {
