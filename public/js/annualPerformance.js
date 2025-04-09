@@ -6,8 +6,7 @@ function annualperf() {
   if ((ci && cf && ti) != "") {
     document.getElementById("anperf.warning").hidden = 1;
     document.getElementById("anperf.result").hidden = 0;
-    document.getElementById("anperf.result").innerText =
-      ((cf - ci) / ci / ti) * 365 * 100 + "%";
+    document.getElementById("anperf.result").innerText = ((cf - ci) / ci / ti) * 365 * 100 + "%";
   } else {
     document.getElementById("anperf.warning").hidden = 0;
     document.getElementById("anperf.result").hidden = 1;

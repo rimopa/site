@@ -36,28 +36,16 @@
   <body id="body">
     <bar id="header">
   <a href="/index.html" class="item">
-    <img
-      title="Guau alta eskin"
-      alt="Rimopa"
-      draggable="false"
-      src="/imgs/logo.png"
-      height="30"
-    />
+    <img title="Guau alta eskin" alt="Rimopa" draggable="false" src="/imgs/logo.png" height="30" />
   </a>
   <a class="button item" title="dark mode" onclick="toggleTheme()">
-    <img
-      src="/imgs/dark_theme.svg"
-      height="24"
-      draggable="false"
-      alt="dark mode button"
-    />
+    <img src="/imgs/dark_theme.svg" height="24" draggable="false" alt="dark mode button" />
   </a>
   <a class="item" href="/tools"><span>Tools</span></a>
   <a class="item" href="/screensaver"><span>Screensaver</span></a>
 </bar>
 
     <main>
-      
 <article id="sortNames">
   <section-title>
     <h2 title="sortNames">Sort list</h2>
@@ -79,8 +67,7 @@
     <input class="math" id="sortNames.input" type="text" value="\n" />
   </label>
   <label
-    >Output separator:
-    <input type="text" class="math" id="sortNames.output" value="\n" /> </label
+    >Output separator: <input type="text" class="math" id="sortNames.output" value="\n" /> </label
   ><br />
   <label
     >Reverse:
@@ -93,19 +80,9 @@
 
   <label
     >Delete leading and finishing spaces:
-    <input
-      type="checkbox"
-      class="math"
-      id="sortNames.deleteSpaces"
-      checked
-    /> </label
+    <input type="checkbox" class="math" id="sortNames.deleteSpaces" checked /> </label
   ><br />
-  <input
-    class="math"
-    type="submit"
-    value="Get result"
-    onclick="orderNames()"
-  /><br />
+  <input class="math" type="submit" value="Get result" onclick="orderNames()" /><br />
   <h2>Sorted list:</h2>
   <p id="sortNames.result" class="output" style="white-space: pre-wrap"></p>
   <p class="warning" hidden id="sortNames.warning">Not enough values to run</p>
@@ -123,11 +100,7 @@
     ><br />
     <label
       >Search for elements instead of separator in the input:
-      <input
-        type="checkbox"
-        class="math"
-        id="sortNames.searchElements"
-      /> </label
+      <input type="checkbox" class="math" id="sortNames.searchElements" /> </label
     ><br />
     <label
       >Name order:
@@ -135,8 +108,7 @@
     </label>
     <details>
       <summary>Name order</summary>
-      The program splits the elements to make words and recognizes its parts
-      like this chart:
+      The program splits the elements to make words and recognizes its parts like this chart:
       <table>
         <tr>
           <th># of words</th>
@@ -159,40 +131,34 @@
           <td>3, 4</td>
         </tr>
       </table>
-      Then creates a list with lastName first and firstName second, so order is
-      given first by lastName and then by firstName. This list is ordered and
-      its indexes used to order the names. <br />If the name is less than 2 or
-      more than 4 words, it's ignored and an alert is given.
+      Then creates a list with lastName first and firstName second, so order is given first by
+      lastName and then by firstName. This list is ordered and its indexes used to order the names.
+      <br />If the name is less than 2 or more than 4 words, it's ignored and an alert is given.
     </details>
   </details>
 </article>
-
-
+ 
 <h2>Full toolist</h2>
 <ul class="tool-list">
-  
-  
+   
   <li title="Get annual rate of return on any investment">
     <a href="/tools/annualperformance/">Annual performance</a>
     <br />
     <small>Get annual rate of return on any investment</small>
   </li>
-  
-  
+   
   <li title="Get the distance between any two points, in diffent ways and planes">
     <a href="/tools/distance2points/">Distance between points</a>
     <br />
     <small>Get the distance between any two points, in diffent ways and planes</small>
   </li>
-  
-  
+   
   <li title="Make relations between quadrilateral sizes">
     <a href="/tools/quadrilateralrelations/">Quadrilateral relations</a>
     <br />
     <small>Make relations between quadrilateral sizes</small>
   </li>
-  
-  
+   
   <li title="Separate elements and sort them alphabetically">
     <a href="/tools/sort/">Sort list</a>
     <br />
@@ -201,14 +167,12 @@
   
 </ul>
 <h2>Remember the results of these tools are approximate</h2>
- 
-    </main>
+ </main>
     <bar id="footer">
   <h2 title="Alfred Pan">Santino Rimondotto</h2>
   <p>
-    Soy Santino Rimondotto, un estudiante al que le gustan estas cositas y
-    aprovechó una página que había hecho antes para modificarla y convertirla en
-    esta abominación.
+    Soy Santino Rimondotto, un estudiante al que le gustan estas cositas y aprovechó una página que
+    había hecho antes para modificarla y convertirla en esta abominación.
   </p>
   <div id="footer-socials">
     <a title="Twitter para los amigos" href="https://twitter.com/RIMOPA0">X</a>

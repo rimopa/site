@@ -35,13 +35,9 @@ function updateScreensaver() {
   function updateObjImgs() {
     const ttObjImgs = objImgs.length;
     var cWidth =
-      window.innerWidth ||
-      document.documentElement.clientWidth ||
-      document.body.clientWidth;
+      window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     var cHeight =
-      window.innerHeight ||
-      document.documentElement.clientHeight ||
-      document.body.clientHeight;
+      window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
     //shortest tab dimension
     var sSize = Math.min(cHeight, cWidth);
@@ -103,11 +99,7 @@ function updateScreensaver() {
       screenSaver.appendChild(imgDiv);
       currentSSElements.push(imgDiv);
     }
-    for (
-      let i = 0, unUsedImgs = objImgs.slice();
-      i < imgCnt && (mode !== 0 || sSize >= 500);
-      i++
-    ) {
+    for (let i = 0, unUsedImgs = objImgs.slice(); i < imgCnt && (mode !== 0 || sSize >= 500); i++) {
       let imgUsed = unUsedImgs.random();
       unUsedImgs = unUsedImgs.removeVal(imgUsed);
       const ele = document.createElement("img");
@@ -152,8 +144,6 @@ let bgImgs = [
 //set/update delay + localStorage
 
 document.getElementById("SS.delay").value =
-  localStorage.getItem("SS.delay") > 0
-    ? localStorage.getItem("SS.delay")
-    : 1000;
+  localStorage.getItem("SS.delay") > 0 ? localStorage.getItem("SS.delay") : 1000;
 
 updateScreensaver();
