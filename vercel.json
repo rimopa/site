@@ -1,0 +1,11 @@
+{
+  "builds": [
+    {
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "site/public"
+      }
+    }
+  ],
+  "ignoreCommand": "if [ \"$VERCEL_GIT_COMMIT_REF\" = \"main\" ]; then exit 0; fi"
+}
