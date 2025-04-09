@@ -4,12 +4,9 @@ function orderNames() {
     const inputSeparator = document.getElementById("sortNames.input").value;
     let inputSeparatorV = inputSeparator;
     if (!caseSensitive) {
-      inputSeparatorV =
-        inputSeparatorV.toLowerCase() + "|" + inputSeparatorV.toUpperCase();
+      inputSeparatorV = inputSeparatorV.toLowerCase() + "|" + inputSeparatorV.toUpperCase();
     }
-    const searchElements = document.getElementById(
-      "sortNames.searchElements"
-    ).checked;
+    const searchElements = document.getElementById("sortNames.searchElements").checked;
     if (searchElements) {
       names = [...textarea.matchAll(inputSeparatorV)].map((match) => match[0]);
     } else {
@@ -46,9 +43,7 @@ function orderNames() {
     } else {
       a = errorsI.join(", ");
       warningElement.innerHTML =
-        "Elements " +
-        a +
-        " have either too much or not enought arguments and are being ignored.";
+        "Elements " + a + " have either too much or not enought arguments and are being ignored.";
       if (a == "") {
         warningElement.hidden = 1;
       } else {
@@ -73,13 +68,9 @@ function orderNames() {
   let orderedNameList = [];
   let names = [];
   let errorsI = [];
-  const deleteSpaces = document.getElementById(
-    "sortNames.deleteSpaces"
-  ).checked;
+  const deleteSpaces = document.getElementById("sortNames.deleteSpaces").checked;
   const nameOrder = document.getElementById("sortNames.nameOrder").checked;
-  const caseSensitive = document.getElementById(
-    "sortNames.caseSensitive"
-  ).checked;
+  const caseSensitive = document.getElementById("sortNames.caseSensitive").checked;
   let empty = false;
   getNames();
   if (deleteSpaces) {

@@ -70,10 +70,7 @@ function quadrilateralRelations() {
       } else {
         if (diag !== 0) {
           method2 = "diagonal";
-          a = getMaxDivinCommon(
-            (newHeight = Math.sqrt(diag ** 2 - width ** 2)),
-            width
-          );
+          a = getMaxDivinCommon((newHeight = Math.sqrt(diag ** 2 - width ** 2)), width);
         }
       }
     } else {
@@ -82,10 +79,7 @@ function quadrilateralRelations() {
         newHeight = height;
         if (diag != 0) {
           method2 = "diagonal";
-          a = getMaxDivinCommon(
-            (newwidth = Math.sqrt(diag ** 2 - height ** 2)),
-            height
-          );
+          a = getMaxDivinCommon((newwidth = Math.sqrt(diag ** 2 - height ** 2)), height);
         }
       }
     }
@@ -103,8 +97,7 @@ function quadrilateralRelations() {
   console.log("a:", a);
   document.getElementById("cmin.result.method").innerText =
     "Using the the " + method1 + " and  " + method2 + " inputs.";
-  document.getElementById("cmin.result.ratio").innerText =
-    newHRatio + ":" + newVRatio;
+  document.getElementById("cmin.result.ratio").innerText = newHRatio + ":" + newVRatio;
 
   measureN = getMeasure(document.getElementById("cmin.result.type").value);
 
@@ -130,23 +123,10 @@ function setCm() {
     "Rods",
     "Yards",
   ];
-  measureCode = [
-    "cm",
-    "AU",
-    "ft",
-    "fur",
-    "in",
-    "lea",
-    "ly",
-    "mi",
-    "nmi",
-    "pc",
-    "rd",
-    "yd",
-  ];
+  measureCode = ["cm", "AU", "ft", "fur", "in", "lea", "ly", "mi", "nmi", "pc", "rd", "yd"];
   measure2cm = [
-    1, 14959787069100, 30.48, 20116.8, 2.54, 482803.2, 946073047258004200,
-    160934.4, 185200, 3085677581279958500, 502.92, 91.44,
+    1, 14959787069100, 30.48, 20116.8, 2.54, 482803.2, 946073047258004200, 160934.4, 185200,
+    3085677581279958500, 502.92, 91.44,
   ];
   //how many centimeters fit in the other measure
   selects = [

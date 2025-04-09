@@ -3,8 +3,8 @@
 <link rel="icon" href="/imgs/favicon.ico" />
 <script type="text/javascript" src="/js/capitalization-title.js" defer></script>
 
-{{ $title := .Title }} {{ $desc := .Params.description }} {{ $image :=
-.Params.image }} {{ $url := .Params.canonical | default .Permalink }}
+{{ $title := .Title }} {{ $desc := .Params.description }} {{ $image := .Params.image }} {{ $url :=
+.Params.canonical | default .Permalink }}
 
 <title>{{ $title }}</title>
 <meta name="description" content="{{ $desc }}" />
