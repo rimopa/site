@@ -1,6 +1,6 @@
 baseURL = 'https://rimopa.github.io/'
 languageCode = 'en-us'
-title = 'Rimopas site'
+title = 'Rimopa'
 
 [build.environment]
   HUGO_VERSION = "0.145.0"
