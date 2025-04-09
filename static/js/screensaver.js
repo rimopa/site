@@ -17,7 +17,7 @@ function screensaverTimeout() {
   localStorage.setItem("SS.delay", delay);
   if (delay > 0) {
     screensaverTimer = setTimeout(() => {
-      requestAnimationFrame(updateScreensaver);
+      requestAnimationFrame(() => updateScreensaver());
     }, delay);
   }
 }

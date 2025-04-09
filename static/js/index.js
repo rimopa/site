@@ -14,6 +14,8 @@ function toggleTheme() {
     darkMode();
   }
 }
+
+//initial execution
 if (localStorage.getItem("mode") === "dark") {
   darkMode();
   // automatic light/dark mode
@@ -24,10 +26,3 @@ if (localStorage.getItem("mode") === "dark") {
 } else {
   lightMode();
 }
-function resetLastModifiedTime() {
-  //last modified time
-  document.getElementById("lastModified").innerText =
-    "Last modification date: " + document.lastModified;
-}
-//initial execution
-resetLastModifiedTime();

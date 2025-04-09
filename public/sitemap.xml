@@ -2,26 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://rimopa.github.io/tools/annualperformance/</loc>
   </url><url>
-    <loc>http://localhost:1313/juego/</loc>
+    <loc>https://rimopa.github.io/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://rimopa.github.io/tools/distance2points/</loc>
   </url><url>
-    <loc>http://localhost:1313/screensaver/screensaver/</loc>
+    <loc>https://rimopa.github.io/juego/juego/</loc>
   </url><url>
-    <loc>http://localhost:1313/screensaver/</loc>
+    <loc>https://rimopa.github.io/juego/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://rimopa.github.io/tools/quadrilateralrelations/</loc>
   </url><url>
-    <loc>http://localhost:1313/tools/</loc>
+    <loc>https://rimopa.github.io/</loc>
   </url><url>
-    <loc>http://localhost:1313/tools/annualperformance/</loc>
+    <loc>https://rimopa.github.io/screensaver/screensaver/</loc>
   </url><url>
-    <loc>http://localhost:1313/tools/distance2points/</loc>
+    <loc>https://rimopa.github.io/screensaver/</loc>
   </url><url>
-    <loc>http://localhost:1313/tools/quadrilateralrelations/</loc>
+    <loc>https://rimopa.github.io/tools/sort/</loc>
   </url><url>
-    <loc>http://localhost:1313/tools/sort/</loc>
+    <loc>https://rimopa.github.io/tags/</loc>
+  </url><url>
+    <loc>https://rimopa.github.io/tools/</loc>
   </url>
 </urlset>
