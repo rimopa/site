@@ -1,0 +1,35 @@
+{{define "head"}}
+
+<script type="text/javascript" src="/js/distance2points.js" defer></script>
+{{end}}{{define "main"}}
+<article id="distance2points">
+  <section-title>
+    <h1 title="distance2points">
+      Get any kind of distance between any two points
+    </h1>
+  </section-title>
+  <p>The formula is: (|x₂ - x₁|ᵖ + |y₂ - y₁|ᵖ)^(1/P)</p>
+  <label>p: <input class="math" type="number" id="d2p.p" value="2" /></label>
+  <span>(2 is euclidian/straight distance)</span>
+  <br />
+  <label>x₁: <input class="math" type="number" id="d2p.x1" value="0" /> </label
+  ><label
+    >y₁: <input class="math" type="number" id="d2p.y1" value="2" />
+  </label>
+  <br />
+  <label>x₂: <input class="math" type="number" id="d2p.x2" value="0" /> </label
+  ><label>y₂: <input class="math" type="number" id="d2p.y2" value="4" /> </label
+  ><br />
+  <input
+    class="math"
+    type="submit"
+    value="Get result"
+    onclick="distance2points()"
+  />
+  <h2>The distance between that two points:</h2>
+  <p id="d2p.result" class="output"></p>
+  <div hidden id="d2p.warning">
+    <p class="warning">Not enough values to run</p>
+  </div>
+</article>
+{{partial "toolist" . }}{{end}}

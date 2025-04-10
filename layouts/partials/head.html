@@ -1,0 +1,29 @@
+<script type="text/javascript" src="/js/index.js" defer></script>
+<link rel="stylesheet" href="/css/index.css" />
+<link rel="icon" href="/imgs/favicon.ico" />
+<script type="text/javascript" src="/js/capitalization-title.js" defer></script>
+
+{{ $title:=.Title }} {{ $desc:=.Params.description }} {{ $image:=.Params.images }}
+{{$url:=.Params.canonical | default .Permalink}}
+
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $desc }}" />
+
+<!--Open Graph Protocol-->
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:description" content="{{ $desc }}" />
+<meta property="og:image" content="{{ $image }}" />
+<meta property="og:url" content="{{ $url }}" />
+<meta property="og:type" content="website" />
+
+<!--Twitter-->
+<meta name="twitter:title" content="{{ $title }}" />
+<meta name="twitter:description" content="{{ $desc }}" />
+<meta name="twitter:image" content="{{ $image }}" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="canonical" href="{{ $url }}" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#ee7248" />

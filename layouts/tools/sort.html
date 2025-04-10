@@ -1,0 +1,113 @@
+{{define "head"}}
+<script type="text/javascript" src="/js/sort.js" defer></script>
+{{end}} {{define "main"}}
+<article id="sortNames">
+  <section-title>
+    <h2 title="sortNames">Sort list</h2>
+  </section-title>
+  <label
+    >List:
+    <br />
+    <textarea
+      class="math"
+      type="text"
+      id="sortNames.names"
+      placeholder="your list here!"
+      style="width: max-content; aspect-ratio: 1.1"
+    ></textarea></label
+  ><br />
+
+  <label
+    >Input separator:
+    <input class="math" id="sortNames.input" type="text" value="\n" />
+  </label>
+  <label
+    >Output separator:
+    <input type="text" class="math" id="sortNames.output" value="\n" /> </label
+  ><br />
+  <label
+    >Reverse:
+    <input type="checkbox" class="math" id="sortNames.reverse" />
+  </label>
+  <label
+    >Case sensitive:
+    <input type="checkbox" class="math" id="sortNames.caseSensitive" />
+  </label>
+
+  <label
+    >Delete leading and finishing spaces:
+    <input
+      type="checkbox"
+      class="math"
+      id="sortNames.deleteSpaces"
+      checked
+    /> </label
+  ><br />
+  <input
+    class="math"
+    type="submit"
+    value="Get result"
+    onclick="orderNames()"
+  /><br />
+  <h2>Sorted list:</h2>
+  <p id="sortNames.result" class="output" style="white-space: pre-wrap"></p>
+  <p class="warning" hidden id="sortNames.warning">Not enough values to run</p>
+  <details>
+    <summary>Advanced</summary>
+    <small
+      >Regular expresions are used for the input. Check
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet"
+        target="_blank"
+        rel="noopener noreferrer"
+        >here</a
+      >
+      for more information about how to use them.</small
+    ><br />
+    <label
+      >Search for elements instead of separator in the input:
+      <input
+        type="checkbox"
+        class="math"
+        id="sortNames.searchElements"
+      /> </label
+    ><br />
+    <label
+      >Name order:
+      <input type="checkbox" class="math" id="sortNames.nameOrder" />
+    </label>
+    <details>
+      <summary>Name order</summary>
+      The program splits the elements to make words and recognizes its parts
+      like this chart:
+      <table>
+        <tr>
+          <th># of words</th>
+          <th>firstName</th>
+          <th>lastName</th>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>1</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>1, 2</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>1, 2</td>
+          <td>3, 4</td>
+        </tr>
+      </table>
+      Then creates a list with lastName first and firstName second, so order is
+      given first by lastName and then by firstName. This list is ordered and
+      its indexes used to order the names.
+      <br />If the name is less than 2 or more than 4 words, it's ignored and an
+      alert is given.
+    </details>
+  </details>
+</article>
+{{partial "toolist" .}} {{end}}
