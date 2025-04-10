@@ -1,4 +1,4 @@
-baseURL = "http://localhost:1313/site/"
+baseURL = "http://localhost:1313/"
 languageCode = 'en-us'
 title = 'Rimopa'
 
