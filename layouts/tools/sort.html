@@ -1,5 +1,5 @@
 {{define "head"}}
-<script type="text/javascript" src="/js/sort.js" defer></script>
+<script type="text/javascript" src="{{"/js/sort.js" | relURL }}" defer></script>
 {{end}} {{define "main"}}
 <article id="sortNames">
   <section-title>
@@ -22,7 +22,8 @@
     <input class="math" id="sortNames.input" type="text" value="\n" />
   </label>
   <label
-    >Output separator: <input type="text" class="math" id="sortNames.output" value="\n" /> </label
+    >Output separator:
+    <input type="text" class="math" id="sortNames.output" value="\n" /> </label
   ><br />
   <label
     >Reverse:
@@ -35,9 +36,19 @@
 
   <label
     >Delete leading and finishing spaces:
-    <input type="checkbox" class="math" id="sortNames.deleteSpaces" checked /> </label
+    <input
+      type="checkbox"
+      class="math"
+      id="sortNames.deleteSpaces"
+      checked
+    /> </label
   ><br />
-  <input class="math" type="submit" value="Get result" onclick="orderNames()" /><br />
+  <input
+    class="math"
+    type="submit"
+    value="Get result"
+    onclick="orderNames()"
+  /><br />
   <h2>Sorted list:</h2>
   <p id="sortNames.result" class="output" style="white-space: pre-wrap"></p>
   <p class="warning" hidden id="sortNames.warning">Not enough values to run</p>
@@ -55,7 +66,11 @@
     ><br />
     <label
       >Search for elements instead of separator in the input:
-      <input type="checkbox" class="math" id="sortNames.searchElements" /> </label
+      <input
+        type="checkbox"
+        class="math"
+        id="sortNames.searchElements"
+      /> </label
     ><br />
     <label
       >Name order:
@@ -63,7 +78,8 @@
     </label>
     <details>
       <summary>Name order</summary>
-      The program splits the elements to make words and recognizes its parts like this chart:
+      The program splits the elements to make words and recognizes its parts
+      like this chart:
       <table>
         <tr>
           <th># of words</th>
@@ -86,9 +102,11 @@
           <td>3, 4</td>
         </tr>
       </table>
-      Then creates a list with lastName first and firstName second, so order is given first by
-      lastName and then by firstName. This list is ordered and its indexes used to order the names.
-      <br />If the name is less than 2 or more than 4 words, it's ignored and an alert is given.
+      Then creates a list with lastName first and firstName second, so order is
+      given first by lastName and then by firstName. This list is ordered and
+      its indexes used to order the names.
+      <br />If the name is less than 2 or more than 4 words, it's ignored and an
+      alert is given.
     </details>
   </details>
 </article>
