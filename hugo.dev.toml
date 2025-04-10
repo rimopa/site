@@ -1,6 +1,0 @@
-baseURL = "http://localhost:1313/"
-languageCode = 'en-us'
-title = 'Rimopa'
-
-[build.environment]
-  HUGO_VERSION = "0.145.0"
