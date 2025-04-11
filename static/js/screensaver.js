@@ -125,21 +125,21 @@ let currentSSElements = [];
 const bg = document.getElementById("gifbg");
 //object images
 let objImgs = [
-  "../imgs/pixabay/ball.gif",
-  "../imgs/pixabay/bicycle.gif",
-  "../imgs/pixabay/box.gif",
-  "../imgs/pixabay/hamster.gif",
-  "../imgs/pixabay/procrastinate.gif",
-  "../imgs/pixabay/wheel.gif",
+  "/imgs/pixabay/ball.gif",
+  "/imgs/pixabay/bicycle.gif",
+  "/imgs/pixabay/box.gif",
+  "/imgs/pixabay/hamster.gif",
+  "/imgs/pixabay/procrastinate.gif",
+  "/imgs/pixabay/wheel.gif",
 ];
 //background images
 let bgImgs = [
-  "../imgs/okkult/1.gif",
-  "../imgs/okkult/2.gif",
-  "../imgs/okkult/3-1.gif",
-  "../imgs/okkult/3-2.gif",
-  "../imgs/okkult/3-3.gif",
-  "../imgs/okkult/4.webp",
+  "/imgs/okkult/1.gif",
+  "/imgs/okkult/2.gif",
+  "/imgs/okkult/3-1.gif",
+  "/imgs/okkult/3-2.gif",
+  "/imgs/okkult/3-3.gif",
+  "/imgs/okkult/4.webp",
 ];
 //set/update delay + localStorage
 
