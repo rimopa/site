@@ -1,12 +1,13 @@
 {{define "head-extra"}}
-<script type="text/javascript" src="/js/annualPerformance.js" defer></script>
+<script type="text/javascript" src="/js/annualPerformance.js"></script>
 {{end}} {{define "main"}}
 <article id="getannualperformance">
   <section-title>
     <h2 title="annualperf">Get annual rate of return on any investment</h2>
   </section-title>
   <p>
-    The formula is: ((finalCapital - initialCapital) / initialCapital / daysInvested) * 365 * 100
+    The formula is: ((finalCapital - initialCapital) / initialCapital /
+    daysInvested) * 365 * 100
   </p>
   <label
     >Initial capital (invested):
@@ -14,11 +15,13 @@
   /></label>
   <br />
   <label
-    >Final capital: <input class="math" type="number" id="anperf.finalCapital" value="150"
+    >Final capital:
+    <input class="math" type="number" id="anperf.finalCapital" value="150"
   /></label>
   <br />
   <label
-    >Days it was invested: <input class="math" type="number" id="anperf.daysInvested" value="365"
+    >Days it was invested:
+    <input class="math" type="number" id="anperf.daysInvested" value="365"
   /></label>
   <br />
   <input class="math" type="submit" value="Get result" onclick="annualperf()" />

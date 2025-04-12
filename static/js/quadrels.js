@@ -1,4 +1,4 @@
-function quadrilateralRelations() {
+function quadrels() {
   if (
     (document.getElementById("cmin.ratio.v").value != 0 &&
       document.getElementById("cmin.ratio.h").value != 0) +
@@ -163,4 +163,4 @@ function getCm(value, type) {
   return value * measure2cm[measureN];
 }
 setCm();
-quadrilateralRelations();
+quadrels();
