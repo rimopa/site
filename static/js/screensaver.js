@@ -29,7 +29,7 @@ function updateScreensaver() {
     currentSSElements = [];
   }
   function updateBg() {
-    bg.style.backgroundImage = "url(/imgs/" + bgImgs.random() + ")";
+    bg.style.backgroundImage = "url(" + bgImgs.random() + ")";
     bg.classList.toggle("cover-bg", getRandomInt(0, 1) === 0);
   }
   function updateObjImgs() {
@@ -103,7 +103,7 @@ function updateScreensaver() {
       let imgUsed = unUsedImgs.random();
       unUsedImgs = unUsedImgs.removeVal(imgUsed);
       const ele = document.createElement("img");
-      ele.src = "/imgs/" + imgUsed;
+      ele.src = imgUsed;
       ele.draggable = 0;
       ele.classList = "img" + i;
       currentSSElements.push(ele);
@@ -125,21 +125,21 @@ let currentSSElements = [];
 const bg = document.getElementById("gifbg");
 //object images
 let objImgs = [
-  "pixabay/ball.gif",
-  "pixabay/bicycle.gif",
-  "pixabay/box.gif",
-  "pixabay/hamster.gif",
-  "pixabay/procrastinate.gif",
-  "pixabay/wheel.gif",
+  "../imgs/pixabay/ball.gif",
+  "../imgs/pixabay/bicycle.gif",
+  "../imgs/pixabay/box.gif",
+  "../imgs/pixabay/hamster.gif",
+  "../imgs/pixabay/procrastinate.gif",
+  "../imgs/pixabay/wheel.gif",
 ];
 //background images
 let bgImgs = [
-  "okkult/1.gif",
-  "okkult/2.gif",
-  "okkult/3-1.gif",
-  "okkult/3-2.gif",
-  "okkult/3-3.gif",
-  "okkult/4.webp",
+  "../imgs/okkult/1.gif",
+  "../imgs/okkult/2.gif",
+  "../imgs/okkult/3-1.gif",
+  "../imgs/okkult/3-2.gif",
+  "../imgs/okkult/3-3.gif",
+  "../imgs/okkult/4.webp",
 ];
 //set/update delay + localStorage
 
