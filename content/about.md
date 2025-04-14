@@ -18,7 +18,7 @@ layout: "doc"
   If you like me, or if you don't, please give me a chance of making you learn a new thing. Talk to
   me, ask me, whatever you need. I know I'm not the best Spanish English writer, nor the best at
   programming, nor the best person. I won't fix anyone's life, ever, but maybe I can help someone to
-  get out of their own way. Or, if you are funny, you can send me a coding challenge and I'll try to
-  solve it.
+  get out of their own way. Or, if you want me to have a little fun, you can send me a coding challenge
+  and I'll try to solve it.
 </p>
 <p class="paragraph">頑張れ！</p>
