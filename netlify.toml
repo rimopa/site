@@ -1,0 +1,15 @@
+baseURL = 'https://rimopa.github.io/site/'
+languageCode = 'en-us'
+title = 'Rimopa'
+relativeURLs = false
+
+[build.environment]
+  HUGO_VERSION = "0.145.0"
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.goldmark.extensions]
+    linkify = true
+    table = true
+    typographer = true
+    attributes = true
