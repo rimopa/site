@@ -2,7 +2,6 @@
 title: "Privacy Notice"
 description: "A privacy page for a privacy guy."
 image: "/imgs/calabaza.jpg"
-canonical: "https://rimopa.github.io/site/privacy/"
 layout: "doc"
 ---
 

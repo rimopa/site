@@ -2,7 +2,6 @@
 title: "About"
 description: "An about page about a guy."
 image: "/imgs/calabaza.jpg"
-canonical: "https://rimopa.github.io/site/about/"
 layout: "doc"
 ---
 

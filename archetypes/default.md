@@ -4,5 +4,4 @@ date: {{ .Date }}
 draft: true
 description: ""
 image: "/imgs/calabaza.jpg"
-canonical: "https://rimopa.github.io/site/"
 ---
