@@ -1,16 +1,36 @@
 <bar id="footer">
-  <h2 title="Alfred Pan">Santino Rimondotto</h2>
-  <p>
-    Soy Santino Rimondotto, un estudiante al que le gustan estas cositas y
-    aprovechó una página que había hecho antes para modificarla y convertirla en
-    esta abominación.
-  </p>
-  <div id="footer-socials">
-    <a title="Twitter para los amigos" href="https://twitter.com/RIMOPA0">X</a>
+  <div class="about">
+    <h2 title="Alfred Pan">Santino Rimondotto</h2>
+    <p>
+      I'm Santino Rimondotto, a student that likes these thingies and just reused a previous page
+      i've done before to modify it and create this.
+    </p>
+    <!--Soy Santino Rimondotto, un estudiante al que le gustan estas cositas y aprovechó una página que
+    había hecho antes para modificarla y convertirla en estao.-->
+    <div class="footer-socials">
+      <a title="Twitter for friends" href="https://x.com/rimopa0" target="_blank" rel="noopener noreferrer"
+      >
+      <img src="{{ absURL "imgs/x.svg"}}" alt="X"
+     >
+      </a>
+      <a href="https://github.com/rimopa/" target="_blank" rel="noopener noreferrer"
+      >
+      <img src="{{ absURL "imgs/github.svg"}}" alt="GitHub"
+     >
+      </a>
+    </div>
   </div>
-  <div id="subfooter">
-    <span>Nadie me pidió que haga esto.</span>
+  <div class="usefulLinks">
+    <h3>Useful links</h3>
+    <ul>
+      <li><a  href="{{"/" | relURL }}">Homepage</a></li>
+      <li><a  href="{{"/about" | relURL }}">About</a></li>
+      <li><a  href="{{"/privacy" | relURL }}">Privacy Notice</a></li>
+    </ul>
+  </div>
+  <div class="subfooter">
+    <span>No one asked me to do this.</span>
     <br />
-    <span title="No sé qué más poner acá"> Gracias por ver </span>
+    <span title="I don't know what else to write here"> Thanks for visiting </span>
   </div>
 </bar>

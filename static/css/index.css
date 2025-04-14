@@ -2,8 +2,8 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica,
-    sans-serif, times;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, sans-serif, times;
   color: #000;
   background: #fcfcfc;
   margin: 0;
@@ -90,7 +90,38 @@ body.dark #header .button:hover {
 #footer {
   font-size: 14px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  .about {
+    display: grid;
+    flex-grow: 1;
+    justify-content: center;
+    margin-bottom: 1em;
+    .footer-socials {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      a {
+        width: 21px;
+        height: 21px;
+      }
+    }
+  }
+  div.usefulLinks {
+    padding: 0 45px;
+    ul li {
+      list-style: none;
+    }
+  }
+  .subfooter {
+    background: #000;
+    width: 100%;
+    text-align: center;
+    padding: 5px 0;
+    margin-bottom: 0;
+  }
 }
 #footer p,
 #footer h2,
@@ -135,6 +166,11 @@ li {
 /*other*/
 .small {
   font-size: 75%;
+}
+.paragraph {
+  max-width: 800px;
+  text-indent: 30px;
+  padding-left: 2rem;
 }
 /*math*/
 .math {
