@@ -21,3 +21,13 @@ layout: "doc"
   and I'll try to solve it.
 </p>
 <p class="paragraph">頑張れ！</p>
+<h2 title="RRing.">Contact</h2>
+<p class="paragraph">
+  If you got any questions, bug reports, feature suggestions for this site, something about another of my
+  projects, or you just feel the need to say something, feel free to contact me via e-mail:
+  rimopapomir(<span title="to avoid bots">at</span>)gmail.com.
+</p>
+<br />
+<p class="paragraph">
+  PD: I know I'm not the best at writing this kind of thing. I prefer writing JavaScript.
+</p>

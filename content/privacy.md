@@ -14,3 +14,10 @@ layout: "doc"
   visit the
   <a href="https://www.microsoft.com/privacy/privacystatement">Microsoft Privacy Statement</a>.
 </p>
+<p class="paragraph">
+  I don't knowingly collect or store any personal information: I don't even have servers to do it.
+  If you think I am hosting something containing your personal data or content belonging to you and
+  would like to get it removed, please let me know. Files you upload are stored on
+  our servers up to 1 hour after they are last used with our tools. They are automatically and
+  securely deleted afterward. Filenames are not listed publicly.
+</p>
