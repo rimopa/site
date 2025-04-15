@@ -131,6 +131,9 @@ let objImgs = [
   "../imgs/pixabay/hamster.gif",
   "../imgs/pixabay/procrastinate.gif",
   "../imgs/pixabay/wheel.gif",
+  "../imgs/pixabay/dna.gif",
+  "../imgs/pixabay/download.gif",
+  "../imgs/pixabay/generation.gif",
 ];
 //background images
 let bgImgs = [
