@@ -1,3 +1,7 @@
+::selection,
+::-moz-selection {
+  background: #ff6836cc;
+}
 html {
   scroll-behavior: smooth;
 }
