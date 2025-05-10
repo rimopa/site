@@ -134,6 +134,8 @@ let objImgs = [
   "../imgs/pixabay/dna.gif",
   "../imgs/pixabay/download.gif",
   "../imgs/pixabay/generation.gif",
+  "../imgs/pixabay/sphere.gif",
+  "../imgs/pixabay/steampunk.gif",
 ];
 //background images
 let bgImgs = [
