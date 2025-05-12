@@ -1,16 +1,22 @@
 function orderNames() {
   function getNames() {
     const textarea = document.getElementById("sortNames.names").value;
-    const inputSeparator = document.getElementById("sortNames.input").value;
-    let inputSeparatorV = inputSeparator;
-    if (!caseSensitive) {
-      inputSeparatorV = inputSeparatorV.toLowerCase() + "|" + inputSeparatorV.toUpperCase();
-    }
+    const initialInputSeparator = document.getElementById("sortNames.input").value;
+    let inputSeparator = document.getElementById("sortNames.input").value;
+    /*if (!caseSensitive) {
+      inputSeparator = inputSeparator.toLowerCase() + "|" + inputSeparator.toUpperCase();
+    }*/
     const searchElements = document.getElementById("sortNames.searchElements").checked;
-    if (searchElements) {
-      names = [...textarea.matchAll(inputSeparatorV)].map((match) => match[0]);
-    } else {
-      names = textarea.split(RegExp(inputSeparatorV));
+    try {
+      if (searchElements) {
+        return [...textarea.matchAll(inputSeparator)].map((match) => match[0]);
+      } else {
+        return textarea.split(RegExp(inputSeparator));
+      }
+    } catch (error) {
+      console.error("Error recognizing regexp expression:", error);
+      warnings.regexpError = initialInputSeparator;
+      return false;
     }
   }
   function trim(str) {
@@ -24,100 +30,104 @@ function orderNames() {
   function printResult() {
     const resultElement = document.getElementById("sortNames.result");
     const outputSeparator = document.getElementById("sortNames.output").value;
-    var result = orderedNameList.join(outputSeparator);
-    result = result.replace(/\\n/g, "\n");
-    if (result == "") {
-      empty = true;
-      resultElement.hidden = 1;
-    } else {
-      resultElement.innerHTML = result;
-      empty = false;
+    const result = sortedList.join(outputSeparator).replace(/\\n/g, "\n");
+    if (result != "") {
       resultElement.hidden = 0;
+      resultElement.innerHTML = result;
+    } else {
+      warnings.empty = true;
+      resultElement.hidden = 1;
     }
   }
   function printWarnings() {
     const warningElement = document.getElementById("sortNames.warning");
-    if (empty) {
-      warningElement.innerHTML = "Error. Empty result.";
+    if (warnings != {}) {
       warningElement.hidden = 0;
-    } else {
-      a = errorsI.join(", ");
-      warningElement.innerHTML =
-        "Elements " + a + " have either too much or not enought arguments and are being ignored.";
-      if (a == "") {
-        warningElement.hidden = 1;
-      } else {
-        warningElement.hidden = 0;
+      warningElement.innerHTML = "";
+      if (warnings.regexpError != undefined) {
+        warningElement.innerHTML =
+          'Unrecognized regular expression: "' + warnings.regexpError + '"';
+      } else if (warnings.nameErrorsI != undefined && warnings.nameErrorsI != []) {
+        warningElement.innerHTML =
+          "Elements " +
+          warnings.nameErrorsI.join(", ") +
+          " have either too much or not enought arguments and are being ignored";
+      } else if (warnings.empty == true) {
+        warningElement.innerHTML = "Error. Empty result";
       }
     }
   }
-  function sortingList() {
+  function sortList(lst) {
     const reverse = document.getElementById("sortNames.reverse").checked;
-    listToSort.sort().forEach((ele) => {
-      let nameParts = ele.split(" ");
-      var nameI = parseInt(nameParts[nameParts.length - 1], 10);
-      if (reverse) {
-        //var | let
-        orderedNameList.unshift(initialNameList[nameI]);
-      } else orderedNameList.push(initialNameList[nameI]);
-      //toma | no toma
+    //Here, I use the index I've placed in second element of each element (ele[1]) to look for the element in the initialList
+    lst.sort((a, b) => {
+      if (a[0] < b[0]) return -1;
+      return 1;
+    });
+    lst.forEach((ele) => {
+      reverse ? sortedList.unshift(initialList[ele[1]]) : sortedList.push(initialList[ele[1]]);
     });
   }
-  let listToSort = [];
-  let initialNameList = [];
-  let orderedNameList = [];
-  let names = [];
-  let errorsI = [];
-  const deleteSpaces = document.getElementById("sortNames.deleteSpaces").checked;
-  const nameOrder = document.getElementById("sortNames.nameOrder").checked;
-  const caseSensitive = document.getElementById("sortNames.caseSensitive").checked;
-  let empty = false;
-  getNames();
-  if (deleteSpaces) {
-    trimElements(names);
-  }
-  if (nameOrder) {
-    let listI = 0;
-    for (let i = 0; i < names.length; i++) {
-      ele = names[i];
-      let firstName = "",
-        middleName = "",
-        lastName = "";
-      let inputted = ele.split(" ").filter(Boolean);
-      firstName = inputted[0];
-      if (inputted.length === 2) {
-        lastName = inputted[1];
-        listToSort.push(`${lastName} ${firstName} ${listI}`);
-        initialNameList.push(`${firstName} ${lastName}`);
-      } else if (inputted.length === 3) {
-        middleName = inputted[1];
-        lastName = inputted[2];
-        listToSort.push(`${lastName} ${firstName} ${middleName} ${listI}`);
-        initialNameList.push(`${firstName} ${middleName} ${lastName}`);
-      } else if (inputted.length === 4) {
-        middleName = inputted[1];
-        lastName = `${inputted[2]} ${inputted[3]}`;
-        listToSort.push(`${lastName} ${firstName} ${middleName} ${listI}`);
-        initialNameList.push(`${firstName} ${middleName} ${lastName}`);
-      } else {
-        console.log("ENTRIES ERROR on i: " + i);
-        errorsI.push(i);
-        continue;
+  let warnings = {};
+  const textElements = getNames();
+  var sortedList = [];
+  let initialList = [];
+  if (textElements != false) {
+    let sortingList = [];
+    const deleteSpaces = document.getElementById("sortNames.deleteSpaces").checked;
+    const nameOrder = document.getElementById("sortNames.nameOrder").checked;
+    const caseSensitive = document.getElementById("sortNames.caseSensitive").checked;
+    if (deleteSpaces) {
+      trimElements(textElements);
+    }
+    if (nameOrder) {
+      warnings.nameErrorsI = [];
+      //ListI is the index of the initialList that eill be searched for when sorting, as seen in sortingList()
+      for (let i = 0, listI = 0; i < textElements.length; i++) {
+        ele = textElements[i];
+        let firstName = "",
+          middleName = "",
+          lastName = "";
+        const inputtedWords = ele.split(" ").filter(Boolean);
+        firstName = inputtedWords[0];
+        if (inputtedWords.length === 1) {
+        } else if (inputtedWords.length === 2) {
+          lastName = inputtedWords[1];
+          sortingList.push([`${lastName} ${firstName}`, listI]);
+        } else if (inputtedWords.length === 3) {
+          middleName = inputtedWords[1];
+          lastName = inputtedWords[2];
+          sortingList.push([`${lastName} ${firstName} ${middleName}`, listI]);
+        } else if (inputtedWords.length === 4) {
+          middleName = inputtedWords[1];
+          lastName = `${inputtedWords[2]} ${inputtedWords[3]}`;
+          sortingList.push([`${lastName} ${firstName} ${middleName}`, listI]);
+        } else {
+          console.log("ENTRIES ERROR on i: " + i);
+          warnings.nameErrorsI.push(i);
+          continue;
+        }
+        initialList.push(textElements[i]);
+        listI++;
       }
-      listI++;
+    } else {
+      initialList = textElements;
+      for (let i = 0; i < textElements.length; i++) {
+        sortingList.push([textElements[i], i]);
+      }
     }
-  } else {
-    initialNameList = names;
-    for (let i = 0; i < names.length; i++) {
-      listToSort.push(names[i] + " " + i);
+    console.log("initialList:");
+    console.log(initialList);
+    console.log("textelements:");
+    console.log(textElements);
+    if (!caseSensitive) {
+      for (let i = 0; i < sortingList.length; i++) {
+        sortingList[i][0] = sortingList[i][0].toUpperCase();
+      }
     }
+    sortList(sortingList);
   }
-  if (!caseSensitive) {
-    for (let i = 0; i < listToSort.length; i++) {
-      listToSort[i] = listToSort[i].toUpperCase();
-    }
-  }
-  sortingList();
+
   printResult();
   printWarnings();
 }
