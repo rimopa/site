@@ -62,7 +62,8 @@ function orderNames() {
     //Here, I use the index I've placed in second element of each element (ele[1]) to look for the element in the initialList
     lst.sort((a, b) => {
       if (a[0] < b[0]) return -1;
-      return 1;
+      if (a[0] > b[0]) return 1;
+      return 0;
     });
     lst.forEach((ele) => {
       reverse ? sortedList.unshift(initialList[ele[1]]) : sortedList.push(initialList[ele[1]]);
