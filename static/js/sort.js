@@ -117,10 +117,6 @@ function orderNames() {
         sortingList.push([textElements[i], i]);
       }
     }
-    console.log("initialList:");
-    console.log(initialList);
-    console.log("textelements:");
-    console.log(textElements);
     if (!caseSensitive) {
       for (let i = 0; i < sortingList.length; i++) {
         sortingList[i][0] = sortingList[i][0].toUpperCase();
