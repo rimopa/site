@@ -22,14 +22,12 @@ function orderNames() {
       sortingList = newSortingList;
       warnings = { ...warnings, ...newWarnings };
     } else {
-      for (let i = 0; i < textElements.length; i++) {
-        sortingList.push([textElements[i], i]);
-      }
+      sortingList = textElements.map((element, index) => [element, index]);
     }
     if (!DOMelements.caseSensitive.checked) {
-      for (let i = 0; i < sortingList.length; i++) {
-        sortingList[i][0] = sortingList[i][0].toUpperCase();
-      }
+      sortingList.forEach((item) => {
+        item[0] = item[0].toUpperCase();
+      });
     }
     sortedList = sortList(sortingList);
   }
