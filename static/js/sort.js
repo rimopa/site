@@ -14,7 +14,7 @@ function orderNames() {
         ? [...DOMelements.textarea.value.matchAll(regex)].map((match) => match[0])
         : DOMelements.textarea.value.split(regex);
     } catch (error) {
-      warnings.regexpError = DOMelements.inputSeparatorvalue;
+      warnings.regexpError = DOMelements.inputSeparator.value;
       return false;
     }
   }
@@ -57,7 +57,8 @@ function orderNames() {
   function processNameOrder(textElements) {
     const sortingList = [];
     const warnings = { nameErrorsI: [] };
-    textElements.forEach((ele, i) => {
+    let i = 0;
+    textElements.forEach((ele) => {
       const inputtedWords = ele.split(" ").filter(Boolean);
       const [firstName, middleName, ...lastNameParts] = inputtedWords;
 
@@ -65,11 +66,11 @@ function orderNames() {
         warnings.nameErrorsI.push(i);
         return;
       }
-
       initialList.push(textElements[i]);
       const lastName = lastNameParts.join(" ");
       const formattedName = [lastName, firstName, middleName].filter(Boolean).join(" ");
       sortingList.push([formattedName, i]);
+      i++;
     });
 
     return { sortingList, warnings };
