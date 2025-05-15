@@ -51,7 +51,7 @@ function orderNames() {
     textElements.forEach((ele, i) => {
       const inputtedWords = ele.split(" ").filter(Boolean);
       if (inputtedWords.length < 1 || inputtedWords.length > 4) {
-        nameErrorsI.push(i);
+        nameErrorsI.push(`${i} ("${ele}")`);
         return;
       }
 
