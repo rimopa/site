@@ -15,7 +15,7 @@ function orderNames() {
   //
   let warnings = {};
   const textElements = getNames();
-  if (textElements != false) {
+  if (textElements) {
     let sortingList = [];
     if (DOMelements.nameOrder.checked) {
       const { sortingList: newSortingList, warnings: newWarnings } = processNameOrder(textElements);
