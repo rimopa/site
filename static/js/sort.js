@@ -77,9 +77,13 @@ function orderNames() {
   printResult(sortedList);
   printWarnings();
 }
-function createRegex(pattern, caseSensitive, global = false) {
+function createRegex(pattern, caseSensitive = false, global = false) {
   const flags = caseSensitive ? (global ? "g" : "") : global ? "gi" : "i";
-  return new RegExp(pattern, flags);
+  const cacheKey = `${pattern}-${flags}`;
+  if (regexCache?.key === cacheKey) return regexCache.regex;
+  const regex = new RegExp(pattern, flags);
+  regexCache = { key: cacheKey, regex };
+  return regex;
 }
 function trimElements(lst) {
   return lst.map((str) => str.replace(/^\s\s*/, "").replace(/\s\s*$/, ""));
