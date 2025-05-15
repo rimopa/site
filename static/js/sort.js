@@ -11,7 +11,10 @@ function orderNames() {
         ? [...DOMelements.textarea.value.matchAll(regex)].map((match) => match[0])
         : DOMelements.textarea.value.split(regex);
     } catch (error) {
-      warnings.regexpError = `Unrecognized regular expression: "${DOMelements.inputSeparator.value}".`;
+      addWarning(
+        "regexpError",
+        `Unrecognized regular expression: "${DOMelements.inputSeparator.value}".`
+      );
       return false;
     }
     return DOMelements.deleteSpaces.checked ? trimElements(elements) : elements;
@@ -25,7 +28,7 @@ function orderNames() {
       DOMelements.resultElement.hidden = 0;
       DOMelements.resultElement.innerHTML = result;
     } else {
-      warnings.empty = "Error. Empty result.";
+      addWarning("empty", "Error. Empty result.");
       DOMelements.resultElement.hidden = 1;
     }
   }
@@ -41,12 +44,12 @@ function orderNames() {
   }
   function processNameOrder(textElements) {
     const sortingList = [];
-    const warnings = { nameErrorsI: [] };
+    const nameErrorsI = [];
 
     textElements.forEach((ele, i) => {
       const inputtedWords = ele.split(" ").filter(Boolean);
       if (inputtedWords.length < 1 || inputtedWords.length > 4) {
-        warnings.nameErrorsI.push(i);
+        nameErrorsI.push(i);
         return;
       }
 
@@ -55,18 +58,21 @@ function orderNames() {
       const formattedName = [lastName, firstName, middleName].filter(Boolean).join(" ");
       sortingList.push([formattedName, i]);
     });
-    return { sortingList, warnings };
+    if (nameErrorsI.length > 0) {
+      addWarning("nameErrorsI", `Invalid name format at indices: ${nameErrorsI.join(", ")}`);
+    }
+    return sortingList;
   }
-  let sortedList = [];
-  //
+  function addWarning(key, message) {
+    warnings[key] = message;
+  }
   let warnings = {};
+  let sortedList = [];
   const textElements = getNames();
   if (textElements) {
     let sortingList = [];
     if (DOMelements.nameOrder.checked) {
-      const { sortingList: newSortingList, warnings: newWarnings } = processNameOrder(textElements);
-      sortingList = newSortingList;
-      warnings = { ...warnings, ...newWarnings };
+      sortingList = processNameOrder(textElements);
     } else {
       sortingList = textElements.map((element, index) => [element, index]);
     }
