@@ -1,166 +1,156 @@
-function quadrels() {
-  if (
-    (document.getElementById("cmin.ratio.v").value != 0 &&
-      document.getElementById("cmin.ratio.h").value != 0) +
-      (document.getElementById("cmin.diag").value != 0) +
-      (document.getElementById("cmin.height").value != 0) +
-      (document.getElementById("cmin.width").value != 0) <
-    2
-  ) {
-    document.getElementById("cmin.warning").hidden = 0;
-    document.getElementById("cmin.results").hidden = 1;
-    console.log("Not enough values to run");
-    return;
-  } else {
-    document.getElementById("cmin.warning").hidden = 1;
-    document.getElementById("cmin.results").hidden = 0;
-  }
-  //check if it's possible
-  width = getCm(
-    document.getElementById("cmin.width").value,
-    document.getElementById("cmin.width.type").value
-  );
-  height = getCm(
-    document.getElementById("cmin.height").value,
-    document.getElementById("cmin.height.type").value
-  );
-  diag = getCm(
-    document.getElementById("cmin.diag").value,
-    document.getElementById("cmin.diag.type").value
-  );
-  hRatio = +document.getElementById("cmin.ratio.h").value;
-  vRatio = +document.getElementById("cmin.ratio.v").value;
-  newHRatio = 0;
-  newVRatio = 0;
-  newHeight = 0;
-  newwidth = 0;
-  newDiag = 0;
-  a = 0;
-  //a=the value that, multiplicated by the ratio, gives the height and width
-  method1 = "patata";
-  method2 = "mandarina";
+function getMaxDivinCommon(a, b) {
+  return b === 0 ? a : getMaxDivinCommon(b, a % b);
+}
+function setCm() {
+  //Accomodate measure selects
+  selects.forEach((ele) => {
+    measureCode.forEach((code, i) => {
+      const opt = document.createElement("option");
+      opt.value = code;
+      opt.innerText = measureName[i];
+      ele.appendChild(opt);
+    });
+  });
+}
+
+function getCm(value, type) {
+  return value * measure2cm[getMeasure(type)];
+}
+function calculateDimensions(hRatio, vRatio, diag, width, height) {
+  let method1, method2, a, newwidth, newHeight;
+
   if (hRatio != 0 && vRatio != 0) {
     method1 = "ratio";
-    newHRatio = hRatio;
-    newVRatio = vRatio;
     if (diag != 0) {
       method2 = "diagonal";
       a = Math.sqrt(diag ** 2 / (hRatio ** 2 + vRatio ** 2));
-    } else {
-      if (width != 0) {
-        method2 = "width";
-        a = width / hRatio;
-      } else {
-        if (height != 0) {
-          method2 = "height";
-          a = height / vRatio;
-        }
-      }
+    } else if (width != 0) {
+      method2 = "width";
+      a = width / hRatio;
+    } else if (height != 0) {
+      method2 = "height";
+      a = height / vRatio;
     }
-    newwidth = a * newHRatio;
-    newHeight = a * newVRatio;
+    newwidth = a * hRatio;
+    newHeight = a * vRatio;
+  } else if (width != 0) {
+    method1 = "width";
+    newwidth = width;
+    if (height != 0) {
+      method2 = "height";
+      newHeight = height;
+      a = getMaxDivinCommon(width, height);
+    } else if (diag != 0) {
+      method2 = "diagonal";
+      newHeight = Math.sqrt(diag ** 2 - width ** 2);
+      a = getMaxDivinCommon(newHeight, width);
+    }
+  } else if (height !== 0) {
+    method1 = "height";
+    newHeight = height;
+    if (diag !== 0) {
+      method2 = "diagonal";
+      newwidth = Math.sqrt(diag ** 2 - height ** 2);
+      a = getMaxDivinCommon(newwidth, height);
+    }
+  }
+
+  return { method1, method2, a, newwidth, newHeight };
+}
+
+function quadrels() {
+  if (filledInputs < 2) {
+    DOMelements.warning.hidden = false;
+    DOMelements.result.hidden = true;
+    console.warn("Not enough values to run");
+    return;
   } else {
-    if (width != 0) {
-      newwidth = width;
-      method1 = "width";
-      if (height != 0) {
-        method2 = "height";
-        newHeight = height;
-        a = getMaxDivinCommon(width, height);
-      } else {
-        if (diag !== 0) {
-          method2 = "diagonal";
-          a = getMaxDivinCommon((newHeight = Math.sqrt(diag ** 2 - width ** 2)), width);
-        }
-      }
-    } else {
-      if (height != 0) {
-        method1 = "height";
-        newHeight = height;
-        if (diag != 0) {
-          method2 = "diagonal";
-          a = getMaxDivinCommon((newwidth = Math.sqrt(diag ** 2 - height ** 2)), height);
-        }
-      }
-    }
-    newVRatio = newHeight / a;
-    newHRatio = newwidth / a;
+    DOMelements.warning.hidden = true;
+    DOMelements.result.hidden = false;
   }
-  /*
-  cmin.result.method
-  cmin.result.ratio
-  cmin.result.width
-  cmin.result.height
-  cmin.result.diag
-  */
-  newDiag = Math.sqrt((a * newHRatio) ** 2 + (a * newVRatio) ** 2);
-  console.log("a:", a);
-  document.getElementById("cmin.result.method").innerText =
-    "Using the the " + method1 + " and  " + method2 + " inputs.";
-  document.getElementById("cmin.result.ratio").innerText = newHRatio + ":" + newVRatio;
 
-  measureN = getMeasure(document.getElementById("cmin.result.type").value);
+  const width = getCm(DOMelements.width.value, DOMelements.widthType.value);
+  const height = getCm(DOMelements.height.value, DOMelements.heightType.value);
+  const diag = getCm(DOMelements.diag.value, DOMelements.diagType.value);
+  const hRatio = DOMelements.ratioh.value;
+  const vRatio = DOMelements.ratiov.value;
 
-  document.getElementById("cmin.result.width").innerText =
-    newwidth / measure2cm[measureN] + measureCode[measureN];
-  document.getElementById("cmin.result.height").innerText =
-    newHeight / measure2cm[measureN] + measureCode[measureN];
-  document.getElementById("cmin.result.diag").innerText =
-    newDiag / measure2cm[measureN] + measureCode[measureN];
-}
-function setCm() {
-  measureName = [
-    "Centimeters",
-    "Astronomical units",
-    "Feet",
-    "Furlongs",
-    "Inches",
-    "League",
-    "Light years",
-    "Miles",
-    "Nautical Miles",
-    "Parsec",
-    "Rods",
-    "Yards",
-  ];
-  measureCode = ["cm", "AU", "ft", "fur", "in", "lea", "ly", "mi", "nmi", "pc", "rd", "yd"];
-  measure2cm = [
-    1, 14959787069100, 30.48, 20116.8, 2.54, 482803.2, 946073047258004200, 160934.4, 185200,
-    3085677581279958500, 502.92, 91.44,
-  ];
-  //how many centimeters fit in the other measure
-  selects = [
-    document.getElementById("cmin.width.type"),
-    document.getElementById("cmin.height.type"),
-    document.getElementById("cmin.diag.type"),
-    document.getElementById("cmin.result.type"),
-  ];
-  //Accomodate measure selects
-  for (let i = 0; i < selects.length; i++) {
-    for (let i2 = 0; i2 < measureCode.length; i2++) {
-      const ele = document.createElement("option");
-      ele.value = measureCode[i2];
-      ele.innerText = measureName[i2];
-      selects[i].appendChild(ele);
-    }
+  const { method1, method2, a, newwidth, newHeight } = calculateDimensions(
+    hRatio,
+    vRatio,
+    diag,
+    width,
+    height
+  );
+
+  if (a) {
+    const newVRatio = newHeight / a;
+    const newHRatio = newwidth / a;
+    newDiag = Math.sqrt((a * newHRatio) ** 2 + (a * newVRatio) ** 2);
+
+    console.log("a:", a);
+    DOMelements.resultMethod.innerText = `Using the the ${method1} and ${method2} inputs.`;
+    DOMelements.resultRatio.innerText = `${newHRatio}:${newVRatio}`;
+
+    const measureN = measureCode.indexOf(DOMelements.resultType.value);
+
+    DOMelements.resultWidth.innerText = newwidth / measure2cm[measureN] + measureCode[measureN];
+    DOMelements.resultHeight.innerText = newHeight / measure2cm[measureN] + measureCode[measureN];
+    DOMelements.resultDiag.innerText = newDiag / measure2cm[measureN] + measureCode[measureN];
   }
 }
-function getMaxDivinCommon(a, b) {
-  if (b === 0) {
-    return a;
-  }
-  return getMaxDivinCommon(b, a % b);
-}
-function getMeasure(type) {
-  for (let index = 0; index < measureCode.length; index++) {
-    if (type == measureCode[index]) {
-      return index;
-    }
-  }
-}
-function getCm(value, type) {
-  measureN = getMeasure(type);
-  return value * measure2cm[measureN];
-}
+const measureName = [
+  "Centimeters",
+  "Astronomical units",
+  "Feet",
+  "Furlongs",
+  "Inches",
+  "League",
+  "Light years",
+  "Miles",
+  "Nautical Miles",
+  "Parsec",
+  "Rods",
+  "Yards",
+];
+//fancy thing to add at the end of texts
+const measureCode = ["cm", "AU", "ft", "fur", "in", "lea", "ly", "mi", "nmi", "pc", "rd", "yd"];
+//how many centimeters fit in another measure
+const measure2cm = [
+  1, 14959787069100, 30.48, 20116.8, 2.54, 482803.2, 946073047258004200, 160934.4, 185200,
+  3085677581279958500, 502.92, 91.44,
+];
+//elements
+const DOMelements = {
+  ratiov: document.getElementById("cmin.ratio.v"),
+  ratioh: document.getElementById("cmin.ratio.h"),
+  diag: document.getElementById("cmin.diag"),
+  diagType: document.getElementById("cmin.diag.type"),
+  height: document.getElementById("cmin.height"),
+  heightType: document.getElementById("cmin.height.type"),
+  width: document.getElementById("cmin.width"),
+  widthType: document.getElementById("cmin.width.type"),
+  result: document.getElementById("cmin.results"),
+  warning: document.getElementById("cmin.warning"),
+  resultMethod: document.getElementById("cmin.result.method"),
+  resultRatio: document.getElementById("cmin.result.ratio"),
+  resultHeight: document.getElementById("cmin.result.height"),
+  resultWidth: document.getElementById("cmin.result.width"),
+  resultDiag: document.getElementById("cmin.result.diag"),
+  resultType: document.getElementById("cmin.result.type"),
+};
+const selects = [
+  document.getElementById("cmin.width.type"),
+  document.getElementById("cmin.height.type"),
+  document.getElementById("cmin.diag.type"),
+  document.getElementById("cmin.result.type"),
+];
+//const to check if the inputs are filled
+const filledInputs = [
+  DOMelements.ratiov.value && DOMelements.ratioh.value,
+  DOMelements.diag.value,
+  DOMelements.height.value,
+  DOMelements.width.value,
+].filter((v) => parseFloat(v)).length;
 setCm();
 quadrels();

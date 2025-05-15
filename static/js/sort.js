@@ -1,124 +1,115 @@
 function orderNames() {
   function getNames() {
-    const textarea = document.getElementById("sortNames.names").value;
-    const inputSeparator = document.getElementById("sortNames.input").value;
-    let inputSeparatorV = inputSeparator;
-    if (!caseSensitive) {
-      inputSeparatorV = inputSeparatorV.toLowerCase() + "|" + inputSeparatorV.toUpperCase();
+    let elements;
+    try {
+      const regex = createRegex(
+        DOMelements.inputSeparator.value,
+        DOMelements.caseSensitive.checked,
+        DOMelements.searchElements.checked
+      );
+      elements = DOMelements.searchElements.checked
+        ? [...DOMelements.textarea.value.matchAll(regex)].map((match) => match[0])
+        : DOMelements.textarea.value.split(regex);
+    } catch (error) {
+      addWarning(
+        "regexpError",
+        `Unrecognized regular expression: "${DOMelements.inputSeparator.value}".`
+      );
+      return false;
     }
-    const searchElements = document.getElementById("sortNames.searchElements").checked;
-    if (searchElements) {
-      names = [...textarea.matchAll(inputSeparatorV)].map((match) => match[0]);
+    return DOMelements.deleteSpaces.checked ? trimElements(elements) : elements;
+  }
+  function unescapeInput(str) {
+    return JSON.parse(`"${str.replace(/"/g, '\\"')}"`);
+  }
+  function printResult(sortedList) {
+    const result = sortedList.join(unescapeInput(DOMelements.outputSeparator.value));
+    if (result != "") {
+      DOMelements.resultElement.hidden = 0;
+      DOMelements.resultElement.innerHTML = result;
     } else {
-      names = textarea.split(RegExp(inputSeparatorV));
-    }
-  }
-  function trim(str) {
-    return str.replace(/^\s\s*/, "").replace(/\s\s*$/, "");
-  }
-  function trimElements(lis) {
-    for (let i = 0; i < lis.length; i++) {
-      lis[i] = trim(lis[i]);
-    }
-  }
-  function printResult() {
-    const resultElement = document.getElementById("sortNames.result");
-    const outputSeparator = document.getElementById("sortNames.output").value;
-    var result = orderedNameList.join(outputSeparator);
-    result = result.replace(/\\n/g, "\n");
-    if (result == "") {
-      empty = true;
-      resultElement.hidden = 1;
-    } else {
-      resultElement.innerHTML = result;
-      empty = false;
-      resultElement.hidden = 0;
+      addWarning("empty", "Error. Empty result.");
+      DOMelements.resultElement.hidden = 1;
     }
   }
   function printWarnings() {
-    const warningElement = document.getElementById("sortNames.warning");
-    if (empty) {
-      warningElement.innerHTML = "Error. Empty result.";
-      warningElement.hidden = 0;
-    } else {
-      a = errorsI.join(", ");
-      warningElement.innerHTML =
-        "Elements " + a + " have either too much or not enought arguments and are being ignored.";
-      if (a == "") {
-        warningElement.hidden = 1;
-      } else {
-        warningElement.hidden = 0;
-      }
-    }
+    const messages = Object.values(warnings).filter(Boolean).join("\n");
+    DOMelements.warningElement.hidden = !messages;
+    DOMelements.warningElement.innerHTML = messages;
   }
-  function sortingList() {
-    const reverse = document.getElementById("sortNames.reverse").checked;
-    listToSort.sort().forEach((ele) => {
-      let nameParts = ele.split(" ");
-      var nameI = parseInt(nameParts[nameParts.length - 1], 10);
-      if (reverse) {
-        //var | let
-        orderedNameList.unshift(initialNameList[nameI]);
-      } else orderedNameList.push(initialNameList[nameI]);
-      //toma | no toma
+  function sortList(lst) {
+    // Sort the list based on the first element of each sub-array, that is, the name or element
+    lst.sort((a, b) => a[0].localeCompare(b[0]));
+    // Return the orginal element, that is, the i stored on ele[1] of textElements
+    const sorted = lst.map((ele) => textElements[ele[1]]);
+    return DOMelements.reverse.checked ? sorted.reverse() : sorted;
+  }
+  function processNameOrder(textElements) {
+    const sortingList = [];
+    const nameErrorsI = [];
+
+    textElements.forEach((ele, i) => {
+      const inputtedWords = ele.split(" ").filter(Boolean);
+      if (inputtedWords.length < 1 || inputtedWords.length > 4) {
+        nameErrorsI.push(`${i} ("${ele}")`);
+        return;
+      }
+
+      const [firstName, middleName, ...lastNameParts] = inputtedWords;
+      const lastName = lastNameParts.join(" ");
+      const formattedName = [lastName, firstName, middleName].filter(Boolean).join(" ");
+      sortingList.push([formattedName, i]);
     });
-  }
-  let listToSort = [];
-  let initialNameList = [];
-  let orderedNameList = [];
-  let names = [];
-  let errorsI = [];
-  const deleteSpaces = document.getElementById("sortNames.deleteSpaces").checked;
-  const nameOrder = document.getElementById("sortNames.nameOrder").checked;
-  const caseSensitive = document.getElementById("sortNames.caseSensitive").checked;
-  let empty = false;
-  getNames();
-  if (deleteSpaces) {
-    trimElements(names);
-  }
-  if (nameOrder) {
-    let listI = 0;
-    for (let i = 0; i < names.length; i++) {
-      ele = names[i];
-      let firstName = "",
-        middleName = "",
-        lastName = "";
-      let inputted = ele.split(" ").filter(Boolean);
-      firstName = inputted[0];
-      if (inputted.length === 2) {
-        lastName = inputted[1];
-        listToSort.push(`${lastName} ${firstName} ${listI}`);
-        initialNameList.push(`${firstName} ${lastName}`);
-      } else if (inputted.length === 3) {
-        middleName = inputted[1];
-        lastName = inputted[2];
-        listToSort.push(`${lastName} ${firstName} ${middleName} ${listI}`);
-        initialNameList.push(`${firstName} ${middleName} ${lastName}`);
-      } else if (inputted.length === 4) {
-        middleName = inputted[1];
-        lastName = `${inputted[2]} ${inputted[3]}`;
-        listToSort.push(`${lastName} ${firstName} ${middleName} ${listI}`);
-        initialNameList.push(`${firstName} ${middleName} ${lastName}`);
-      } else {
-        console.log("ENTRIES ERROR on i: " + i);
-        errorsI.push(i);
-        continue;
-      }
-      listI++;
+    if (nameErrorsI.length > 0) {
+      addWarning("nameErrorsI", `Invalid name format at indices: ${nameErrorsI.join(", ")}`);
     }
-  } else {
-    initialNameList = names;
-    for (let i = 0; i < names.length; i++) {
-      listToSort.push(names[i] + " " + i);
-    }
+    return sortingList;
   }
-  if (!caseSensitive) {
-    for (let i = 0; i < listToSort.length; i++) {
-      listToSort[i] = listToSort[i].toUpperCase();
-    }
+  function addWarning(key, message) {
+    warnings[key] = message;
   }
-  sortingList();
-  printResult();
+  let warnings = {};
+  let sortedList = [];
+  const textElements = getNames();
+  if (textElements) {
+    let sortingList = [];
+    if (DOMelements.nameOrder.checked) {
+      sortingList = processNameOrder(textElements);
+    } else {
+      sortingList = textElements.map((element, index) => [element, index]);
+    }
+    if (!DOMelements.caseSensitive.checked) {
+      sortingList.forEach((item) => {
+        item[0] = item[0].toUpperCase();
+      });
+    }
+    sortedList = sortList(sortingList);
+  }
+  printResult(sortedList);
   printWarnings();
 }
+function createRegex(pattern, caseSensitive = false, global = false) {
+  const flags = caseSensitive ? (global ? "g" : "") : global ? "gi" : "i";
+  const cacheKey = `${pattern}-${flags}`;
+  if (regexCache?.key === cacheKey) return regexCache.regex;
+  const regex = new RegExp(pattern, flags);
+  regexCache = { key: cacheKey, regex };
+  return regex;
+}
+function trimElements(lst) {
+  return lst.map((str) => str.trim());
+}
+let regexCache = null;
+const DOMelements = {
+  resultElement: document.getElementById("sortNames.result"),
+  warningElement: document.getElementById("sortNames.warning"),
+  outputSeparator: document.getElementById("sortNames.output"),
+  inputSeparator: document.getElementById("sortNames.input"),
+  textarea: document.getElementById("sortNames.names"),
+  searchElements: document.getElementById("sortNames.searchElements"),
+  caseSensitive: document.getElementById("sortNames.caseSensitive"),
+  deleteSpaces: document.getElementById("sortNames.deleteSpaces"),
+  nameOrder: document.getElementById("sortNames.nameOrder"),
+  reverse: document.getElementById("sortNames.reverse"),
+};
 orderNames();
