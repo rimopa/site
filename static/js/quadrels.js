@@ -30,12 +30,12 @@ function quadrels() {
   );
   hRatio = +document.getElementById("cmin.ratio.h").value;
   vRatio = +document.getElementById("cmin.ratio.v").value;
-  newHRatio = 0;
-  newVRatio = 0;
-  newHeight = 0;
-  newwidth = 0;
-  newDiag = 0;
-  a = 0;
+  let newHRatio,
+    newVRatio,
+    newHeight,
+    newwidth,
+    newDiag,
+    a = 0;
   //a=the value that, multiplicated by the ratio, gives the height and width
   method1 = "patata";
   method2 = "mandarina";
@@ -109,7 +109,7 @@ function quadrels() {
     newDiag / measure2cm[measureN] + measureCode[measureN];
 }
 function setCm() {
-  measureName = [
+  const measureName = [
     "Centimeters",
     "Astronomical units",
     "Feet",
@@ -123,13 +123,13 @@ function setCm() {
     "Rods",
     "Yards",
   ];
-  measureCode = ["cm", "AU", "ft", "fur", "in", "lea", "ly", "mi", "nmi", "pc", "rd", "yd"];
-  measure2cm = [
+  const measureCode = ["cm", "AU", "ft", "fur", "in", "lea", "ly", "mi", "nmi", "pc", "rd", "yd"];
+  //how many centimeters fit in another measure
+  const measure2cm = [
     1, 14959787069100, 30.48, 20116.8, 2.54, 482803.2, 946073047258004200, 160934.4, 185200,
     3085677581279958500, 502.92, 91.44,
   ];
-  //how many centimeters fit in the other measure
-  selects = [
+  const selects = [
     document.getElementById("cmin.width.type"),
     document.getElementById("cmin.height.type"),
     document.getElementById("cmin.diag.type"),
