@@ -189,6 +189,7 @@ button.math:hover {
   font-size: 125%;
   margin-left: 20px;
   color: #c70039;
+  white-space: pre-line;
 }
 .output {
   font-size: 125%;

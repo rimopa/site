@@ -13,7 +13,7 @@ const DOMelements = {
 function orderNames() {
   let sortedList = [];
   //
-  let warnings = { nameErrorsI: [] };
+  let warnings = {};
   const textElements = getNames();
   if (textElements != false) {
     let sortingList = [];
@@ -35,7 +35,7 @@ function orderNames() {
   printWarnings();
 
   function getNames() {
-    var elements;
+    let elements;
     try {
       const regex = createRegex(
         DOMelements.inputSeparator.value,
@@ -46,7 +46,7 @@ function orderNames() {
         ? [...DOMelements.textarea.value.matchAll(regex)].map((match) => match[0])
         : DOMelements.textarea.value.split(regex);
     } catch (error) {
-      warnings.regexpError = DOMelements.inputSeparator.value;
+      warnings.regexpError = `Unrecognized regular expression: "${DOMelements.inputSeparator.value}".`;
       return false;
     }
     return DOMelements.deleteSpaces.checked ? trimElements(elements) : elements;
@@ -57,22 +57,12 @@ function orderNames() {
       DOMelements.resultElement.hidden = 0;
       DOMelements.resultElement.innerHTML = result;
     } else {
-      warnings.empty = true;
+      warnings.empty = "Error. Empty result.";
       DOMelements.resultElement.hidden = 1;
     }
   }
   function printWarnings() {
-    const warningMessages = {
-      regexpError: `Unrecognized regular expression: "${warnings.regexpError}"`,
-      nameErrorsI: warnings.nameErrorsI.length
-        ? `Elements ${warnings.nameErrorsI.join(", ")} have either too much or not enough arguments and are being ignored`
-        : null,
-      empty: "Error. Empty result",
-    };
-
-    const messages = Object.keys(warnings)
-      .map((key) => warningMessages[key])
-      .join("<br>");
+    const messages = Object.values(warnings).filter(Boolean).join("\n");
     DOMelements.warningElement.hidden = !messages;
     DOMelements.warningElement.innerHTML = messages;
   }
@@ -97,7 +87,6 @@ function orderNames() {
       const formattedName = [lastName, firstName, middleName].filter(Boolean).join(" ");
       sortingList.push([formattedName, i]);
     });
-
     return { sortingList, warnings };
   }
 }
