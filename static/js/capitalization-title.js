@@ -6,15 +6,10 @@ capitalizations.forEach((ele) => {
 });
 
 function randomizeCapitalization(str) {
-  const chars = str.split("");
-  for (let i = 0; i < chars.length; i++) {
-    chars[i] = /[a-z]/i.test(chars[i])
-      ? Math.random() < 0.5
-        ? chars[i].toLowerCase()
-        : chars[i].toUpperCase()
-      : chars[i];
-  }
-  return chars.join("");
+  return str
+    .split("")
+    .map((c) => (Math.random() < 0.5 ? c.toLowerCase() : c.toUpperCase()))
+    .join("");
 }
 
 function updateCapitalizations(ele, delay) {
