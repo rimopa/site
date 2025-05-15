@@ -1,39 +1,4 @@
-const DOMelements = {
-  resultElement: document.getElementById("sortNames.result"),
-  warningElement: document.getElementById("sortNames.warning"),
-  outputSeparator: document.getElementById("sortNames.output"),
-  inputSeparator: document.getElementById("sortNames.input"),
-  textarea: document.getElementById("sortNames.names"),
-  searchElements: document.getElementById("sortNames.searchElements"),
-  caseSensitive: document.getElementById("sortNames.caseSensitive"),
-  deleteSpaces: document.getElementById("sortNames.deleteSpaces"),
-  nameOrder: document.getElementById("sortNames.nameOrder"),
-  reverse: document.getElementById("sortNames.reverse"),
-};
 function orderNames() {
-  let sortedList = [];
-  //
-  let warnings = {};
-  const textElements = getNames();
-  if (textElements) {
-    let sortingList = [];
-    if (DOMelements.nameOrder.checked) {
-      const { sortingList: newSortingList, warnings: newWarnings } = processNameOrder(textElements);
-      sortingList = newSortingList;
-      warnings = { ...warnings, ...newWarnings };
-    } else {
-      sortingList = textElements.map((element, index) => [element, index]);
-    }
-    if (!DOMelements.caseSensitive.checked) {
-      sortingList.forEach((item) => {
-        item[0] = item[0].toUpperCase();
-      });
-    }
-    sortedList = sortList(sortingList);
-  }
-  printResult(sortedList);
-  printWarnings();
-
   function getNames() {
     let elements;
     try {
@@ -89,6 +54,28 @@ function orderNames() {
     });
     return { sortingList, warnings };
   }
+  let sortedList = [];
+  //
+  let warnings = {};
+  const textElements = getNames();
+  if (textElements) {
+    let sortingList = [];
+    if (DOMelements.nameOrder.checked) {
+      const { sortingList: newSortingList, warnings: newWarnings } = processNameOrder(textElements);
+      sortingList = newSortingList;
+      warnings = { ...warnings, ...newWarnings };
+    } else {
+      sortingList = textElements.map((element, index) => [element, index]);
+    }
+    if (!DOMelements.caseSensitive.checked) {
+      sortingList.forEach((item) => {
+        item[0] = item[0].toUpperCase();
+      });
+    }
+    sortedList = sortList(sortingList);
+  }
+  printResult(sortedList);
+  printWarnings();
 }
 function createRegex(pattern, caseSensitive, global = false) {
   const flags = caseSensitive ? (global ? "g" : "") : global ? "gi" : "i";
@@ -97,4 +84,16 @@ function createRegex(pattern, caseSensitive, global = false) {
 function trimElements(lst) {
   return lst.map((str) => str.replace(/^\s\s*/, "").replace(/\s\s*$/, ""));
 }
+const DOMelements = {
+  resultElement: document.getElementById("sortNames.result"),
+  warningElement: document.getElementById("sortNames.warning"),
+  outputSeparator: document.getElementById("sortNames.output"),
+  inputSeparator: document.getElementById("sortNames.input"),
+  textarea: document.getElementById("sortNames.names"),
+  searchElements: document.getElementById("sortNames.searchElements"),
+  caseSensitive: document.getElementById("sortNames.caseSensitive"),
+  deleteSpaces: document.getElementById("sortNames.deleteSpaces"),
+  nameOrder: document.getElementById("sortNames.nameOrder"),
+  reverse: document.getElementById("sortNames.reverse"),
+};
 orderNames();
