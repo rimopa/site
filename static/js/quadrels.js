@@ -3,15 +3,16 @@ function getMaxDivinCommon(a, b) {
 }
 function setCm() {
   //Accomodate measure selects
-  for (let i = 0; i < selects.length; i++) {
-    for (let j = 0; j < measureCode.length; j++) {
-      const ele = document.createElement("option");
-      ele.value = measureCode[j];
-      ele.innerText = measureName[j];
-      selects[i].appendChild(ele);
-    }
-  }
+  selects.forEach((ele) => {
+    measureCode.forEach((code, i) => {
+      const opt = document.createElement("option");
+      opt.value = code;
+      opt.innerText = measureName[i];
+      ele.appendChild(opt);
+    });
+  });
 }
+
 function getCm(value, type) {
   return value * measure2cm[getMeasure(type)];
 }
