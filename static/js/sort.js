@@ -88,6 +88,7 @@ function createRegex(pattern, caseSensitive = false, global = false) {
 function trimElements(lst) {
   return lst.map((str) => str.replace(/^\s\s*/, "").replace(/\s\s*$/, ""));
 }
+let regexCache = null;
 const DOMelements = {
   resultElement: document.getElementById("sortNames.result"),
   warningElement: document.getElementById("sortNames.warning"),
