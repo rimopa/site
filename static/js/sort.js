@@ -16,8 +16,11 @@ function orderNames() {
     }
     return DOMelements.deleteSpaces.checked ? trimElements(elements) : elements;
   }
+  function unescapeInput(str) {
+    return JSON.parse(`"${str.replace(/"/g, '\\"')}"`);
+  }
   function printResult(sortedList) {
-    const result = sortedList.join(DOMelements.outputSeparator.value).replace(/\\n/g, "\n");
+    const result = sortedList.join(unescapeInput(DOMelements.outputSeparator.value));
     if (result != "") {
       DOMelements.resultElement.hidden = 0;
       DOMelements.resultElement.innerHTML = result;
@@ -86,7 +89,7 @@ function createRegex(pattern, caseSensitive = false, global = false) {
   return regex;
 }
 function trimElements(lst) {
-  return lst.map((str) => str.replace(/^\s\s*/, "").replace(/\s\s*$/, ""));
+  return lst.map((str) => str.trim());
 }
 let regexCache = null;
 const DOMelements = {
