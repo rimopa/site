@@ -1,77 +1,5 @@
-function quadrels() {
-  if (filledInputs < 2) {
-    DOMelements.warning.hidden = false;
-    DOMelements.result.hidden = true;
-    console.log("Not enough values to run");
-    return;
-  } else {
-    DOMelements.warning.hidden = true;
-    DOMelements.result.hidden = false;
-  }
-
-  const width = getCm(DOMelements.width.value, DOMelements.widthType.value);
-  const height = getCm(DOMelements.height.value, DOMelements.heightType.value);
-  const diag = getCm(DOMelements.diag.value, DOMelements.diagType.value);
-  const hRatio = DOMelements.ratioh.value;
-  const vRatio = DOMelements.ratiov.value;
-
-  let newHRatio, newVRatio, newHeight, newwidth, newDiag, a, method1, method2;
-
-  if (hRatio !== 0 && vRatio !== 0) {
-    method1 = "ratio";
-    newHRatio = hRatio;
-    newVRatio = vRatio;
-
-    if (diag !== 0) {
-      method2 = "diagonal";
-      a = Math.sqrt(diag ** 2 / (hRatio ** 2 + vRatio ** 2));
-    } else if (width !== 0) {
-      method2 = "width";
-      a = width / hRatio;
-    } else if (height !== 0) {
-      method2 = "height";
-      a = height / vRatio;
-    }
-
-    newwidth = a * newHRatio;
-    newHeight = a * newVRatio;
-  } else if (width !== 0) {
-    newwidth = width;
-    method1 = "width";
-
-    if (height !== 0) {
-      method2 = "height";
-      newHeight = height;
-      a = getMaxDivinCommon(width, height);
-    } else if (diag !== 0) {
-      method2 = "diagonal";
-      newHeight = Math.sqrt(diag ** 2 - width ** 2);
-      a = getMaxDivinCommon(newHeight, width);
-    }
-  } else if (height !== 0) {
-    method1 = "height";
-    newHeight = height;
-
-    if (diag !== 0) {
-      method2 = "diagonal";
-      newwidth = Math.sqrt(diag ** 2 - height ** 2);
-      a = getMaxDivinCommon(newwidth, height);
-    }
-  }
-
-  newVRatio = newHeight / a;
-  newHRatio = newwidth / a;
-  newDiag = Math.sqrt((a * newHRatio) ** 2 + (a * newVRatio) ** 2);
-
-  console.log("a:", a);
-  DOMelements.resultMethod.innerText = `Using the the ${method1} and ${method2} inputs.`;
-  DOMelements.resultRatio.innerText = `${newHRatio}:${newVRatio}`;
-
-  const measureN = getMeasure(DOMelements.resultType.value);
-
-  DOMelements.resultWidth.innerText = newwidth / measure2cm[measureN] + measureCode[measureN];
-  DOMelements.resultHeight.innerText = newHeight / measure2cm[measureN] + measureCode[measureN];
-  DOMelements.resultDiag.innerText = newDiag / measure2cm[measureN] + measureCode[measureN];
+function getMaxDivinCommon(a, b) {
+  return b === 0 ? a : getMaxDivinCommon(b, a % b);
 }
 function setCm() {
   //Accomodate measure selects
@@ -84,8 +12,8 @@ function setCm() {
     }
   }
 }
-function getMaxDivinCommon(a, b) {
-  return b === 0 ? a : getMaxDivinCommon(b, a % b);
+function getCm(value, type) {
+  return value * measure2cm[getMeasure(type)];
 }
 function getMeasure(type) {
   for (let i = 0; i < measureCode.length; i++) {
@@ -94,8 +22,88 @@ function getMeasure(type) {
     }
   }
 }
-function getCm(value, type) {
-  return value * measure2cm[getMeasure(type)];
+function calculateDimensions(hRatio, vRatio, diag, width, height) {
+  let method1, method2, a, newwidth, newHeight;
+
+  if (hRatio != 0 && vRatio != 0) {
+    method1 = "ratio";
+    if (diag != 0) {
+      method2 = "diagonal";
+      a = Math.sqrt(diag ** 2 / (hRatio ** 2 + vRatio ** 2));
+    } else if (width != 0) {
+      method2 = "width";
+      a = width / hRatio;
+    } else if (height != 0) {
+      method2 = "height";
+      a = height / vRatio;
+    }
+    newwidth = a * hRatio;
+    newHeight = a * vRatio;
+  } else if (width != 0) {
+    method1 = "width";
+    newwidth = width;
+    if (height != 0) {
+      method2 = "height";
+      newHeight = height;
+      a = getMaxDivinCommon(width, height);
+    } else if (diag != 0) {
+      method2 = "diagonal";
+      newHeight = Math.sqrt(diag ** 2 - width ** 2);
+      a = getMaxDivinCommon(newHeight, width);
+    }
+  } else if (height !== 0) {
+    method1 = "height";
+    newHeight = height;
+    if (diag !== 0) {
+      method2 = "diagonal";
+      newwidth = Math.sqrt(diag ** 2 - height ** 2);
+      a = getMaxDivinCommon(newwidth, height);
+    }
+  }
+
+  return { method1, method2, a, newwidth, newHeight };
+}
+
+function quadrels() {
+  if (filledInputs < 2) {
+    DOMelements.warning.hidden = false;
+    DOMelements.result.hidden = true;
+    console.warn("Not enough values to run");
+    return;
+  } else {
+    DOMelements.warning.hidden = true;
+    DOMelements.result.hidden = false;
+  }
+
+  const width = getCm(DOMelements.width.value, DOMelements.widthType.value);
+  const height = getCm(DOMelements.height.value, DOMelements.heightType.value);
+  const diag = getCm(DOMelements.diag.value, DOMelements.diagType.value);
+  const hRatio = DOMelements.ratioh.value;
+  const vRatio = DOMelements.ratiov.value;
+
+  const { method1, method2, a, newwidth, newHeight } = calculateDimensions(
+    hRatio,
+    vRatio,
+    diag,
+    width,
+    height
+  );
+
+  if (a) {
+    const newVRatio = newHeight / a;
+    const newHRatio = newwidth / a;
+    newDiag = Math.sqrt((a * newHRatio) ** 2 + (a * newVRatio) ** 2);
+
+    console.log("a:", a);
+    DOMelements.resultMethod.innerText = `Using the the ${method1} and ${method2} inputs.`;
+    DOMelements.resultRatio.innerText = `${newHRatio}:${newVRatio}`;
+
+    const measureN = getMeasure(DOMelements.resultType.value);
+
+    DOMelements.resultWidth.innerText = newwidth / measure2cm[measureN] + measureCode[measureN];
+    DOMelements.resultHeight.innerText = newHeight / measure2cm[measureN] + measureCode[measureN];
+    DOMelements.resultDiag.innerText = newDiag / measure2cm[measureN] + measureCode[measureN];
+  }
 }
 const measureName = [
   "Centimeters",
