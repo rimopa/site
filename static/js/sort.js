@@ -38,7 +38,9 @@ function orderNames() {
     DOMelements.warningElement.innerHTML = messages;
   }
   function sortList(lst) {
+    // Sort the list based on the first element of each sub-array, that is, the name or element
     lst.sort((a, b) => a[0].localeCompare(b[0]));
+    // Return the orginal element, that is, the i stored on ele[1] of textElements
     const sorted = lst.map((ele) => textElements[ele[1]]);
     return DOMelements.reverse.checked ? sorted.reverse() : sorted;
   }
