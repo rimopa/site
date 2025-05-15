@@ -16,13 +16,6 @@ function setCm() {
 function getCm(value, type) {
   return value * measure2cm[getMeasure(type)];
 }
-function getMeasure(type) {
-  for (let i = 0; i < measureCode.length; i++) {
-    if (type == measureCode[i]) {
-      return i;
-    }
-  }
-}
 function calculateDimensions(hRatio, vRatio, diag, width, height) {
   let method1, method2, a, newwidth, newHeight;
 
@@ -99,7 +92,7 @@ function quadrels() {
     DOMelements.resultMethod.innerText = `Using the the ${method1} and ${method2} inputs.`;
     DOMelements.resultRatio.innerText = `${newHRatio}:${newVRatio}`;
 
-    const measureN = getMeasure(DOMelements.resultType.value);
+    const measureN = measureCode.indexOf(DOMelements.resultType.value);
 
     DOMelements.resultWidth.innerText = newwidth / measure2cm[measureN] + measureCode[measureN];
     DOMelements.resultHeight.innerText = newHeight / measure2cm[measureN] + measureCode[measureN];
