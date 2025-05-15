@@ -1,15 +1,23 @@
 function annualperf() {
   //Get annual performance of any investment
-  ci = document.getElementById("anperf.initialCapital").value;
-  cf = document.getElementById("anperf.finalCapital").value;
-  ti = document.getElementById("anperf.daysInvested").value;
-  if ((ci && cf && ti) != "") {
-    document.getElementById("anperf.warning").hidden = 1;
-    document.getElementById("anperf.result").hidden = 0;
-    document.getElementById("anperf.result").innerText = ((cf - ci) / ci / ti) * 365 * 100 + "%";
+  const ci = DOMelements.initialCapital.value;
+  const cf = DOMelements.finalCapital.value;
+  const ti = DOMelements.daysInvested.value;
+  if ((ci && cf && ti) != 0) {
+    DOMelements.warning.hidden = 1;
+    DOMelements.result.hidden = 0;
+    DOMelements.result.innerText = ((cf - ci) / ci / ti) * 365 * 100 + "%";
   } else {
-    document.getElementById("anperf.warning").hidden = 0;
-    document.getElementById("anperf.result").hidden = 1;
+    DOMelements.warning.hidden = 0;
+    DOMelements.result.hidden = 1;
   }
 }
+
+const DOMelements = {
+  initialCapital: document.getElementById("anperf.initialCapital"),
+  finalCapital: document.getElementById("anperf.finalCapital"),
+  daysInvested: document.getElementById("anperf.daysInvested"),
+  result: document.getElementById("anperf.result"),
+  warning: document.getElementById("anperf.warning"),
+};
 annualperf();
