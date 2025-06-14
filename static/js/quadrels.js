@@ -14,7 +14,7 @@ function setCm() {
 }
 
 function getCm(value, type) {
-  return value * measure2cm[getMeasure(type)];
+  return value * measure2cm[measureCode.indexOf(type)];
 }
 function calculateDimensions(hRatio, vRatio, diag, width, height) {
   let method1, method2, a, newwidth, newHeight;
