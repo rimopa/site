@@ -54,11 +54,18 @@ function orderNames() {
         nameErrorsI.push(`${i} ("${ele}")`);
         return;
       }
-
-      const [firstName, middleName, ...lastNameParts] = inputtedWords;
-      const lastName = lastNameParts.join(" ");
-      const formattedName = [lastName, firstName, middleName].filter(Boolean).join(" ");
-      sortingList.push([formattedName, i]);
+      {
+        let formattedName;
+        if (inputtedWords.length === 2) {
+          const [firstName, lastName] = inputtedWords;
+          formattedName = [lastName, firstName].join(" ");
+        } else {
+          const [firstName, middleName, ...lastNameParts] = inputtedWords;
+          const lastName = lastNameParts.join(" ");
+          formattedName = [lastName, firstName, middleName].filter(Boolean).join(" ");
+        }
+        sortingList.push([formattedName, i]);
+      }
     });
     if (nameErrorsI.length > 0) {
       addWarning("nameErrorsI", `Invalid name format at indices: ${nameErrorsI.join(", ")}`);
