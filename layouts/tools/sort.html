@@ -8,14 +8,8 @@
   <label>
     List:
     <br />
-    <!-- prettier-ignore -->
-    <textarea
-      class="math"
-      type="text"
-      id="sortNames.names"
-      placeholder="your list here!"
-      style="width: max-content; aspect-ratio: 1.1"
-    >
+    <textarea class="math" type="text" id="sortNames.names" placeholder="your list here!"
+      style="width: max-content; aspect-ratio: 1.1">
 c
 a
 b
@@ -26,54 +20,37 @@ B
 </textarea>
   </label>
   <br />
-  <label
-    >Input separator:
+  <label>Input separator:
     <input class="math" id="sortNames.input" type="text" value="\n" />
   </label>
-  <label
-    >Output separator: <input type="text" class="math" id="sortNames.output" value="\n" /> </label
-  ><br />
-  <label
-    >Reverse:
+  <label>Output separator: <input type="text" class="math" id="sortNames.output" value="\n" /> </label><br />
+  <label>Reverse:
     <input type="checkbox" class="math" id="sortNames.reverse" />
   </label>
-  <label
-    >Case sensitive:
+  <label>Case sensitive:
     <input type="checkbox" class="math" id="sortNames.caseSensitive" />
   </label>
 
-  <label
-    >Delete leading and finishing spaces:
-    <input type="checkbox" class="math" id="sortNames.deleteSpaces" checked /> </label
-  ><br />
+  <label>Delete leading and finishing spaces:
+    <input type="checkbox" class="math" id="sortNames.deleteSpaces" checked /> </label><br />
   <input class="math" type="submit" value="Get result" onclick="orderNames()" /><br />
   <h2>Sorted list:</h2>
   <p id="sortNames.result" class="output" style="white-space: pre-wrap"></p>
   <p class="warning" hidden id="sortNames.warning">Not enough values to run</p>
   <details>
     <summary>Advanced</summary>
-    <small
-      >Regular expresions are used for the input. Check
-      <a
-        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet"
-        target="_blank"
-        rel="noopener noreferrer"
-        >here</a
-      >
-      for more information about how to use them.</small
-    ><br />
-    <label
-      >Search for elements instead of separator in the input:
-      <input type="checkbox" class="math" id="sortNames.searchElements" /> </label
-    ><br />
-    <label
-      >Sort:
+    <small>Regular expresions are used for the input. Check
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet"
+        target="_blank" rel="noopener noreferrer">here</a>
+      for more information about how to use them.</small><br />
+    <label>Search for elements instead of separator in the input:
+      <input type="checkbox" class="math" id="sortNames.searchElements" /> </label><br />
+    <label>Sort:
       <input type="checkbox" class="math" id="sortNames.sort" checked />
     </label>
     <details>
       <summary>Name order</summary>
-      <label>Name order: <input type="checkbox" class="math" id="sortNames.nameOrder" /> </label
-      ><br />
+      <label>Name order: <input type="checkbox" class="math" id="sortNames.nameOrder" /> </label><br />
       If this is checked, the program splits the elements to make words and recognizes its parts
       like this chart:
       <table>

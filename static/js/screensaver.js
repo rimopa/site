@@ -19,9 +19,14 @@
     }
   }
   function calculateDimensions() {
-    cWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    cWidth =
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth;
     cHeight =
-      window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+      window.innerHeight ||
+      document.documentElement.clientHeight ||
+      document.body.clientHeight;
     //shortest tab dimension
     sSize = Math.min(cHeight, cWidth);
     //longest tab dimension
@@ -49,13 +54,13 @@
       removeObjImgs();
       let imgCnt;
       const mode = getRandomInt(0, 1);
-      if (mode == 0) {
+      if (mode === 0) {
         //Mode 0: imgs in the middle of the page, on top of each other
         //Next one's size can't be less than min_img_size
         imgCnt = ttObjImgs;
         screenSaver.style.display = "grid";
         screenSaver.style.placeItems = "center";
-      } else if (mode == 1) {
+      } else if (mode === 1) {
         //Mode 1: images  of fixed size on page grid
         //columns/rows count for long side (lCnt) or short side (sCnt). Simplifies code.
         let lCnt = Math.floor(lSize / grid_cell_size);
@@ -108,21 +113,23 @@
         i < imgCnt && (mode !== 0 || sSize >= min_img_size);
         i++
       ) {
-        let imgUsed = unUsedImgs.splice(getRandomInt(0, unUsedImgs.length - 1), 1)[0];
         const ele = document.createElement("img");
-        ele.src = imgUsed;
+        ele.src = unUsedImgs.splice(
+          getRandomInt(0, unUsedImgs.length - 1),
+          1,
+        )[0];
         ele.draggable = 0;
-        ele.classList = "img" + i;
+        ele.classList = `img${i}`;
         currentSSElements.push(ele);
-        if (mode == 0) {
+        if (mode === 0) {
           size *= size_reduction_fator;
           ele.width = size;
         }
         fragment.appendChild(ele);
       }
-      if (mode == 0) {
+      if (mode === 0) {
         screenSaver.appendChild(fragment);
-      } else if (mode == 1) {
+      } else if (mode === 1) {
         imgDiv.appendChild(fragment);
       }
     }
@@ -131,7 +138,7 @@
     screensaverTimeout();
   }
   //Images
-  let objImgs = [
+  const objImgs = [
     "../imgs/pixabay/ball.gif",
     "../imgs/pixabay/bicycle.gif",
     "../imgs/pixabay/box.gif",
@@ -144,7 +151,7 @@
     "../imgs/pixabay/sphere.gif",
     "../imgs/pixabay/steampunk.gif",
   ];
-  let bgImgs = [
+  const bgImgs = [
     "../imgs/okkult/1.gif",
     "../imgs/okkult/2.gif",
     "../imgs/okkult/3-1.gif",
@@ -168,7 +175,9 @@
   const delayElement = document.getElementById("SS.delay");
   //set/update delay + localStorage
   document.getElementById("SS.delay").value =
-    localStorage.getItem("SS.delay") > 0 ? localStorage.getItem("SS.delay") : 1000;
+    localStorage.getItem("SS.delay") > 0
+      ? localStorage.getItem("SS.delay")
+      : 1000;
   //initial execution
   calculateDimensions();
   updateScreensaver();

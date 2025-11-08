@@ -1,6 +1,8 @@
-const capitalizations = Array.from(document.getElementsByClassName("undefinedCapitalization"));
+const capitalizations = Array.from(
+  document.getElementsByClassName("undefinedCapitalization"),
+);
 capitalizations.forEach((ele) => {
-  let inLineDelay = parseInt(ele.getAttribute("capitalizationDelay"), 10);
+  const inLineDelay = parseInt(ele.getAttribute("capitalizationDelay"), 10);
   const delay = !inLineDelay || inLineDelay <= 0 ? 500 : inLineDelay;
   updateCapitalizations(ele, delay);
 });

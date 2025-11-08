@@ -5,15 +5,17 @@ function orderNames() {
       const regex = createRegex(
         DOMelements.inputSeparator.value,
         DOMelements.caseSensitive.checked,
-        DOMelements.searchElements.checked
+        DOMelements.searchElements.checked,
       );
       elements = DOMelements.searchElements.checked
-        ? [...DOMelements.textarea.value.matchAll(regex)].map((match) => match[0])
+        ? [...DOMelements.textarea.value.matchAll(regex)].map(
+            (match) => match[0],
+          )
         : DOMelements.textarea.value.split(regex);
-    } catch (error) {
+    } catch {
       addWarning(
         "regexpError",
-        `Unrecognized regular expression: "${DOMelements.inputSeparator.value}".`
+        `Unrecognized regular expression: "${DOMelements.inputSeparator.value}".`,
       );
       return false;
     }
@@ -23,8 +25,10 @@ function orderNames() {
     return JSON.parse(`"${str.replace(/"/g, '\\"')}"`);
   }
   function printResult(sortedList) {
-    const result = sortedList.join(unescapeInput(DOMelements.outputSeparator.value));
-    if (result != "") {
+    const result = sortedList.join(
+      unescapeInput(DOMelements.outputSeparator.value),
+    );
+    if (result !== "") {
       DOMelements.resultElement.hidden = 0;
       DOMelements.resultElement.innerHTML = result;
     } else {
@@ -62,20 +66,25 @@ function orderNames() {
         } else {
           const [firstName, middleName, ...lastNameParts] = inputtedWords;
           const lastName = lastNameParts.join(" ");
-          formattedName = [lastName, firstName, middleName].filter(Boolean).join(" ");
+          formattedName = [lastName, firstName, middleName]
+            .filter(Boolean)
+            .join(" ");
         }
         sortingList.push([formattedName, i]);
       }
     });
     if (nameErrorsI.length > 0) {
-      addWarning("nameErrorsI", `Invalid name format at indices: ${nameErrorsI.join(", ")}`);
+      addWarning(
+        "nameErrorsI",
+        `Invalid name format at indices: ${nameErrorsI.join(", ")}`,
+      );
     }
     return sortingList;
   }
   function addWarning(key, message) {
     warnings[key] = message;
   }
-  let warnings = {};
+  const warnings = {};
   let sortedList = [];
   const textElements = getNames();
   if (textElements) {

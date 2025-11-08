@@ -11,7 +11,7 @@ function toolsNav() {
         var lis = document.querySelectorAll("#toolsNav ul li");
         lis.forEach((li) => {
           var a = li.querySelector("a");
-          if (a.getAttribute("href") == window.location.pathname) {
+          if (a.getAttribute("href") === window.location.pathname) {
             li.setAttribute("hidden", 1);
           }
         });

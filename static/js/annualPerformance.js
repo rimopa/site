@@ -3,10 +3,10 @@ function annualperf() {
   const ci = DOMelements.initialCapital.value;
   const cf = DOMelements.finalCapital.value;
   const ti = DOMelements.daysInvested.value;
-  if ((ci && cf && ti) != 0) {
+  if ((ci && cf && ti) !== 0) {
     DOMelements.warning.hidden = 1;
     DOMelements.result.hidden = 0;
-    DOMelements.result.innerText = ((cf - ci) / ci / ti) * 365 * 100 + "%";
+    DOMelements.result.innerText = `{((cf - ci) / ci / ti) * 365 * 100}%`;
   } else {
     DOMelements.warning.hidden = 0;
     DOMelements.result.hidden = 1;

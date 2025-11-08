@@ -19,28 +19,28 @@ function getCm(value, type) {
 function calculateDimensions(hRatio, vRatio, diag, width, height) {
   let method1, method2, a, newwidth, newHeight;
 
-  if (hRatio != 0 && vRatio != 0) {
+  if (hRatio !== 0 && vRatio !== 0) {
     method1 = "ratio";
-    if (diag != 0) {
+    if (diag !== 0) {
       method2 = "diagonal";
       a = Math.sqrt(diag ** 2 / (hRatio ** 2 + vRatio ** 2));
-    } else if (width != 0) {
+    } else if (width !== 0) {
       method2 = "width";
       a = width / hRatio;
-    } else if (height != 0) {
+    } else if (height !== 0) {
       method2 = "height";
       a = height / vRatio;
     }
     newwidth = a * hRatio;
     newHeight = a * vRatio;
-  } else if (width != 0) {
+  } else if (width !== 0) {
     method1 = "width";
     newwidth = width;
-    if (height != 0) {
+    if (height !== 0) {
       method2 = "height";
       newHeight = height;
       a = getMaxDivinCommon(width, height);
-    } else if (diag != 0) {
+    } else if (diag !== 0) {
       method2 = "diagonal";
       newHeight = Math.sqrt(diag ** 2 - width ** 2);
       a = getMaxDivinCommon(newHeight, width);
@@ -80,7 +80,7 @@ function quadrels() {
     vRatio,
     diag,
     width,
-    height
+    height,
   );
 
   if (a) {
@@ -94,9 +94,12 @@ function quadrels() {
 
     const measureN = measureCode.indexOf(DOMelements.resultType.value);
 
-    DOMelements.resultWidth.innerText = newwidth / measure2cm[measureN] + measureCode[measureN];
-    DOMelements.resultHeight.innerText = newHeight / measure2cm[measureN] + measureCode[measureN];
-    DOMelements.resultDiag.innerText = newDiag / measure2cm[measureN] + measureCode[measureN];
+    DOMelements.resultWidth.innerText =
+      newwidth / measure2cm[measureN] + measureCode[measureN];
+    DOMelements.resultHeight.innerText =
+      newHeight / measure2cm[measureN] + measureCode[measureN];
+    DOMelements.resultDiag.innerText =
+      newDiag / measure2cm[measureN] + measureCode[measureN];
   }
 }
 const measureName = [
@@ -114,11 +117,24 @@ const measureName = [
   "Yards",
 ];
 //fancy thing to add at the end of texts
-const measureCode = ["cm", "AU", "ft", "fur", "in", "lea", "ly", "mi", "nmi", "pc", "rd", "yd"];
+const measureCode = [
+  "cm",
+  "AU",
+  "ft",
+  "fur",
+  "in",
+  "lea",
+  "ly",
+  "mi",
+  "nmi",
+  "pc",
+  "rd",
+  "yd",
+];
 //how many centimeters fit in another measure
 const measure2cm = [
-  1, 14959787069100, 30.48, 20116.8, 2.54, 482803.2, 946073047258004200, 160934.4, 185200,
-  3085677581279958500, 502.92, 91.44,
+  1, 14959787069100, 30.48, 20116.8, 2.54, 482803.2, 946073047258004200,
+  160934.4, 185200, 3085677581279958500, 502.92, 91.44,
 ];
 //elements
 const DOMelements = {
