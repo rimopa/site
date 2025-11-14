@@ -61,6 +61,17 @@ li {
   margin-bottom: 0.7em;
 }
 
+iframe {
+  border: none;
+}
+
+p.suited {
+  max-width: 1000px;
+  text-align: justify;
+  hyphens: auto;
+  text-indent: 2em;
+}
+
 /*details*/
 details {
   border: 1px solid #aaa;
@@ -202,6 +213,11 @@ body.dark #header .button:hover {
   max-width: 800px;
   text-indent: 30px;
   padding-left: 2rem;
+}
+video.simple-center {
+  display: block;
+  margin: auto;
+
 }
 
 /*math*/
