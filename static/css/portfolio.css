@@ -1,0 +1,98 @@
+.section {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+/* Projects */
+.projects ul {
+  width: 65%;
+  border: 2px solid #333;
+  padding: 20px;
+  margin: 0;
+  list-style-position: inside;
+}
+
+.projects h2 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: right;
+  margin: 0;
+  padding: 10px;
+}
+
+/* Experience */
+.exp p {
+  width: 55%;
+  border: 2px solid #333;
+  padding: 20px;
+  margin: 0;
+}
+
+.exp h2 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: right;
+  width: min-content;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .projects h2,
+  .exp h2 {
+    position: static;
+    text-align: right;
+    margin-bottom: 10px;
+    width: auto;
+  }
+
+  .projects ul,
+  .exp p {
+    width: 85%;
+  }
+}
+
+/* Conclusion */
+.conclusion {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: 100px;
+}
+
+.conclusion .left {
+  text-align: left;
+  text-decoration: underline;
+}
+
+.conclusion .center {
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 60px;
+}
+
+/* Resume */
+ul.resume-list {
+  li {
+    .institution,
+    .location,
+    .degree {
+      font-size: 110%;
+    }
+    .institution {
+      font-weight: bold;
+    }
+    .degree {
+      font-style: italic;
+    }
+    .time {
+      font-size: 80%;
+    }
+    .description {
+      font-size: 90%;
+    }
+  }
+}

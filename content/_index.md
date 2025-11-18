@@ -1,5 +1,5 @@
 ---
 title: "Rimopa"
-description: "An index page for a index guy."
+description: "An index page for an index guy."
 image: "/imgs/calabaza.jpg"
 ---
