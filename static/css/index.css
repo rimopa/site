@@ -1,3 +1,7 @@
+/* ========================================
+   BASE STYLES & RESETS
+   ======================================== */
+
 ::selection,
 ::-moz-selection {
   background: #ff6836cc;
@@ -8,9 +12,8 @@ html {
 }
 
 body {
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica,
-    sans-serif, times;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "JetBrains Mono", "Consolas",
+    "Helvetica Neue", sans-serif, times;
   color: #000;
   background: #fcfcfc;
   margin: 0;
@@ -30,99 +33,97 @@ main {
   margin: 8px;
 }
 
-.index,
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+
+.monospace,
 section-title,
 #pageTitle {
-  font-family:
-    "Courier New", Courier, monospace, "Georgia", "Times New Roman", Times,
-    serif;
+  font-family: "JetBrains Mono", "IBM Plex Mono", "Courier New", Courier, monospace, "Georgia",
+    "Times New Roman", Times, serif;
 }
 
 section-title {
   font-size: 110%;
   color: #ee7248;
 }
-/*links*/
-@keyframes imHere {
+
+h2.fancy-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  margin: 30px 0;
+  font-size: 28px;
+  padding-left: 0;
+}
+
+h2.fancy-right::before {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: #000;
+}
+body.dark h2.fancy-right::before {
+  background: #fff;
+}
+
+.small {
+  font-size: 75%;
+}
+
+.paragraph {
+  max-width: 800px;
+  text-indent: 30px;
+  padding-left: 2rem;
+  hyphens: auto;
+}
+
+/* ========================================
+   LINKS
+   ======================================== */
+
+@keyframes im-here {
   100% {
     color: #00dc0f;
   }
-}
-
-a:hover {
-  animation: imHere 3s linear 1 alternate-reverse;
 }
 
 a {
   color: #ff5300;
 }
 
+a:hover {
+  animation: im-here 3s linear 1 alternate-reverse;
+}
+
+a.silent {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+a.silent:hover {
+  animation: inherit;
+  text-decoration: underline;
+}
+
+/* ========================================
+   LISTS
+   ======================================== */
+
 li {
   margin-bottom: 0.7em;
 }
 
-iframe {
-  border: none;
+/* ========================================
+   HEADER
+   ======================================== */
+
+body.no-header #header {
+  display: none;
 }
 
-p.suited {
-  max-width: 1000px;
-  text-align: justify;
-  hyphens: auto;
-  text-indent: 2em;
-}
-
-/*details*/
-details {
-  border: 1px solid #aaa;
-  border-radius: 4px;
-  max-width: 800px;
-  padding: 0.5em 0.5em 0;
-  margin: 0.5em 0;
-
-  details {
-    margin-bottom: 0;
-  }
-}
-
-summary {
-  font-weight: bold;
-  margin: -0.5em -0.5em 0;
-  padding: 0.5em;
-}
-
-details[open] {
-  padding: 0.5em;
-}
-
-details[open] > summary {
-  border-bottom: 1px solid #aaa;
-  margin-bottom: 0.5em;
-}
-
-/*bars*/
-bar {
-  background: #f15c2a;
-  width: 100%;
-  color: #fff;
-  line-height: 28px;
-  align-items: center;
-}
-
-body.dark bar {
-  background-color: #333333;
-}
-
-bar a {
-  color: #fff;
-  text-decoration: none;
-}
-
-body.dark bar a {
-  color: #fff;
-}
-
-/*  header*/
 #header {
   font-weight: bold;
   height: 3em;
@@ -148,48 +149,51 @@ body.dark #header .button:hover {
   background-color: #515151;
 }
 
-/*  footer*/
+/* ========================================
+   FOOTER
+   ======================================== */
+
 #footer {
   font-size: 14px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
+}
 
-  .about {
-    display: grid;
-    flex-grow: 1;
-    justify-content: center;
-    margin-bottom: 1em;
+#footer .about {
+  display: grid;
+  flex-grow: 1;
+  justify-content: center;
+  margin-bottom: 1em;
+}
 
-    .footer-socials {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
+#footer .about .footer-socials {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 
-      a {
-        width: 21px;
-        height: 21px;
-      }
-    }
-  }
+#footer .about .footer-socials a {
+  width: 21px;
+  height: 21px;
+}
 
-  div.usefulLinks {
-    padding: 0 45px;
+#footer div.useful-links {
+  padding: 0 45px;
+}
 
-    ul li {
-      list-style: none;
-    }
-  }
+#footer div.useful-links ul li {
+  list-style: none;
+}
 
-  .subfooter {
-    background: #000;
-    width: 100%;
-    text-align: center;
-    padding: 5px 0;
-    margin-bottom: 0;
-  }
+#footer .sub-footer {
+  background: #000;
+  width: 100%;
+  text-align: center;
+  padding: 5px 0;
+  margin-bottom: 0;
 }
 
 #footer p,
@@ -204,52 +208,50 @@ body.dark #header .button:hover {
   text-align: left;
 }
 
-/*other*/
-.small {
-  font-size: 75%;
+#footer #footer-desc-es {
+  display: none;
+}
+body.footer-es #footer {
+  #footer-desc-es {
+    display: inherit;
+  }
+  #footer-desc {
+    display: none;
+  }
 }
 
-.paragraph {
-  max-width: 800px;
-  text-indent: 30px;
-  padding-left: 2rem;
-}
-video.simple-center {
-  display: block;
-  margin: auto;
-
+body.no-sub-footer #footer .sub-footer {
+  display: none;
 }
 
-/*math*/
-.math {
-  width: 100px;
-  margin-top: 14px;
-  box-shadow: inset 0 0.0625em 0.125em rgba(0, 0, 0, 0.05);
-  max-width: 100%;
-  background-color: #fff;
-  border-color: #000;
-  border-radius: 4px;
-  color: #363636;
+/* ========================================
+   BAR COMPONENT
+   ======================================== */
+
+bar {
+  background: #f15c2a;
+  width: 100%;
+  color: #fff;
+  line-height: 28px;
+  align-items: center;
 }
 
-[type="submit"].math:hover,
-button.math:hover {
-  cursor: pointer;
-  background-color: #f15c2a;
-  border-color: #bb9d3c;
+body.dark bar {
+  background-color: #333333;
+}
+
+bar a {
+  color: #fff;
+  text-decoration: none;
+}
+
+body.dark bar a {
   color: #fff;
 }
 
-.warning {
-  font-size: 125%;
-  margin-left: 20px;
-  color: #c70039;
-  white-space: pre-line;
-}
-
-.output {
-  font-size: 125%;
-}
+/* ========================================
+   FORM ELEMENTS
+   ======================================== */
 
 input[type="checkbox"] {
   appearance: none;
@@ -286,16 +288,95 @@ label {
   display: inline-block;
 }
 
-/*Scratch-likely button, i is placed like this: <a data-placement="left" href="https://github.com/ScratchCE/beta"> <button class="button"><span>GitHub Repository</span></button></a>*/
-/*.button {
-display: inline-block;
-margin: 0.5em 0;
-border: 0;
-border-radius: 0.5rem;
-background-color: #ff5300;;
-cursor: pointer;
-padding: 1em 1.25em;
-color: #fff;
-font-size: .8rem;
-font-weight: bold;}
-        .button:hover{background-color: #00dc0f;}*/
+.math {
+  width: 100px;
+  margin-top: 14px;
+  box-shadow: inset 0 0.0625em 0.125em rgba(0, 0, 0, 0.05);
+  max-width: 100%;
+  background-color: #fff;
+  border-color: #000;
+  border-radius: 4px;
+  color: #363636;
+}
+
+[type="submit"].math:hover,
+button.math:hover {
+  cursor: pointer;
+  background-color: #f15c2a;
+  border-color: #bb9d3c;
+  color: #fff;
+}
+
+/* ========================================
+   DETAILS/SUMMARY
+   ======================================== */
+
+details {
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  max-width: 800px;
+  padding: 0.5em 0.5em 0;
+  margin: 0.5em 0;
+}
+
+details details {
+  margin-bottom: 0;
+}
+
+summary {
+  font-weight: bold;
+  margin: -0.5em -0.5em 0;
+  padding: 0.5em;
+}
+
+details[open] {
+  padding: 0.5em;
+}
+
+details[open] > summary {
+  border-bottom: 1px solid #aaa;
+  margin-bottom: 0.5em;
+}
+
+/* ========================================
+   MEDIA ELEMENTS
+   ======================================== */
+
+iframe {
+  border: none;
+}
+
+video.simple-center {
+  display: block;
+  margin: auto;
+}
+
+.infobox {
+  margin-left: 1em;
+  float: right;
+  clear: right;
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.warning {
+  font-size: 125%;
+  margin-left: 20px;
+  color: #c70039;
+  white-space: pre-line;
+}
+
+.output {
+  font-size: 125%;
+}
+
+/* ========================================
+   COMMENTED OUT / SCRATCH BUTTON
+   ======================================== */
+/*
+.button:hover {
+  background-color: #00dc0f;
+}
+*/
