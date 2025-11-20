@@ -1,7 +1,7 @@
 baseURL = 'https://rimopa.netlify.app/'
 languageCode = 'en-us'
 title = 'Rimopa'
-relativeURLs = false
+relativeURLs = true
 
 [build.environment]
   HUGO_VERSION = "0.145.0"
