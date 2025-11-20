@@ -1,4 +1,3 @@
-baseURL = 'https://rimopa.netlify.app/'
 languageCode = 'en-us'
 title = 'Rimopa'
 relativeURLs = true
