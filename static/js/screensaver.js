@@ -47,7 +47,7 @@
       currentSSElements = [];
     }
     function updateBg() {
-      bg.style.backgroundImage = "url(" + bgImgs.random() + ")";
+      bg.style.backgroundImage = `url(${bgImgs.random()})`;
       bg.classList.toggle("cover-bg", getRandomInt(0, 1) === 0);
     }
     function updateObjImgs() {
@@ -66,7 +66,7 @@
         let lCnt = Math.floor(lSize / grid_cell_size);
         let sCnt = Math.floor(sSize / grid_cell_size);
         //Prevent imgCnt being larger than ttObjImgs
-        console.log("initial: long:" + lCnt + " short:" + sCnt);
+        console.log(`initial: long:${lCnt} short:${sCnt}`);
         while (lCnt * sCnt > ttObjImgs) {
           if (sCnt > 1) {
             console.log("short--");
@@ -88,7 +88,7 @@
           lCnt--;
           sCnt++;
         }
-        console.log("final: long:" + lCnt + " short:" + sCnt);
+        console.log(`final: long:${lCnt} short:${sCnt}`);
         let columns, rows;
         if (cHeight > cWidth) {
           columns = sCnt;
@@ -98,7 +98,7 @@
           rows = sCnt;
         }
         imgCnt = columns * rows;
-        console.log("imgCnt:" + imgCnt + " c:" + columns + " r:" + rows);
+        console.log(`imgCnt:${imgCnt} c:${columns} r:${rows}`);
 
         const imgDiv = document.createElement("div");
         imgDiv.id = "imgDiv";

@@ -7,13 +7,14 @@ function lightMode() {
   localStorage.setItem("mode", "light");
   body.classList.remove("dark");
 }
-function toggleTheme() {
+
+document.getElementById("themeToggle")?.addEventListener("click", () => {
   if (localStorage.getItem("mode") === "dark") {
     lightMode();
   } else {
     darkMode();
   }
-}
+});
 
 const body = document.getElementById("body");
 // automatic light/dark mode
