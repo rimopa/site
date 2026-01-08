@@ -1,7 +1,7 @@
-<link rel="stylesheet" href="{{ absURL 'css/index.css' }}" />
-<link rel="icon" href="{{ absURL 'imgs/favicon.ico' }}" />
-<script type="text/javascript" src="{{ absURL 'js/index.js' }}" defer></script>
-<script type="text/javascript" src="{{ absURL 'js/capitalization-title.js' }}" defer></script>
+<link rel="stylesheet" href='{{ absURL "css/index.css" }}' />
+<link rel="icon" href='{{ absURL "imgs/favicon.ico" }}' />
+<script type="text/javascript" src='{{ absURL "js/index.js" }}' defer></script>
+<script type="text/javascript" src='{{ absURL "js/capitalization-title.js" }}' defer></script>
 
 {{ $title:=.Title }} {{ $desc:=.Params.description }} {{ $image:=.Params.images }}
 {{$url:=.Params.canonical | default .Permalink}}
