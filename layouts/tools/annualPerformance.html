@@ -1,25 +1,36 @@
-{{define "head-extra"}}
+{{ define "head-extra" }}
 <script type="text/javascript" src="/js/annualPerformance.js" defer></script>
-{{end}} {{define "main"}}
+{{ end }}
+{{ define "main" }}
 <article id="getannualperformance">
   <section-title>
     <h2 title="annualperf">Get annual rate of return on any investment</h2>
   </section-title>
   <p>
-    The formula is: ((finalCapital - initialCapital) / initialCapital / daysInvested) * 365 * 100
+    The formula is: ((finalCapital - initialCapital) / initialCapital /
+    daysInvested) * 365 * 100
   </p>
-  <label>Initial capital (invested):
-    <input class="math" type="number" id="anperf.initialCapital" value="100" /></label>
-  <br />
-  <label>Final capital: <input class="math" type="number" id="anperf.finalCapital" value="150" /></label>
-  <br />
-  <label>Days it was invested: <input class="math" type="number" id="anperf.daysInvested" value="365" /></label>
-  <br />
-  <input class="math" type="submit" value="Get result" onclick="annualperf()" />
+  <label>
+    Initial capital (invested):
+    <input class="math" type="number" id="anperf.initialCapital" value="100">
+  </label>
+  <br>
+  <label>
+    Final capital:
+    <input class="math" type="number" id="anperf.finalCapital" value="150">
+  </label>
+  <br>
+  <label>
+    Days it was invested:
+    <input class="math" type="number" id="anperf.daysInvested" value="365">
+  </label>
+  <br>
+  <input class="math" type="submit" value="Get result" onclick="annualperf()">
   <h2>Your invesment's annual performance:</h2>
   <p id="anperf.result" class="output"></p>
   <div hidden id="anperf.warning">
                    <p class="warning">Not enough values to run</p>
   </div>
 </article>
-{{partial "toolist" . }} {{end}}
+{{ partial "toolist" . }}
+{{ end }}

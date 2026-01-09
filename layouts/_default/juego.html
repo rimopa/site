@@ -1,4 +1,4 @@
-{{define "main"}}
+{{ define "main" }}
 <h1>Problema Digital</h1>
 <h2>A little spanish game friends made in school</h2>
 <iframe
@@ -13,23 +13,21 @@
 ></iframe>
 <button class="math" id="fullscreenBtn">Fullscreen</button>
 <script>
-  const iframe = document.getElementById("problemaDigital");
-  const fullscreenBtn = document.getElementById("fullscreenBtn");
+const iframe = document.getElementById("problemaDigital");
+const fullscreenBtn = document.getElementById("fullscreenBtn");
 
-  fullscreenBtn?.addEventListener("click", () => {
-    if (!iframe) {
-      console.warn("Iframe not found");
-      return;
-    }
-    if (!document.fullscreenEnabled) {
-      alert("Fullscreen not supported in this browser.");
-      return;
-    }
-    iframe
-      .requestFullscreen()
-      .catch(() => {
-        alert("Fullscreen request failed.");
-      });
+fullscreenBtn?.addEventListener("click", () => {
+  if (!iframe) {
+    console.warn("Iframe not found");
+    return;
+  }
+  if (!document.fullscreenEnabled) {
+    alert("Fullscreen not supported in this browser.");
+    return;
+  }
+  iframe.requestFullscreen().catch(() => {
+    alert("Fullscreen request failed.");
   });
+});
 </script>
-{{end}}
+{{ end }}

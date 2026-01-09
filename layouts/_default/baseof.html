@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    {{ partial "head.html" . }}
+    {{ block "head-extra" . }}
+    {{ end }}
+  </head>
 
-<head>
-  {{ partial "head.html" . }}{{ block "head-extra" . }} {{ end }}
-</head>
-
-<body id="body" class="{{ .Params.bodyclass }}">
-  {{ partial "header.html" . }}
-  <main>{{block "main" . }} {{ end }}</main>
-  {{ partial "footer.html" . }}
-</body>
-
+  <body id="body" class="{{ .Params.bodyclass }}">
+    {{ partial "header.html" . }}
+    <main>{{ block "main" . }} {{ end }}</main>
+    {{ partial "footer.html" . }}
+  </body>
 </html>
