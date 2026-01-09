@@ -1,5 +1,5 @@
 {{define "head-extra"}}
-<link rel="stylesheet" href="{{ absURL "css/portfolio.css" }}" />
+<link rel="stylesheet" href='{{ absURL "css/portfolio.css" }}' />
 {{end}}
 {{define "main" }}
 <section>
@@ -22,7 +22,6 @@ Paná
         └──<span>Paná</span>
 </pre>
 -->
-</div>
 <div id="capit">
 <pre>
 <span class="undefinedCapitalization" capitalizationDelay="1000">Santino
@@ -36,19 +35,19 @@ pa<span class="undefinedCapitalization" capitalizationDelay="1000">ná</span>
     </section-title>
     <!-- Part 1 -->
     <div class="section projects">
-        <h2><a href="{{ "/portfolio/projects" | relURL }}">Mis proyectos</a></h2>
+        <h2><a href='{{ "/portfolio/projects" | relURL }}'>Mis proyectos</a></h2>
         <ul>
             <li><a class="silent" href="https://github.com/rimopa/userstyles">Estilos de CSS</a></li>
-            <li><a class="silent" href="{{ "/juego" | relURL }}">Juego en Scratch</a></li>
-            <li><a class="silent" href="{{ "/screensaver" | relURL }}">Salvapantallas en JavaScript</a></li>
-            <li><a class="silent" href="{{ "/tools" | relURL }}">Herramientas matemáticas</a></li>
-            <li><a class="silent" href="{{ "/portfolio/projects" | relURL }}">Ver más</a></li>
+            <li><a class="silent" href='{{ "/juego" | relURL }}'>Juego en Scratch</a></li>
+            <li><a class="silent" href='{{ "/screensaver" | relURL }}'>Salvapantallas en JavaScript</a></li>
+            <li><a class="silent" href='{{ "/tools" | relURL }}'>Herramientas matemáticas</a></li>
+            <li><a class="silent" href='{{ "/portfolio/project" | relURL }}'>Ver más</a></li>
         </ul>
     </div>
 
     <!-- Part 2 -->
     <div class="section exp">
-        <h2><a href="{{ "/portfolio/exp" | relURL }}">Formación y Experiencias</a></h2>
+        <h2><a href='{{ "/portfolio/exp" | relURL }}'>Formación y Experiencias</a></h2>
         <p>
             Mi distinta formación académica, técnica, e informática, además de otras experiencias.
         </p>
@@ -56,8 +55,8 @@ pa<span class="undefinedCapitalization" capitalizationDelay="1000">ná</span>
 
     <!-- Part 3 -->
     <div class="section conclusion">
-        <h2 class="left"><a class="silent" href="{{ "/portfolio/about" | relURL }}">Sobre mí</a></h2>
-        <h2 class="center"><a class="silent" href="{{ "/portfolio/contact" | relURL }}">Contacto</a></h2>
+        <h2 class="left"><a class="silent" href='{{ "/portfolio/about" | relURL }}'>Sobre mí</a></h2>
+        <h2 class="center"><a class="silent" href='{{ "/portfolio/contact" | relURL }}'>Contacto</a></h2>
     </div>
 </section>
 {{end}}

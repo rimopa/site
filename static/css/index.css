@@ -12,7 +12,8 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "JetBrains Mono", "Consolas",
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "JetBrains Mono", "Consolas",
     "Helvetica Neue", sans-serif, times;
   color: #000;
   background: #fcfcfc;
@@ -40,8 +41,9 @@ main {
 .monospace,
 section-title,
 #pageTitle {
-  font-family: "JetBrains Mono", "IBM Plex Mono", "Courier New", Courier, monospace, "Georgia",
-    "Times New Roman", Times, serif;
+  font-family:
+    "JetBrains Mono", "IBM Plex Mono", "Courier New", Courier, monospace,
+    "Georgia", "Times New Roman", Times, serif;
 }
 
 section-title {
