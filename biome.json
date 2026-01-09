@@ -14,9 +14,12 @@
   "html": {
     "parser": {
       "interpolation": true
+    },
+    "formatter": {
+      "enabled": true
     }
   },
   "files": {
-    "includes": ["layouts/**", "static/**", "!static/*.html"]
+    "includes": ["layouts/**", "static/**", "!static/**/*.html"]
   }
 }

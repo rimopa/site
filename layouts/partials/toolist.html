@@ -1,12 +1,15 @@
 {{ $section:=.Section }}
 <h2>Full toolist</h2>
 <ul>
-  {{ range where .Site.RegularPages "Section" $section}} {{$desc:=.Params.description}}
+  {{ range where .Site.RegularPages "Section" $section }}
+  {{ $desc:=.Params.description }}
   <li title="{{ $desc }}">
     <a href="{{ .Permalink }}">{{ .Params.tool }}</a>
-    <br />
+    <br>
     <small>{{ $desc }}</small>
   </li>
   {{ end }}
 </ul>
-<h2 title="not my fault, JS's.">Remember the results of these tools are approximate</h2>
+<h2 title="not my fault, JS's.">
+  Remember the results of these tools are approximate
+</h2>
