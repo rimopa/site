@@ -43,7 +43,20 @@ function orderNames() {
   }
   function sortList(lst) {
     // Sort the list based on the first element of each sub-array, that is, the name or element
-    if (DOMelements.sort.checked) lst.sort((a, b) => a[0].localeCompare(b[0]));
+
+if (DOMelements.sort.checked) {
+  if (!DOMelements.caseSensitive.checked) {
+    lst.sort((a, b) => {
+      const ra = a[0].toUpperCase();
+      const rb = b[0].toUpperCase();
+      if (ra < rb) return -1;
+      if (ra > rb) return 1;
+      return 0;
+    });
+  } else {
+    lst.sort();
+  }
+}
     // Return the orginal element, that is, the i stored on ele[1] of textElements
     const sorted = lst.map((ele) => textElements[ele[1]]);
     return DOMelements.reverse.checked ? sorted.reverse() : sorted;
@@ -93,11 +106,6 @@ function orderNames() {
       sortingList = processNameOrder(textElements);
     } else {
       sortingList = textElements.map((element, index) => [element, index]);
-    }
-    if (!DOMelements.caseSensitive.checked) {
-      sortingList.forEach((item) => {
-        item[0] = item[0].toUpperCase();
-      });
     }
     sortedList = sortList(sortingList);
   }
